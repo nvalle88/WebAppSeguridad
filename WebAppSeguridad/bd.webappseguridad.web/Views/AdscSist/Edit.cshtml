@@ -1,0 +1,110 @@
+@model bd.webappseguridad.entidades.Negocio.Adscsist
+
+@{
+    ViewData["Title"] = "Editar";
+}
+
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- START ROW -->
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-8">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>Sistemas </h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                            <form asp-action="Edit" id="checkout-form" class="smart-form" novalidate="novalidate">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <input type="hidden" asp-for="AdstSistema" />
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-signal"></i>
+                                                <input disabled="disabled" asp-for="AdstSistema" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdstSistema)" />
+                                                <span asp-validation-for="AdstSistema" class="text-danger"></span>
+                                            </label>
+                                        </section>
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-hotel"></i>
+                                                <input maxlength="250" asp-for="AdstHost" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdstHost)" />
+                                                <span asp-validation-for="AdstHost" class="text-danger"></span>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-ticket"></i>
+                                                <input maxlength="3" asp-for="AdstTipo" class="form-control" data-mask="aaa" placeholder="@Html.DisplayNameFor(model=>model.AdstTipo)" />
+                                                <span asp-validation-for="AdstTipo" class="text-danger"></span>
+                                            </label>
+                                        </section>
+                                        <section class="col col-6">
+                                            <label class="input">
+
+                                                <select asp-for="AdstBdd" asp- class="form-control" asp-items="ViewBag.AdbdBdd">
+                                                    <option value="0" selected="" disabled="">@Html.DisplayNameFor(model => model.AdstBdd)</option>
+                                                </select>
+                                                <span asp-validation-for="AdstBdd" class="text-danger"></span>
+                                            </label>
+                                        </section>
+                                    </div>
+
+                                </fieldset>
+                                <fieldset>
+                                    <section>
+                                        <label class="textarea">
+                                            <textarea rows="3" maxlength="64" asp-for="AdstDescripcion" placeholder="@Html.DisplayNameFor(model=>model.AdstDescripcion)"></textarea>
+                                            <span asp-validation-for="AdstDescripcion" class="text-danger"></span>
+                                        </label>
+                                    </section>
+                                </fieldset>
+                                <footer>
+                                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                                    <a asp-action="Index" class="btn btn-default">Cancelar</a>
+
+                                </footer>
+                            </form>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+
+        </div>
+        <!-- END ROW -->
+    </section>
+    <!-- end widget grid -->
+    <!-- Modal -->
+
+</div>
+<!-- END MAIN CONTENT -->
+@section Scripts {
+    <script type="text/javascript">
+
+
+    </script>
+}

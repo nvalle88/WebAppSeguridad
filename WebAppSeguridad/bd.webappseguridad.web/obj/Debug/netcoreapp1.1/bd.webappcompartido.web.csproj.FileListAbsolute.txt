@@ -1,0 +1,15 @@
+D:\Source\Repos\WebAppCompartido\WebAppCompartido\bd.webappcompartido.web\bin\Debug\netcoreapp1.1\bd.webappcompartido.web.deps.json
+D:\Source\Repos\WebAppCompartido\WebAppCompartido\bd.webappcompartido.web\bin\Debug\netcoreapp1.1\bd.webappcompartido.web.runtimeconfig.json
+D:\Source\Repos\WebAppCompartido\WebAppCompartido\bd.webappcompartido.web\bin\Debug\netcoreapp1.1\bd.webappcompartido.web.runtimeconfig.dev.json
+D:\Source\Repos\WebAppCompartido\WebAppCompartido\bd.webappcompartido.web\bin\Debug\netcoreapp1.1\bd.webappcompartido.web.dll
+D:\Source\Repos\WebAppCompartido\WebAppCompartido\bd.webappcompartido.web\bin\Debug\netcoreapp1.1\bd.webappcompartido.web.pdb
+D:\Source\Repos\WebAppCompartido\WebAppCompartido\bd.webappcompartido.web\bin\Debug\netcoreapp1.1\bd.sw.externos.dll
+D:\Source\Repos\WebAppCompartido\WebAppCompartido\bd.webappcompartido.web\bin\Debug\netcoreapp1.1\bd.webappcompartido.entidades.dll
+D:\Source\Repos\WebAppCompartido\WebAppCompartido\bd.webappcompartido.web\bin\Debug\netcoreapp1.1\bd.webappcompartido.servicios.dll
+D:\Source\Repos\WebAppCompartido\WebAppCompartido\bd.webappcompartido.web\bin\Debug\netcoreapp1.1\bd.webappcompartido.entidades.pdb
+D:\Source\Repos\WebAppCompartido\WebAppCompartido\bd.webappcompartido.web\bin\Debug\netcoreapp1.1\bd.sw.externos.pdb
+D:\Source\Repos\WebAppCompartido\WebAppCompartido\bd.webappcompartido.web\bin\Debug\netcoreapp1.1\bd.webappcompartido.servicios.pdb
+D:\Source\Repos\WebAppCompartido\WebAppCompartido\bd.webappcompartido.web\obj\Debug\netcoreapp1.1\bd.webappcompartido.web.csprojResolveAssemblyReference.cache
+D:\Source\Repos\WebAppCompartido\WebAppCompartido\bd.webappcompartido.web\obj\Debug\netcoreapp1.1\bd.webappcompartido.web.AssemblyInfo.cs
+D:\Source\Repos\WebAppCompartido\WebAppCompartido\bd.webappcompartido.web\obj\Debug\netcoreapp1.1\bd.webappcompartido.web.dll
+D:\Source\Repos\WebAppCompartido\WebAppCompartido\bd.webappcompartido.web\obj\Debug\netcoreapp1.1\bd.webappcompartido.web.pdb

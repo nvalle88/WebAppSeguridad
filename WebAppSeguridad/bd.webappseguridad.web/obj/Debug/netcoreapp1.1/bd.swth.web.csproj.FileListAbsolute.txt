@@ -1,0 +1,15 @@
+D:\Source\Repos\swTH\swTH\bd.swth.web\bin\Debug\netcoreapp1.1\bd.swth.web.deps.json
+D:\Source\Repos\swTH\swTH\bd.swth.web\bin\Debug\netcoreapp1.1\bd.swth.web.runtimeconfig.json
+D:\Source\Repos\swTH\swTH\bd.swth.web\bin\Debug\netcoreapp1.1\bd.swth.web.runtimeconfig.dev.json
+D:\Source\Repos\swTH\swTH\bd.swth.web\obj\Debug\netcoreapp1.1\bd.swth.web.csprojResolveAssemblyReference.cache
+D:\Source\Repos\swTH\swTH\bd.swth.web\obj\Debug\netcoreapp1.1\bd.swth.web.AssemblyInfo.cs
+D:\Source\Repos\swTH\swTH\bd.swth.web\bin\Debug\netcoreapp1.1\bd.swth.web.dll
+D:\Source\Repos\swTH\swTH\bd.swth.web\bin\Debug\netcoreapp1.1\bd.swth.web.pdb
+D:\Source\Repos\swTH\swTH\bd.swth.web\bin\Debug\netcoreapp1.1\bd.sw.externos.dll
+D:\Source\Repos\swTH\swTH\bd.swth.web\bin\Debug\netcoreapp1.1\bd.swth.datos.dll
+D:\Source\Repos\swTH\swTH\bd.swth.web\bin\Debug\netcoreapp1.1\bd.swth.entidades.dll
+D:\Source\Repos\swTH\swTH\bd.swth.web\bin\Debug\netcoreapp1.1\bd.sw.externos.pdb
+D:\Source\Repos\swTH\swTH\bd.swth.web\bin\Debug\netcoreapp1.1\bd.swth.datos.pdb
+D:\Source\Repos\swTH\swTH\bd.swth.web\bin\Debug\netcoreapp1.1\bd.swth.entidades.pdb
+D:\Source\Repos\swTH\swTH\bd.swth.web\obj\Debug\netcoreapp1.1\bd.swth.web.dll
+D:\Source\Repos\swTH\swTH\bd.swth.web\obj\Debug\netcoreapp1.1\bd.swth.web.pdb
