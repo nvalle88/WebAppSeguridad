@@ -4133,8 +4133,7 @@
         "framework": ".NETCoreApp,Version=v1.1",
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
-          "Newtonsoft.Json": "10.0.3",
-          "bd.webappseguridad.entidades": "1.0.0"
+          "Newtonsoft.Json": "10.0.3"
         }
       },
       "bd.sw.externos/1.0.0": {

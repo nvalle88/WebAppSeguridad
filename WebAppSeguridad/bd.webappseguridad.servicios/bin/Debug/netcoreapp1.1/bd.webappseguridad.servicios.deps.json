@@ -593,8 +593,7 @@
       },
       "bd.log.guardar/1.0.0": {
         "dependencies": {
-          "Newtonsoft.Json": "10.0.3",
-          "bd.webappseguridad.entidades": "1.0.0"
+          "Newtonsoft.Json": "10.0.3"
         },
         "runtime": {
           "bd.log.guardar.dll": {}
