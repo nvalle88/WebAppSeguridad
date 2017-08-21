@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace bd.webappseguridad.entidades.Negocio
 {
     public partial class Adscpassw
     {
+        [Required(ErrorMessage = "Debe introducir {0}")]
+        [Display(Name = "Base de Datos")]
+        [StringLength(32, MinimumLength = 4, ErrorMessage = "El {0} no puede tener más de {1} y menos de {2}")]
         public string AdpsLogin { get; set; }
         public string AdpsPassword { get; set; }
         public DateTime? AdpsFechaCambio { get; set; }

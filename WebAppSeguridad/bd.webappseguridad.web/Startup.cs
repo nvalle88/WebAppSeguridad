@@ -24,7 +24,7 @@ namespace bd.webappcompartido.web
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public async void ConfigureServices(IServiceCollection services)
         {
 
             // Add framework services.
@@ -33,7 +33,8 @@ namespace bd.webappcompartido.web
             services.AddSingleton<IAdscSistServicio, AdscSistServicio>();
             services.AddSingleton<IApiServicio, ApiServicio>();
             services.AddSingleton<IInicializacionServico, InicializacionServico>();
-            InicializarWebApp.Inicializar("swSeguridad");
+            services.AddSingleton<IAdscpasswServicio, AdscpasswServicio>();
+            await InicializarWebApp.Inicializar("swSeguridad");
            
 
         }
