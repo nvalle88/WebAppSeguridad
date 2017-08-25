@@ -12,3 +12,11 @@ D:\GitHub\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\obj\Debug
 D:\GitHub\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\obj\Debug\netcoreapp1.1\bd.webappseguridad.entidades.dll
 D:\GitHub\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\obj\Debug\netcoreapp1.1\bd.webappseguridad.entidades.pdb
 D:\GitHub\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\obj\Debug\netcoreapp1.1\bd.webappseguridad.entidades.csprojResolveAssemblyReference.cache
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\bin\Debug\netcoreapp1.1\bd.webappseguridad.entidades.deps.json
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\bin\Debug\netcoreapp1.1\bd.webappseguridad.entidades.dll
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\bin\Debug\netcoreapp1.1\bd.webappseguridad.entidades.pdb
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\obj\Debug\netcoreapp1.1\bd.webappseguridad.entidades.csprojResolveAssemblyReference.cache
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\obj\Debug\netcoreapp1.1\bd.webappseguridad.entidades.csproj.CoreCompileInputs.cache
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\obj\Debug\netcoreapp1.1\bd.webappseguridad.entidades.AssemblyInfo.cs
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\obj\Debug\netcoreapp1.1\bd.webappseguridad.entidades.dll
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\obj\Debug\netcoreapp1.1\bd.webappseguridad.entidades.pdb
