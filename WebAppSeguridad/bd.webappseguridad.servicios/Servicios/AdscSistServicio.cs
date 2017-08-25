@@ -205,7 +205,7 @@ namespace bd.webappseguridad.servicios.Servicios
             {
 
                 lista = await apiservicio.Listar<Adscsist>(new Uri(WebApp.BaseAddress)
-                                                                    ,"/api/Adscsists/ListarAdscSistema");
+                                                                    , "/api/Adscsists/ListarAdscSistema");
                 return lista;
             }
             catch (Exception ex)

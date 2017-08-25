@@ -96,11 +96,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         {
 
             var listado = await baseDatosServicio.ListarBaseDatosAsync();
-            if (listado == null)
-            {
-                return BadRequest();
-            }
-                return View(listado);
+            return View(listado);
         }
 
         public async Task<IActionResult> Delete(string id)

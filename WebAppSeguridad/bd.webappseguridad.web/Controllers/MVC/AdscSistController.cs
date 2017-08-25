@@ -101,10 +101,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         public async Task<IActionResult> Index()
         {
             var listado = await adscSistServicio.ListarAdscSistAsync();
-            if (listado == null)
-            {
-                return BadRequest();
-            }
+         
             return View(listado);
 
         }
