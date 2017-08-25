@@ -1,4 +1,4 @@
-@model IEnumerable<bd.webappseguridad.entidades.Negocio.Adscpassw>
+@model List<bd.webappseguridad.entidades.Negocio.Adscpassw>
 
 @{
     ViewData["Title"] = "Index";
@@ -32,7 +32,7 @@
                     -->
                     <header>
                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-                        <h2>Bases de datos</h2>
+                        <h2>Usuarios</h2>
                     </header>
                     <!-- widget div-->
                     <div>
@@ -49,13 +49,25 @@
                                         <th data-hide="phone">
                                             @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsLogin)
                                         </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsCodigoEmpleado)
+                                        </th>
                                         <th data-class="expand">
                                             <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i>
-                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdbdServidor)
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsFechaVencimiento)
                                         </th>
                                         <th data-hide="phone">
                                             <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
-                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdbdDescripcion)
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsIdContacto)
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsLoginAdm)
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsTipoUso)
                                         </th>
                                         <th>Opciones</th>
                                     </tr>
@@ -65,18 +77,27 @@
                                     {
                                         <tr>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.AdbdBdd)
+                                                @Html.DisplayFor(modelItem => item.AdpsLogin)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.AdbdServidor)
+                                                @Html.DisplayFor(modelItem => item.AdpsCodigoEmpleado)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.AdbdDescripcion)
+                                                @Html.DisplayFor(modelItem => item.AdpsFechaCambio)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdpsIdContacto)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdpsLoginAdm)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdpsTipoUso)
                                             </td>
                                            
                                             <td>
-                                                @Html.ActionLink("Editar", "Edit", new { id = item.AdbdBdd }) |
-                                                @Html.ActionLink("Eliminar", "Delete", new { id = item.AdbdBdd }, new { onclick = "return confirm('Desea eliminar el la base de datos... ?');" })
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.AdpsLogin }) |
+                                                @Html.ActionLink("Eliminar", "Delete", new { id = item.AdpsLogin }, new { onclick = "return confirm('Desea eliminar el Usuario... ?');" })
                                             </td>
                                         </tr>
                                     }

@@ -7037,7 +7037,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\SISTEMAS\\.nuget\\packages\\": {}
+    "C:\\Users\\Nestor Yasmani Valle\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
@@ -7045,14 +7045,14 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\SISTEMAS\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\bd.webappseguridad.entidades.csproj",
+      "projectUniqueName": "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\bd.webappseguridad.entidades.csproj",
       "projectName": "bd.webappseguridad.entidades",
-      "projectPath": "C:\\Users\\SISTEMAS\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\bd.webappseguridad.entidades.csproj",
-      "packagesPath": "C:\\Users\\SISTEMAS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\SISTEMAS\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\obj\\",
+      "projectPath": "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\bd.webappseguridad.entidades.csproj",
+      "packagesPath": "C:\\Users\\Nestor Yasmani Valle\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\SISTEMAS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Nestor Yasmani Valle\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
