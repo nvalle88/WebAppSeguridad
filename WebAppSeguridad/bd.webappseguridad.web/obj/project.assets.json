@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "targets": {
     ".NETCoreApp,Version=v1.1": {
       "Libuv/1.9.1": {
@@ -4134,6 +4134,12 @@
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
           "Newtonsoft.Json": "10.0.3"
+        },
+        "compile": {
+          "bin/placeholder/bd.log.guardar.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/bd.log.guardar.dll": {}
         }
       },
       "bd.sw.externos/1.0.0": {
@@ -4142,6 +4148,12 @@
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
           "bd.webappseguridad.entidades": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/bd.sw.externos.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/bd.sw.externos.dll": {}
         }
       },
       "bd.webappseguridad.entidades/1.0.0": {
@@ -4149,6 +4161,12 @@
         "framework": ".NETCoreApp,Version=v1.1",
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2"
+        },
+        "compile": {
+          "bin/placeholder/bd.webappseguridad.entidades.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/bd.webappseguridad.entidades.dll": {}
         }
       },
       "bd.webappseguridad.servicios/1.0.0": {
@@ -4161,6 +4179,12 @@
           "bd.log.guardar": "1.0.0",
           "bd.sw.externos": "1.0.0",
           "bd.webappseguridad.entidades": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/bd.webappseguridad.servicios.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/bd.webappseguridad.servicios.dll": {}
         }
       }
     }
@@ -10801,33 +10825,45 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\yanelys darzon\\.nuget\\packages\\": {}
+    "C:\\Users\\SISTEMAS\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
+    "restoreSettings": {
+      "hideWarningsAndErrors": true
+    },
     "restore": {
-      "projectUniqueName": "D:\\GitHub\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.web\\bd.webappseguridad.web.csproj",
+      "projectUniqueName": "C:\\Users\\SISTEMAS\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.web\\bd.webappseguridad.web.csproj",
       "projectName": "bd.webappseguridad.web",
-      "projectPath": "D:\\GitHub\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.web\\bd.webappseguridad.web.csproj",
-      "outputPath": "D:\\GitHub\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.web\\obj\\",
+      "projectPath": "C:\\Users\\SISTEMAS\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.web\\bd.webappseguridad.web.csproj",
+      "packagesPath": "C:\\Users\\SISTEMAS\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\SISTEMAS\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.web\\obj\\",
       "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\SISTEMAS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
       "originalTargetFrameworks": [
         "netcoreapp1.1"
       ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
-            "D:\\GitHub\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.servicios\\bd.webappseguridad.servicios.csproj": {
-              "projectPath": "D:\\GitHub\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.servicios\\bd.webappseguridad.servicios.csproj"
+            "C:\\Users\\SISTEMAS\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.servicios\\bd.webappseguridad.servicios.csproj": {
+              "projectPath": "C:\\Users\\SISTEMAS\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.servicios\\bd.webappseguridad.servicios.csproj"
             },
-            "D:\\GitHub\\WebAppSeguridad\\WebAppSeguridad\\bd.sw.externos\\bd.sw.externos.csproj": {
-              "projectPath": "D:\\GitHub\\WebAppSeguridad\\WebAppSeguridad\\bd.sw.externos\\bd.sw.externos.csproj"
+            "C:\\Users\\SISTEMAS\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.sw.externos\\bd.sw.externos.csproj": {
+              "projectPath": "C:\\Users\\SISTEMAS\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.sw.externos\\bd.sw.externos.csproj"
             },
-            "D:\\GitHub\\SalvarLogEntry\\bd.guardarlog.servicios\\bd.log.guardar.csproj": {
-              "projectPath": "D:\\GitHub\\SalvarLogEntry\\bd.guardarlog.servicios\\bd.log.guardar.csproj"
+            "C:\\Users\\SISTEMAS\\source\\repos\\SalvarLogEntry\\bd.guardarlog.servicios\\bd.log.guardar.csproj": {
+              "projectPath": "C:\\Users\\SISTEMAS\\source\\repos\\SalvarLogEntry\\bd.guardarlog.servicios\\bd.log.guardar.csproj"
             },
-            "D:\\GitHub\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\bd.webappseguridad.entidades.csproj": {
-              "projectPath": "D:\\GitHub\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\bd.webappseguridad.entidades.csproj"
+            "C:\\Users\\SISTEMAS\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\bd.webappseguridad.entidades.csproj": {
+              "projectPath": "C:\\Users\\SISTEMAS\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\bd.webappseguridad.entidades.csproj"
             }
           }
         }
