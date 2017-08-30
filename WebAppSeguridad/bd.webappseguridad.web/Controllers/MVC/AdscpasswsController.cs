@@ -42,7 +42,6 @@ namespace bd.webappseguridad.web.Controllers.MVC
                                                              "/api/Adscpassws/InsertarAdscPassw");
                 if (response.IsSuccess)
                 {
-
                     var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
                     {
                         ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
@@ -85,8 +84,6 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     var respuesta = await apiServicio.SeleccionarAsync<Response>(id, new Uri(WebApp.BaseAddress),
                                                                   "/api/Adscpassws");
-
-
                     respuesta.Resultado = JsonConvert.DeserializeObject<Adscsist>(respuesta.Resultado.ToString());
                     if (respuesta.IsSuccess)
                     {

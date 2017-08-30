@@ -32,7 +32,7 @@ namespace bd.webappcompartido.web
             services.AddSingleton<IBaseDatosServicio, BaseDatosServicio>();
             services.AddSingleton<IAdscSistServicio, AdscSistServicio>();
             services.AddSingleton<IApiServicio, ApiServicio>();
-            services.AddSingleton<IInicializacionServico, InicializacionServico>();
+           
             services.AddSingleton<IAdscpasswServicio, AdscpasswServicio>();
             await InicializarWebApp.Inicializar("swSeguridad");
            

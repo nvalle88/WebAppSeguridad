@@ -21,6 +21,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
         public async Task<IActionResult> Create()
         {
+
             ViewData["AdbdBdd"] = new SelectList(await baseDatosServicio.ListarBaseDatosAsync(), "AdbdBdd", "AdbdBdd");
             return View();
         }
@@ -101,9 +102,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         public async Task<IActionResult> Index()
         {
             var listado = await adscSistServicio.ListarAdscSistAsync();
-         
             return View(listado);
-
         }
 
         public async Task<IActionResult> Delete(string id)
