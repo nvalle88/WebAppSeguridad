@@ -141,7 +141,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     response = await apiServicio.EditarAsync(adscgrp, new Uri(WebApp.BaseAddress),
                                                                  "/api/Adscgrps/EditarAdscgrp");
-
+                  
                     if (response.IsSuccess)
                     {
                         await GuardarLogService.SaveLogEntry(new LogEntryTranfer

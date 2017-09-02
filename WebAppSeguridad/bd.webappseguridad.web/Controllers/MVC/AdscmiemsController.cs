@@ -233,7 +233,21 @@ namespace bd.webappseguridad.web.Controllers.MVC
             var listaBdd = await apiServicio.Listar<Adscbdd>(new Uri(WebApp.BaseAddress), "api/BasesDatos/ListarBasesDatos");
             var listaGrupos = await apiServicio.Listar<Adscgrp>(new Uri(WebApp.BaseAddress), "api/Adscgrps/ListarAdscgrp");
             ViewData["AdbdBdd"] = new SelectList(listaBdd, "AdbdBdd", "AdbdBdd");
-            ViewData["AdbdGrp"] = new SelectList(listaBdd, "AdbdGrp", "AdbdGrp");
+            ViewData["AdbdGrp"] = new SelectList(listaGrupos, "AdgrGrupo", "AdgrGrupo");
         }
+
+
+        public async Task<JsonResult> ListarBdd(string AdmiGrupo)
+        {
+            var grupo = new Adscgrp
+            {
+                AdgrGrupo=AdmiGrupo,
+               AdgrBdd=null,
+               
+            };
+           var listaGrupos = await apiServicio.Listar(grupo,new Uri(WebApp.BaseAddress), "api/Adscgrps/ListarBddPorGrupo");
+            return Json(listaGrupos);
+        }
+
     }
 }
