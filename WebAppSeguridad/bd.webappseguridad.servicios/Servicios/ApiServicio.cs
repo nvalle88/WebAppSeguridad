@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json;
 using bd.webappseguridad.entidades.Negocio;
+using bd.webappseguridad.entidades.ViewModels;
 
 namespace bd.webappseguridad.servicios.Servicios
 {
@@ -153,6 +154,87 @@ namespace bd.webappseguridad.servicios.Servicios
             }
         }
 
+        public async Task<List<Adscmenu>> ListarAplicacionPorSistema<T>(T model, Uri baseAddress, string url) where T : class
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    var request = JsonConvert.SerializeObject(model);
+                    var content = new StringContent(request, Encoding.UTF8, "application/json");
+
+                    client.BaseAddress = baseAddress;
+                    url = string.Format("{0}", url);
+
+                    var response = await client.PostAsync(url, content);
+
+                    var resultado = await response.Content.ReadAsStringAsync();
+                    var respuesta = JsonConvert.DeserializeObject<List<Adscmenu>>(resultado);
+                    return respuesta;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        public async Task<List<Adscgrp>> ListarGrupoPorBdd<T>(T model, Uri baseAddress, string url) where T : class
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    var request = JsonConvert.SerializeObject(model);
+                    var content = new StringContent(request, Encoding.UTF8, "application/json");
+
+                    client.BaseAddress = baseAddress;
+                    url = string.Format("{0}", url);
+
+                    var response = await client.PostAsync(url, content);
+
+                    var resultado = await response.Content.ReadAsStringAsync();
+                    var respuesta = JsonConvert.DeserializeObject<List<Adscgrp>>(resultado);
+                    return respuesta;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
+        public async Task<List<Adscmenu>> ListarPadresPorSistema<T>(T model, Uri baseAddress, string url) where T : class
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    var request = JsonConvert.SerializeObject(model);
+                    var content = new StringContent(request, Encoding.UTF8, "application/json");
+
+                    client.BaseAddress = baseAddress;
+                    url = string.Format("{0}", url);
+
+                    var response = await client.PostAsync(url, content);
+
+                    var resultado = await response.Content.ReadAsStringAsync();
+                    var respuesta = JsonConvert.DeserializeObject<List<Adscmenu>>(resultado);
+                    return respuesta;
+                }
+            }
+
+            catch (Exception ex)
+            {
+                return null;
+            }
+
+        }
+
         public async Task<List<Adscbdd>> Listar<T>(T model,Uri baseAddress, string url) where T : class
         {
             try
@@ -200,6 +282,31 @@ namespace bd.webappseguridad.servicios.Servicios
                 return null;
             }
                            
+        }
+
+        public async Task<DetalleMenu> DetalleMenuAsync<T>(T model, Uri baseAddress, string url) where T : class
+        {
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    var request = JsonConvert.SerializeObject(model);
+                    var content = new StringContent(request, Encoding.UTF8, "application/json");
+
+                    client.BaseAddress = baseAddress;
+
+                    var response = await client.PostAsync(url, content);
+
+                    var resultado = await response.Content.ReadAsStringAsync();
+                    var respuesta = JsonConvert.DeserializeObject<DetalleMenu>(resultado);
+                    return respuesta;
+                }
+            }
+            catch (Exception)
+            {
+                return new DetalleMenu();
+            }
+
         }
 
         public async Task<Response> SeleccionarAsync<T>(T model,Uri baseAddress, string url) where T : class

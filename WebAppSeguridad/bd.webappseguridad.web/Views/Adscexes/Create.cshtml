@@ -1,0 +1,213 @@
+@model bd.webappseguridad.entidades.Negocio.Adscexe
+
+@{
+    ViewData["Title"] = "Menu";
+}
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- START ROW -->
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+               
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>Men&uacute;s</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                           
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                          
+                            <form  asp-action="Create" id="checkout-form"  class="smart-form" novalidate="novalidate">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <fieldset>
+
+                                    <div class="row">
+
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                <select asp-for="AdexBdd" asp- class="form-control" asp-items="ViewBag.AdexBdd">
+                                                    <option value="Raiz" selected="" disabled="">@Html.DisplayNameFor(model => model.AdexBdd)</option>
+                                                </select>
+                                                <span asp-validation-for="AdexBdd" class="text-danger"></span>
+                                            </label>
+                                        </section>
+
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                <select asp-for="AdexSistema" asp- class="form-control" asp-items="ViewBag.AdexSistema">
+                                                    <option value="Raiz" selected="" disabled="">@Html.DisplayNameFor(model => model.AdexSistema)</option>
+                                                </select>
+                                                <span asp-validation-for="AdexSistema" class="text-danger"></span>
+                                            </label>
+                                        </section>
+
+
+
+
+                                    </div>
+
+                                    <div class="row" >
+
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                <select asp-for="AdexGrupo" asp- class="form-control" asp-items="ViewBag.AdexGrupo">
+                                                    <option value="0" selected="" disabled="">@Html.DisplayNameFor(model => model.AdexGrupo)</option>
+                                                </select>
+                                                <span asp-validation-for="AdexGrupo" class="text-danger"></span>
+                                            </label>
+                                        </section>
+
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                <select asp-for="AdexAplicacion" asp- class="form-control" asp-items="ViewBag.AdexAplicacion">
+                                                    <option value="Raiz" selected="" disabled="">@Html.DisplayNameFor(model => model.AdexAplicacion)</option>
+                                                </select>
+                                                <span asp-validation-for="AdexAplicacion" class="text-danger"></span>
+                                            </label>
+                                        </section>
+
+                                    </div>
+
+                                    <div class="row">
+                                        <section class="col col-3">
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-user"></i>
+                                                <input maxlength="30" asp-for="AdexSql" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdexSql)" />
+                                                <span asp-validation-for="AdexSql" class="text-danger"></span>
+                                            </label>
+                                        </section>
+
+                                      
+                                        
+                                        <div class="row">
+                                            <section class="col col-2">
+                                                <label class="checkbox">
+                                                    <input type="checkbox" asp-for="Ins" class="form-control">
+                                                    <i></i>¿Insertar?
+                                                    <span asp-validation-for="Ins" class="text-danger"></span>
+                                                </label>
+                                            </section>
+                                            <section class="col col-2">
+                                                <label class="checkbox">
+                                                    <input type="checkbox" asp-for="Upd" class="form-control">
+                                                    <i></i>¿Actualizar?
+                                                    <span asp-validation-for="Upd" class="text-danger"></span>
+                                                </label>
+                                            </section>
+                                            <section class="col col-2">
+                                                <label class="checkbox">
+                                                    <input type="checkbox" asp-for="Del" class="form-control">
+                                                    <i></i>¿Eliminar?
+                                                    <span asp-validation-for="Del" class="text-danger"></span>
+                                                </label>
+                                            </section>
+
+                                            <section class="col col-2">
+                                                <label class="checkbox">
+                                                    <input type="checkbox" asp-for="Sel" class="form-control">
+                                                    <i></i>¿Seleccionar?
+                                                    <span asp-validation-for="Sel" class="text-danger"></span>
+                                                </label>
+                                            </section>
+                                        </div>
+                                    </div>
+                                   
+
+                                </fieldset>
+
+                                <footer>
+                                    <span class="text-danger">@ViewData["Error"]</span>
+                                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                                    <a asp-action="Index"  class="btn btn-default">Cancelar</a>
+                                </footer>
+                            </form>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+       
+        </div>
+        <!-- END ROW -->
+    </section>
+    <!-- end widget grid -->
+    <!-- Modal -->
+   
+</div>
+<!-- END MAIN CONTENT -->
+@section Scripts {
+
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#AdexSistema").change(function () {
+                $("#AdexAplicacion").empty();
+                $("#AdexAplicacion").append('<option value="0">[Seleccione un grupo]</option>');
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("ListarAplicacionPorSistema")',
+                    dataType: 'json',
+                    data: { AdexSistema: $("#AdexSistema").val() },
+                    success: function (data) {
+                        $.each(data, function (i, data) {
+                            $("#AdexAplicacion").append('<option value="'
+                                + data.admeAplicacion + '">'
+                                + data.admeAplicacion + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve Departments.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+</script>
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#AdexBdd").change(function () {
+                $("#AdexGrupo").empty();
+                $("#AdexGrupo").append('<option value="0">[Seleccione un grupo]</option>');
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("ListarBasesDatos")',
+                    dataType: 'json',
+                    data: { AdexBdd: $("#AdexBdd").val() },
+                    success: function (data) {
+                        $.each(data, function (i, data) {
+                            $("#AdexGrupo").append('<option value="'
+                                + data.adgrGrupo + '">'
+                                + data.adgrGrupo + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve Departments.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+</script>
+
+
+}

@@ -1,0 +1,122 @@
+@model bd.webappseguridad.entidades.Negocio.Adscpassw
+
+@{
+    ViewData["Title"] = "BasesDatos";
+}
+
+
+			<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- START ROW -->
+        <div class="row">
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-10">
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+               
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>Usuarios</h2>
+                    </header>
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+                           
+                        </div>
+                        <!-- end widget edit box -->
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
+                          
+                            <form  asp-action="Create" id="checkout-form"  class="smart-form" novalidate="novalidate">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-user"></i>
+                                                <input maxlength="32" asp-for="AdpsLogin" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdpsLogin)" />
+                                                <span asp-validation-for="AdpsLogin" class="text-danger"></span>
+                                            </label>
+                                        </section>
+
+                                        <section class="col col-4">
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-user-secret"></i>
+                                                <input maxlength="32" asp-for="AdpsLoginAdm" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdpsLoginAdm)" />
+                                                <span asp-validation-for="AdpsLoginAdm" class="text-danger"></span>
+                                            </label>
+                                        </section>
+
+                                        <section class="col col-4">
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-tint"></i>
+                                                <input maxlength="100" asp-="AdpsTipoUso" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdpsTipoUso)" />
+                                                <span asp-validation-for="AdpsTipoUso" class="text-danger"></span>
+                                            </label>
+                                        </section>
+                                    </div>
+
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-archive"></i>
+                                                <input maxlength="32" asp-for="AdpsIdContacto" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdpsIdContacto)" />
+                                                <span asp-validation-for="AdpsIdContacto" class="text-danger"></span>
+                                            </label>
+                                        </section>
+
+                                        <section class="col col-4">
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-envelope"></i>
+                                                <input maxlength="32" asp-for="AdpsIdEntidad" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdpsIdEntidad)" />
+                                                <span asp-validation-for="AdpsIdEntidad" class="text-danger"></span>
+                                            </label>
+                                        </section>
+
+                                        <section class="col col-4">
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-inbox"></i>
+                                                <input maxlength="100" asp-="AdpsCodigoEmpleado" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdpsCodigoEmpleado)" />
+                                                <span asp-validation-for="AdpsCodigoEmpleado" class="text-danger"></span>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    
+                                </fieldset>
+                               
+                                <footer>
+                                    <span class="text-danger">@ViewData["Error"]</span>
+                                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                                    <a asp-action="Index"  class="btn btn-default">Cancelar</a>
+                                </footer>
+                            </form>
+                        </div>
+                        <!-- end widget content -->
+                    </div>
+                    <!-- end widget div -->
+                </div>
+                <!-- end widget -->
+
+            </article>
+       
+        </div>
+        <!-- END ROW -->
+    </section>
+    <!-- end widget grid -->
+    <!-- Modal -->
+   
+</div>
+<!-- END MAIN CONTENT -->
+@section Scripts {
+    <script type="text/javascript">
+
+
+    </script>
+}
