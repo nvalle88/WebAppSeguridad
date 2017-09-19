@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 
 namespace bd.webappcompartido.web
 {
@@ -34,8 +35,9 @@ namespace bd.webappcompartido.web
             services.AddSingleton<IApiServicio, ApiServicio>();
            
             services.AddSingleton<IAdscpasswServicio, AdscpasswServicio>();
-            await InicializarWebApp.Inicializar("swSeguridad");
-           
+            await InicializarWebApp.InicializarWeb("SeguridadWebService", new Uri("http://localhost:4000"));
+            await InicializarWebApp.InicializarLogEntry("LogWebService", new Uri("http://localhost:4000"));
+
 
         }
 

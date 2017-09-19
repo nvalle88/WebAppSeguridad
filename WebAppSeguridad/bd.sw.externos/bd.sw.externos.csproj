@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="bd.log.guardar" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\bd.webappseguridad.entidades\bd.webappseguridad.entidades.csproj" />
   </ItemGroup>
 

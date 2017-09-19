@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "7babe58c0d1f8d101977612e520de1abe9408e92"
+    "signature": "808b8b85990725679ddb93ef27634a6ca5c0c380"
   },
   "compilationOptions": {},
   "targets": {
@@ -16,6 +16,14 @@
         },
         "runtime": {
           "bd.webappseguridad.servicios.dll": {}
+        }
+      },
+      "bd.log.guardar/1.0.0": {
+        "dependencies": {
+          "Newtonsoft.Json": "10.0.3"
+        },
+        "runtime": {
+          "lib/netcoreapp1.1/bd.log.guardar.dll": {}
         }
       },
       "microsoft.aspnetcore.antiforgery/1.1.2": {
@@ -591,16 +599,9 @@
           "lib/netstandard1.3/System.Xml.XmlDocument.dll": {}
         }
       },
-      "bd.log.guardar/1.0.0": {
-        "dependencies": {
-          "Newtonsoft.Json": "10.0.3"
-        },
-        "runtime": {
-          "bd.log.guardar.dll": {}
-        }
-      },
       "bd.sw.externos/1.0.0": {
         "dependencies": {
+          "bd.log.guardar": "1.0.0",
           "bd.webappseguridad.entidades": "1.0.0"
         },
         "runtime": {
@@ -608,6 +609,9 @@
         }
       },
       "bd.webappseguridad.entidades/1.0.0": {
+        "dependencies": {
+          "bd.log.guardar": "1.0.0"
+        },
         "runtime": {
           "bd.webappseguridad.entidades.dll": {}
         }
@@ -619,6 +623,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "bd.log.guardar/1.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-geBS273vn3bn/Hv0XgMnewi2PFnk5DjuQG+/gBtgp2QK0uHIeY1uN8bNXo3Lfmz9COgHh91ccsiSmTblFajF6g==",
+      "path": "bd.log.guardar/1.0.0",
+      "hashPath": "bd.log.guardar.1.0.0.nupkg.sha512"
     },
     "microsoft.aspnetcore.antiforgery/1.1.2": {
       "type": "package",
@@ -1088,11 +1099,6 @@
       "sha512": "sha512-lJ8AxvkX7GQxpC6GFCeBj8ThYVyQczx2+f/cWHJU8tjS7YfI6Cv6bon70jVEgs2CiFbmmM8b9j1oZVx0dSI2Ww==",
       "path": "system.xml.xmldocument/4.3.0",
       "hashPath": "system.xml.xmldocument.4.3.0.nupkg.sha512"
-    },
-    "bd.log.guardar/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
     },
     "bd.sw.externos/1.0.0": {
       "type": "project",

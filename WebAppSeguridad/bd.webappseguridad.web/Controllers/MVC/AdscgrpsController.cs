@@ -9,6 +9,7 @@ using bd.webappseguridad.entidades.Utils;
 using bd.webappseguridad.entidades.Negocio;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using bd.log.guardar.Servicios;
+using bd.log.guardar.Inicializar;
 using bd.log.guardar.ObjectTranfer;
 using bd.webappseguridad.entidades.Enumeradores;
 using bd.log.guardar.Enumeradores;
@@ -27,6 +28,8 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
         public async Task<IActionResult> Index()
         {
+
+           
             try
             {
                 var ListaAdscgrp = await apiServicio.Listar<Adscgrp>(new Uri(WebApp.BaseAddress), "api/Adscgrps/ListarAdscgrp");

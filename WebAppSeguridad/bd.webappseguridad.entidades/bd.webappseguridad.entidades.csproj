@@ -8,4 +8,8 @@
     <None Remove="Negocio\ve-7044.tmp" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="bd.log.guardar" Version="1.0.0" />
+  </ItemGroup>
+
 </Project>

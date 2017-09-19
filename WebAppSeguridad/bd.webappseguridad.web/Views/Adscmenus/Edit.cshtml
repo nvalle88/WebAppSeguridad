@@ -4,6 +4,8 @@
     ViewData["Title"] = "BasesDatos";
 }
 <!-- MAIN CONTENT -->
+
+
 <div id="content">
 
     <!-- widget grid -->
@@ -35,118 +37,7 @@
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <input type="hidden" asp-for="AdmeSistema"/>
                                 <input type="hidden" asp-for="AdmeAplicacion" />
-                                <fieldset>
-                                    <div class="row">
-
-                                        <section class="col col-3">
-                                            <label class="input">
-                                                <i class="icon-prepend fa fa-user"></i>
-                                                <input maxlength="30" disabled="disabled" asp-for="AdmeSistema" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeSistema)" />
-                                                <span asp-validation-for="AdmeSistema" class="text-danger"></span>
-                                            </label>
-                                        </section>
-
-                                        <section class="col col-3">
-                                            <label class="input">
-                                                <select asp-for="AdmePadre" asp- class="form-control" asp-items="ViewBag.AdmePadre">
-                                                    <option value="0" selected="" disabled="">@Html.DisplayNameFor(model => model.AdmePadre)</option>
-                                                </select>
-                                                <span asp-validation-for="AdmePadre" class="text-danger"></span>
-                                            </label>
-                                        </section>
-
-                                        <section class="col col-3">
-                                            <label class="input">
-                                                <i class="icon-prepend fa fa-user"></i>
-                                                <input maxlength="30" disabled="disabled" asp-for="AdmeAplicacion" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeAplicacion)" />
-                                                <span asp-validation-for="AdmeAplicacion" class="text-danger"></span>
-                                            </label>
-                                        </section>
-
-                                        <section class="col col-2">
-                                            <label class="input">
-                                                <i class="icon-prepend fa fa-user"></i>
-                                                <input maxlength="1" asp-for="AdmeTipo" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeTipo)" />
-                                                <span asp-validation-for="AdmeTipo" class="text-danger"></span>
-                                            </label>
-                                        </section>
-
-                                    </div>
-
-                                    <div class="row">
-                                        <section class="col col-4">
-                                            <label class="input">
-                                                <i class="icon-prepend fa fa-user"></i>
-                                                <input maxlength="150" asp-for="AdmeUrl" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeUrl)" />
-                                                <span asp-validation-for="AdmeUrl" class="text-danger"></span>
-                                            </label>
-                                        </section>
-
-                                        <section class="col col-4">
-                                            <label class="input">
-                                                <i class="icon-prepend fa fa-user"></i>
-                                                <input maxlength="100" asp-for="AdmeEnsamblado" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeEnsamblado)" />
-                                                <span asp-validation-for="AdmeEnsamblado" class="text-danger"></span>
-                                            </label>
-                                        </section>
-
-                                        <div class="row">
-                                            <section class="col col-4">
-                                                <label class="input">
-                                                    <i class="icon-prepend fa fa-user"></i>
-                                                    <input maxlength="100" asp-for="AdmeElemento" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeElemento)" />
-                                                    <span asp-validation-for="AdmeElemento" class="text-danger"></span>
-                                                </label>
-                                            </section>
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <section class="col col-3">
-                                            <label class="input">
-                                                <i class="icon-prepend fa fa-user"></i>
-                                                <input maxlength="32" asp-for="AdmeObjetivo" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeObjetivo)" />
-                                                <span asp-validation-for="AdmeObjetivo" class="text-danger"></span>
-                                            </label>
-                                        </section>
-
-                                        <section class="col col-3">
-                                            <label class="input">
-                                                <i class="icon-prepend fa fa-user"></i>
-                                                <input maxlength="10" asp-for="AdmeTipoObjeto" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeTipoObjeto)" />
-                                                <span asp-validation-for="AdmeTipoObjeto" class="text-danger"></span>
-                                            </label>
-                                        </section>
-
-                                        <section class="col col-3">
-                                            <label class="input">
-                                                <i class="icon-prepend fa fa-user"></i>
-                                                <input maxlength="1" asp-for="AdmeOrden" data-mask="9" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeOrden)" />
-                                                <span asp-validation-for="AdmeOrden" class="text-danger"></span>
-                                            </label>
-                                        </section>
-
-                                        <section class="col col-3">
-                                            <label class="input">
-                                                <select asp-for="AdmeEstado" asp- class="form-control">
-                                                    <option value="ACTIVO">ACTIVO</option>
-                                                    <option value="INACTIVO">INACTIVO</option>
-                                                </select>
-                                                <span asp-validation-for="AdmeEstado" class="text-danger"></span>
-                                            </label>
-                                        </section>
-                                    </div>
-
-                                </fieldset>
-
-                                <fieldset>
-                                    <section>
-                                        <label class="textarea">
-                                            <textarea rows="6" maxlength="128" asp-for="AdmeDescripcion" placeholder="@Html.DisplayNameFor(model=>model.AdmeDescripcion)"></textarea>
-                                            <span asp-validation-for="AdmeDescripcion" class="text-danger"></span>
-                                        </label>
-                                    </section>
-                                </fieldset>
+                                @{await Html.RenderPartialAsync("_MenuPartialView");}
                                 <footer>
                                     <span class="text-danger">@ViewData["Error"]</span>
                                     <input type="submit" value="Guardar" class="btn btn-primary" />

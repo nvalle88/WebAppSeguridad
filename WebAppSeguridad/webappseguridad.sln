@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.4
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bd.sw.externos", "bd.sw.externos\bd.sw.externos.csproj", "{3C0E2E0B-A060-4994-A4A3-CFBE530F003E}"
 EndProject
@@ -10,8 +10,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bd.webappseguridad.servicios", "bd.webappseguridad.servicios\bd.webappseguridad.servicios.csproj", "{CBDC6B82-B072-44C8-B602-2D3CBA749E95}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bd.webappseguridad.web", "bd.webappseguridad.web\bd.webappseguridad.web.csproj", "{018CF73A-CD6B-4C75-B46A-7E770F594ABC}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bd.log.guardar", "..\..\SalvarLogEntry\bd.guardarlog.servicios\bd.log.guardar.csproj", "{6BB64559-F2F5-482C-BC21-D2D0ADDBBCD4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,12 +33,11 @@ Global
 		{018CF73A-CD6B-4C75-B46A-7E770F594ABC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{018CF73A-CD6B-4C75-B46A-7E770F594ABC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{018CF73A-CD6B-4C75-B46A-7E770F594ABC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6BB64559-F2F5-482C-BC21-D2D0ADDBBCD4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BB64559-F2F5-482C-BC21-D2D0ADDBBCD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BB64559-F2F5-482C-BC21-D2D0ADDBBCD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BB64559-F2F5-482C-BC21-D2D0ADDBBCD4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8C5AD474-4119-412A-816A-11F4BCA9E478}
 	EndGlobalSection
 EndGlobal

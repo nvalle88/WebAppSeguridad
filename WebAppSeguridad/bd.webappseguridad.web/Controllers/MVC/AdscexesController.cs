@@ -309,17 +309,17 @@ namespace bd.webappseguridad.web.Controllers.MVC
         private async Task CargarListaCombox()
         {
 
-            var ListaBDD = await apiServicio.Listar<Adscgrp>(new Uri(WebApp.BaseAddress), "api/Adscgrps/ListarAdscgrp");
+            var ListaBDD = await apiServicio.Listar<Adscgrp>(new Uri(WebApp.BaseAddress), "api/Adscgrps/ListarAdscgrpDistinct");
             ViewData["AdexBdd"] = new SelectList(ListaBDD, "AdgrBdd", "AdgrBdd");
 
-            var ListaSistema = await apiServicio.Listar<Adscmenu>(new Uri(WebApp.BaseAddress), "/api/Adscmenus/ListarMenu");
+            var ListaSistema = await apiServicio.Listar<Adscmenu>(new Uri(WebApp.BaseAddress), "/api/Adscmenus/ListarMenuDistinct");
             ViewData["AdexSistema"] = new SelectList(ListaSistema, "AdmeSistema", "AdmeSistema");
         }
 
         private async Task CargarListaCombox(Adscexe adscexe)
         {
 
-            var ListaBDD = await apiServicio.Listar<Adscgrp>(new Uri(WebApp.BaseAddress), "api/Adscgrps/ListarAdscgrp");
+            var ListaBDD = await apiServicio.Listar<Adscgrp>(new Uri(WebApp.BaseAddress), "api/Adscgrps/ListarAdscgrpDistinct");
             ViewData["AdexBdd"] = new SelectList(ListaBDD, "AdgrBdd", "AdgrBdd",adscexe.AdexBdd);
 
             var adscGrupo = new Adscgrp
@@ -332,7 +332,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
 
 
-            var ListaSistema = await apiServicio.Listar<Adscmenu>(new Uri(WebApp.BaseAddress), "/api/Adscmenus/ListarMenu");
+            var ListaSistema = await apiServicio.Listar<Adscmenu>(new Uri(WebApp.BaseAddress), "/api/Adscmenus/ListarMenuDistinct");
             ViewData["AdexSistema"] = new SelectList(ListaSistema, "AdmeSistema", "AdmeSistema",adscexe.AdexSistema);
 
             var adscMenu = new Adscmenu

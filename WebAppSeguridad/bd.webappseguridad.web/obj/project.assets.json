@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v1.1": {
+      "bd.log.guardar/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.NETCore.App": "1.1.2",
+          "Newtonsoft.Json": "10.0.3"
+        },
+        "compile": {
+          "lib/netcoreapp1.1/bd.log.guardar.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp1.1/bd.log.guardar.dll": {}
+        }
+      },
       "Libuv/1.9.1": {
         "type": "package",
         "dependencies": {
@@ -4128,25 +4141,12 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "bd.log.guardar/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v1.1",
-        "dependencies": {
-          "Microsoft.NETCore.App": "1.1.2",
-          "Newtonsoft.Json": "10.0.3"
-        },
-        "compile": {
-          "bin/placeholder/bd.log.guardar.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/bd.log.guardar.dll": {}
-        }
-      },
       "bd.sw.externos/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v1.1",
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
+          "bd.log.guardar": "1.0.0",
           "bd.webappseguridad.entidades": "1.0.0"
         },
         "compile": {
@@ -4160,7 +4160,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v1.1",
         "dependencies": {
-          "Microsoft.NETCore.App": "1.1.2"
+          "Microsoft.NETCore.App": "1.1.2",
+          "bd.log.guardar": "1.0.0"
         },
         "compile": {
           "bin/placeholder/bd.webappseguridad.entidades.dll": {}
@@ -4190,6 +4191,16 @@
     }
   },
   "libraries": {
+    "bd.log.guardar/1.0.0": {
+      "sha512": "geBS273vn3bn/Hv0XgMnewi2PFnk5DjuQG+/gBtgp2QK0uHIeY1uN8bNXo3Lfmz9COgHh91ccsiSmTblFajF6g==",
+      "type": "package",
+      "path": "bd.log.guardar/1.0.0",
+      "files": [
+        "bd.log.guardar.1.0.0.nupkg.sha512",
+        "bd.log.guardar.nuspec",
+        "lib/netcoreapp1.1/bd.log.guardar.dll"
+      ]
+    },
     "Libuv/1.9.1": {
       "sha512": "uqX2Frwf9PW8MaY7PRNY6HM5BpW1D8oj1EdqzrmbEFD5nH63Yat3aEjN/tws6Tw6Fk7LwmLBvtUh32tTeTaHiA==",
       "type": "package",
@@ -10783,11 +10794,6 @@
         "system.xml.xpath.xdocument.nuspec"
       ]
     },
-    "bd.log.guardar/1.0.0": {
-      "type": "project",
-      "path": "../../../SalvarLogEntry/bd.guardarlog.servicios/bd.log.guardar.csproj",
-      "msbuildProject": "../../../SalvarLogEntry/bd.guardarlog.servicios/bd.log.guardar.csproj"
-    },
     "bd.sw.externos/1.0.0": {
       "type": "project",
       "path": "../bd.sw.externos/bd.sw.externos.csproj",
@@ -10833,11 +10839,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nestor Yasmani Valle\\Source\\Repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.web\\bd.webappseguridad.web.csproj",
+      "projectUniqueName": "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.web\\bd.webappseguridad.web.csproj",
       "projectName": "bd.webappseguridad.web",
-      "projectPath": "C:\\Users\\Nestor Yasmani Valle\\Source\\Repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.web\\bd.webappseguridad.web.csproj",
+      "projectPath": "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.web\\bd.webappseguridad.web.csproj",
       "packagesPath": "C:\\Users\\Nestor Yasmani Valle\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nestor Yasmani Valle\\Source\\Repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.web\\obj\\",
+      "outputPath": "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.web\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Nestor Yasmani Valle\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10847,25 +10853,21 @@
         "netcoreapp1.1"
       ],
       "sources": {
-        "C:\\NugetPackage": {},
+        "C:\\Paquetes Nuguet Locales": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\NugetDemo\\NugetDemo\\bin\\Debug": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
-            "C:\\Users\\Nestor Yasmani Valle\\Source\\Repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.servicios\\bd.webappseguridad.servicios.csproj": {
-              "projectPath": "C:\\Users\\Nestor Yasmani Valle\\Source\\Repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.servicios\\bd.webappseguridad.servicios.csproj"
+            "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.servicios\\bd.webappseguridad.servicios.csproj": {
+              "projectPath": "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.servicios\\bd.webappseguridad.servicios.csproj"
             },
-            "C:\\Users\\Nestor Yasmani Valle\\Source\\Repos\\WebAppSeguridad\\WebAppSeguridad\\bd.sw.externos\\bd.sw.externos.csproj": {
-              "projectPath": "C:\\Users\\Nestor Yasmani Valle\\Source\\Repos\\WebAppSeguridad\\WebAppSeguridad\\bd.sw.externos\\bd.sw.externos.csproj"
+            "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.sw.externos\\bd.sw.externos.csproj": {
+              "projectPath": "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.sw.externos\\bd.sw.externos.csproj"
             },
-            "C:\\Users\\Nestor Yasmani Valle\\Source\\Repos\\SalvarLogEntry\\bd.guardarlog.servicios\\bd.log.guardar.csproj": {
-              "projectPath": "C:\\Users\\Nestor Yasmani Valle\\Source\\Repos\\SalvarLogEntry\\bd.guardarlog.servicios\\bd.log.guardar.csproj"
-            },
-            "C:\\Users\\Nestor Yasmani Valle\\Source\\Repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\bd.webappseguridad.entidades.csproj": {
-              "projectPath": "C:\\Users\\Nestor Yasmani Valle\\Source\\Repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\bd.webappseguridad.entidades.csproj"
+            "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\bd.webappseguridad.entidades.csproj": {
+              "projectPath": "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\bd.webappseguridad.entidades.csproj"
             }
           }
         }
@@ -10918,6 +10920,10 @@
           "Microsoft.ApplicationInsights.AspNetCore": {
             "target": "Package",
             "version": "2.0.0"
+          },
+          "bd.log.guardar": {
+            "target": "Package",
+            "version": "1.0.0"
           },
           "Microsoft.AspNetCore.StaticFiles": {
             "target": "Package",

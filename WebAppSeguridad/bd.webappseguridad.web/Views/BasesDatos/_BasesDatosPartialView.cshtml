@@ -1,0 +1,30 @@
+@model bd.webappseguridad.entidades.Negocio.Adscbdd
+<fieldset>
+    <div class="row">
+        <section class="col col-6">
+            <label class="input">
+                <i class="icon-prepend fa fa-database"></i>
+                <input maxlength="32" asp-for="AdbdBdd" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdbdBdd)" />
+                <span asp-validation-for="AdbdBdd" class="text-danger"></span>
+            </label>
+        </section>
+        <section class="col col-6">
+            <label class="input">
+                <i class="icon-prepend fa fa-desktop"></i>
+                <input maxlength="100" asp-for="AdbdServidor" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdbdServidor)" />
+                <span asp-validation-for="AdbdServidor" class="text-danger"></span>
+            </label>
+        </section>
+    </div>
+
+</fieldset>
+<fieldset>
+    <section>
+
+        <label class="textarea">
+            <i class="icon-prepend fa fa-comment"></i>
+            <textarea rows="3" maxlength="64" asp-for="AdbdDescripcion" placeholder="@Html.DisplayNameFor(model=>model.AdbdDescripcion)"></textarea>
+            <span asp-validation-for="AdbdDescripcion" class="text-danger"></span>
+        </label>
+    </section>
+</fieldset>

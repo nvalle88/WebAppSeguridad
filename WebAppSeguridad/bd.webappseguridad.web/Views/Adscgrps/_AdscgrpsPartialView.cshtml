@@ -1,0 +1,41 @@
+
+@model bd.webappseguridad.entidades.Negocio.Adscgrp
+<fieldset>
+    <div class="row">
+        <section class="col col-4">
+            <label class="input">
+
+                <select asp-for="AdgrBdd" asp- class="form-control" asp-items="ViewBag.AdbdBdd">
+                    <option value="0" selected="" disabled="">@Html.DisplayNameFor(model => model.AdgrBdd)</option>
+                </select>
+                <span asp-validation-for="AdgrBdd" class="text-danger"></span>
+            </label>
+        </section>
+
+        <section class="col col-4">
+            <label class="input">
+                <i class="icon-prepend fa fa-users"></i>
+                <input maxlength="32" asp-for="AdgrGrupo" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdgrGrupo)" />
+                <span asp-validation-for="AdgrGrupo" class="text-danger"></span>
+            </label>
+        </section>
+
+        <section class="col col-4">
+            <label class="input">
+                <i class="icon-prepend fa fa-delicious"></i>
+                <input maxlength="32" asp-for="AdgrNombre" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdgrNombre)" />
+                <span asp-validation-for="AdgrNombre" class="text-danger"></span>
+            </label>
+        </section>
+    </div>
+
+</fieldset>
+<fieldset>
+    <section>
+        <label class="textarea">
+            <i class="icon-prepend fa fa-comment"></i>
+            <textarea rows="3" maxlength="64" asp-for="AdgrDescripcion" placeholder="@Html.DisplayNameFor(model=>model.AdgrDescripcion)"></textarea>
+            <span asp-validation-for="AdgrDescripcion" class="text-danger"></span>
+        </label>
+    </section>
+</fieldset>

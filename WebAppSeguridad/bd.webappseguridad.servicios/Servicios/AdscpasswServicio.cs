@@ -1,7 +1,6 @@
 ﻿using bd.log.guardar.Enumeradores;
 using bd.log.guardar.ObjectTranfer;
 using bd.log.guardar.Servicios;
-using bd.log.guardar.Utiles;
 using bd.webappseguridad.entidades.Enumeradores;
 using bd.webappseguridad.entidades.Negocio;
 using bd.webappseguridad.entidades.Utils;
@@ -9,7 +8,6 @@ using bd.webappseguridad.servicios.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace bd.webappseguridad.servicios.Servicios
@@ -57,6 +55,7 @@ namespace bd.webappseguridad.servicios.Servicios
                         LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
                         LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
                         EntityID = string.Format("{0} {1}", "Base de Datos:", adscpassw.AdpsLogin),
+                        
                     });
                 }
 

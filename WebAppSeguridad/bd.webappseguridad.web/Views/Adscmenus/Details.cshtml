@@ -8,124 +8,121 @@
 
     <!-- widget grid -->
     <section id="widget-grid" class="">
-        <a asp-action="Index" class="btn btn-default">Regresar</a>
-        <!-- START ROW -->
-        <div class="row">
-            <!-- NEW COL START -->
-            <article class="col-sm-12 col-md-12 col-lg-12">
-                <!-- Widget ID (each widget will need unique ID)-->
-                <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
+        <p></p>
+        <a asp-action="Index">
+            <button type="button" asp-action="Index" class="btn btn-labeled btn-default">
+                <span class="btn-label">
+                    <i class="glyphicon glyphicon-arrow-left"></i>
+                </span>Regresar
 
+            </button>
+        </a>
+        <p> </p>
+        <div class="row">
+            <article class="col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
                     <header>
                         <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
                         <h2> Detalle Men&uacute;</h2>
                     </header>
-                    <!-- widget div-->
                     <div>
-
-                        <!-- widget edit box -->
                         <div class="jarviswidget-editbox">
-                            <!-- This area used as dropdown edit box -->
                         </div>
-                        <!-- end widget edit box -->
-                        <!-- widget content -->
                         <form asp-action="Edit" id="checkout-form" class="smart-form" novalidate="novalidate">
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <input type="hidden" asp-for="AdmeSistema" />
                             <input type="hidden" asp-for="AdmeAplicacion" />
                             <div class="widget-body no-padding">
-
                                 <fieldset>
                                     <div class="row">
-
                                         <section class="col col-3">
+                                            <label class="label">@Html.DisplayNameFor(mode => mode.AdmeSistema)</label>
                                             <label class="input">
-                                               @Html.DisplayNameFor(mode => mode.AdmeSistema)
+                                                <i class="icon-prepend fa fa-building"></i>
                                                 <input maxlength="30" disabled="disabled" asp-for="AdmeSistema" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeSistema)" />
                                                 <span asp-validation-for="AdmeSistema" class="text-danger"></span>
                                             </label>
                                         </section>
-
                                         <section class="col col-3">
-                                            <label  class="input">@Html.DisplayNameFor(mode => mode.AdmePadre)
+                                            <label class="label">@Html.DisplayNameFor(mode => mode.AdmePadre)</label>
+                                            <label  class="input">
+                                                <i class="icon-prepend fa fa-rebel"></i>
                                                 <input maxlength="30" disabled="disabled" asp-for="AdmePadre" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeAplicacion)" />
                                                 <span asp-validation-for="AdmePadre" class="text-danger"></span>
                                             </label>
                                         </section>
-
                                         <section class="col col-3">
+                                            <label class="label">@Html.DisplayNameFor(mode => mode.AdmeAplicacion)</label>
                                             <label class="input">
-                                                @Html.DisplayNameFor(mode => mode.AdmeAplicacion)
+                                                <i class="icon-prepend fa fa-thumb-tack"></i>
                                                 <input maxlength="30" disabled="disabled" asp-for="AdmeAplicacion" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeAplicacion)" />
                                                 <span asp-validation-for="AdmeAplicacion" class="text-danger"></span>
                                             </label>
                                         </section>
-
                                         <section class="col col-2">
+                                            <label class="label">@Html.DisplayNameFor(mode => mode.AdmeTipo)</label>
                                             <label class="input">
-                                               @Html.DisplayNameFor(mode => mode.AdmeTipo)
+                                                <i class="icon-prepend fa fa-tags"></i>
                                                 <input maxlength="1" asp-for="AdmeTipo" disabled="disabled" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeTipo)" />
                                                 <span asp-validation-for="AdmeTipo" class="text-danger"></span>
                                             </label>
                                         </section>
-
                                     </div>
-
                                     <div class="row">
                                         <section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(mode => mode.AdmeUrl)</label>
                                             <label class="input">
-                                                @Html.DisplayNameFor(mode => mode.AdmeUrl)
+                                                <i class="icon-prepend fa fa-globe"></i>
                                                 <input maxlength="150" asp-for="AdmeUrl" disabled="disabled" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeUrl)" />
                                                 <span asp-validation-for="AdmeUrl" class="text-danger"></span>
                                             </label>
                                         </section>
-
                                         <section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(mode => mode.AdmeEnsamblado)</label>
                                             <label class="input">
-                                                @Html.DisplayNameFor(mode => mode.AdmeEnsamblado)
+                                                <i class="icon-prepend fa fa-tint"></i>
                                                 <input maxlength="100" asp-for="AdmeEnsamblado" disabled="disabled" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeEnsamblado)" />
                                                 <span asp-validation-for="AdmeEnsamblado" class="text-danger"></span>
                                             </label>
                                         </section>
-
                                         <div class="row">
                                             <section class="col col-4">
+                                                <label class="label">@Html.DisplayNameFor(mode => mode.AdmeElemento)</label>
                                                 <label class="input">
-                                                    @Html.DisplayNameFor(mode => mode.AdmeElemento)
+                                                    <i class="icon-prepend fa fa-globe"></i>
                                                     <input maxlength="100" asp-for="AdmeElemento" disabled="disabled" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeElemento)" />
                                                     <span asp-validation-for="AdmeElemento" class="text-danger"></span>
                                                 </label>
                                             </section>
                                         </div>
-
                                     </div>
                                     <div class="row">
                                         <section class="col col-3">
+                                            <label class="label">@Html.DisplayNameFor(mode => mode.AdmeObjetivo)</label>
                                             <label class="input">
-                                               @Html.DisplayNameFor(mode => mode.AdmeObjetivo)
+                                                <i class="icon-prepend fa fa-crosshairs"></i>
                                                 <input maxlength="32" asp-for="AdmeObjetivo" disabled="disabled" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeObjetivo)" />
                                                 <span asp-validation-for="AdmeObjetivo" class="text-danger"></span>
                                             </label>
                                         </section>
-
                                         <section class="col col-3">
+                                            <label class="label">@Html.DisplayNameFor(mode => mode.AdmeTipoObjeto)</label>
                                             <label class="input">
-                                                @Html.DisplayNameFor(mode => mode.AdmeTipoObjeto)
+                                                <i class="icon-prepend fa fa-cubes"></i>
                                                 <input maxlength="10" asp-for="AdmeTipoObjeto" disabled="disabled" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeTipoObjeto)" />
                                                 <span asp-validation-for="AdmeTipoObjeto" class="text-danger"></span>
                                             </label>
                                         </section>
-
                                         <section class="col col-3">
+                                            <label class="label">@Html.DisplayNameFor(mode => mode.AdmeOrden)</label>
                                             <label class="input">
-                                                @Html.DisplayNameFor(mode => mode.AdmeOrden)
+                                                <i class="icon-prepend fa fa-sort-numeric-asc"></i>
                                                 <input maxlength="1" asp-for="AdmeOrden" disabled="disabled" data-mask="9" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeOrden)" />
                                                 <span asp-validation-for="AdmeOrden" class="text-danger"></span>
                                             </label>
                                         </section>
-                                       
                                         <section class="col col-3">
-                                            @Html.DisplayNameFor(model => model.AdmeEstado)
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmeEstado)</label>
                                             <label class="input">
                                                 <select asp-for="AdmeEstado" disabled="disabled" asp- class="form-control">
                                                     <option value="ACTIVO">ACTIVO</option>
@@ -135,12 +132,12 @@
                                             </label>
                                         </section>
                                     </div>
-
                                 </fieldset>
-
                                 <fieldset>
                                     <section>
-                                        <label class="textarea">@Html.DisplayNameFor(mode => mode.AdmeDescripcion)
+                                        <label class="label">@Html.DisplayNameFor(mode => mode.AdmeDescripcion)</label>
+                                        <label class="textarea">
+                                            <i class="icon-prepend fa fa-comment"></i>
                                             <textarea rows="6" maxlength="128" disabled="disabled" asp-for="AdmeDescripcion" placeholder="@Html.DisplayNameFor(model=>model.AdmeDescripcion)"></textarea>
                                             <span asp-validation-for="AdmeDescripcion" class="text-danger"></span>
                                         </label>
@@ -166,26 +163,27 @@
                                                             <thead>
                                                                 <tr>
                                                                     <th data-class="expand">
+                                                                        <i class="fa fa-fw fa-building text-muted hidden-md hidden-sm hidden-xs"></i>  
                                                                         @Html.DisplayNameFor(model => model.AdmeSistema)
                                                                     </th>
                                                                     <th data-hide="phone">
-                                                                        <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
+                                                                        <i class="fa fa-fw fa-thumb-tack text-muted hidden-md hidden-sm hidden-xs"></i>
                                                                         @Html.DisplayNameFor(model => model.AdmeAplicacion)
                                                                     </th>
                                                                     <th data-hide="phone">
-                                                                        <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                                        @Html.DisplayNameFor(model => model.AdmeTipo)
-                                                                    </th>
-                                                                    <th data-hide="">
-                                                                        <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                                        @Html.DisplayNameFor(model => model.AdmeObjetivo)
+                                                                        <i class="fa fa-fw fa-gear text-muted hidden-md hidden-sm hidden-xs"></i>
+                                                                        @Html.DisplayNameFor(model => model.ListaHijos.FirstOrDefault().AdmeControlador)
                                                                     </th>
                                                                     <th data-hide="phone">
-                                                                        <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
+                                                                        <i class="fa fa-fw fa-gears text-muted hidden-md hidden-sm hidden-xs"></i>
+                                                                        @Html.DisplayNameFor(model => model.ListaHijos.FirstOrDefault().AdmeAccionControlador)
+                                                                    </th>
+                                                                    <th data-hide="phone">
+                                                                        <i class="fa fa-fw fa-globe text-muted hidden-md hidden-sm hidden-xs"></i>
                                                                         @Html.DisplayNameFor(model => model.AdmeUrl)
                                                                     </th>
                                                                     <th data-hide="phone">
-                                                                        <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
+                                                                        <i class="fa fa-fw fa-check-square-o text-muted hidden-md hidden-sm hidden-xs"></i>
                                                                         @Html.DisplayNameFor(model => model.AdmeEstado)
                                                                     </th>
                                                                     <th>Opciones</th>
@@ -202,10 +200,10 @@
                                                                             @Html.DisplayFor(modelItem => item.AdmeAplicacion)
                                                                         </td>
                                                                         <td>
-                                                                            @Html.DisplayFor(modelItem => item.AdmeTipo)
+                                                                            @Html.DisplayFor(modelItem => item.AdmeControlador)
                                                                         </td>
                                                                         <td>
-                                                                            @Html.DisplayFor(modelItem => item.AdmeObjetivo)
+                                                                            @Html.DisplayFor(modelItem => item.AdmeAccionControlador)
                                                                         </td>
                                                                         <td>
                                                                             @Html.DisplayFor(modelItem => item.AdmeUrl)
@@ -235,15 +233,7 @@
             </article>
         </div>
     </section>
-    <!-- end widget grid -->
-    <!-- Modal -->
 </div>
-
-
-
-
-
-
 <!-- END MAIN CONTENT -->
 @section Scripts {
     <script type="text/javascript">
