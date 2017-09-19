@@ -3,92 +3,22 @@
 @{
     ViewData["Title"] = "Miembros";
 }
-
-
-			<!-- MAIN CONTENT -->
 <div id="content">
-
-    <!-- widget grid -->
     <section id="widget-grid" class="">
-
-        <!-- START ROW -->
         <div class="row">
-            <!-- NEW COL START -->
             <article class="col-sm-12 col-md-12 col-lg-10">
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
-               
                     <header>
-                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <span class="widget-icon"> <i class="fa fa-save"x></i> </span>
                         <h2>Miembro</h2>
                     </header>
-                    <!-- widget div-->
                     <div>
-
-                        <!-- widget edit box -->
                         <div class="jarviswidget-editbox">
-                            <!-- This area used as dropdown edit box -->
-                           
                         </div>
-                        <!-- end widget edit box -->
-                        <!-- widget content -->
                         <div class="widget-body no-padding">
-                          
                             <form  asp-action="Create" id="checkout-form"  class="smart-form" novalidate="novalidate">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <fieldset>
-                                    <div class="row">
-
-                                        <section class="col col-4">
-                                            <label class="input">
-                                                <i class="icon-prepend fa fa-users"></i>
-                                                <select asp-for="AdmiGrupo" asp- class="form-control" asp-items="ViewBag.AdbdGrp">
-                                                    <option value="0" selected="" disabled="">@Html.DisplayNameFor(model => model.AdmiGrupo)</option>
-                                                </select>
-                                                <span asp-validation-for="AdmiGrupo" class="text-danger"></span>
-                                            </label>
-                                        </section>
-
-                                        <section class="col col-4">
-                                            <label class="input">
-                                                <i class="icon-prepend fa fa-database"></i>
-                                                <select asp-for="AdmiBdd" asp- class="form-control" asp-items="ViewBag.AdbdBdd">
-                                                    <option value="0" selected="" disabled="">@Html.DisplayNameFor(model => model.AdmiBdd)</option>
-                                                </select>
-                                                <span asp-validation-for="AdmiBdd" class="text-danger"></span>
-                                            </label>
-                                        </section>
-
-                                        <section class="col col-4">
-                                            <label class="input">
-                                                <i class="icon-prepend fa fa-user"></i>
-                                                <input maxlength="100" asp-for="AdmiEmpleado" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmiEmpleado)" />
-                                                <span asp-validation-for="AdmiEmpleado" class="text-danger"></span>
-                                            </label>
-                                        </section>
-
-                                    </div>
-
-                                    <div class="row">
-                                        <section class="col col-6">
-                                            <label class="input">
-                                                <i class="icon-prepend fa fa-user-plus"></i>
-                                                <input maxlength="3" data-mask="aaa" asp-for="AdmiTotal" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmiTotal)" />
-                                                <span asp-validation-for="AdmiTotal" class="text-danger"></span>
-                                            </label>
-                                        </section>
-
-                                        <section class="col col-6">
-                                            <label class="input">
-                                                <i class="icon-prepend fa fa-user-md"></i>
-                                                <input maxlength="100" asp-for="AdmiCodigoEmpleado" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmiCodigoEmpleado)" />
-                                                <span asp-validation-for="AdmiCodigoEmpleado" class="text-danger"></span>
-                                            </label>
-                                        </section>
-                                    </div>
-                                    
-                                </fieldset>
-                               
+                                @{await Html.RenderPartialAsync("_AdscMiemsPartialView", Model);}
                                 <footer>
                                     <span class="text-danger">@ViewData["Error"]</span>
                                     <input type="submit" value="Guardar" class="btn btn-primary" />
@@ -96,22 +26,12 @@
                                 </footer>
                             </form>
                         </div>
-                        <!-- end widget content -->
                     </div>
-                    <!-- end widget div -->
                 </div>
-                <!-- end widget -->
-
             </article>
-       
         </div>
-        <!-- END ROW -->
     </section>
-    <!-- end widget grid -->
-    <!-- Modal -->
-   
 </div>
-<!-- END MAIN CONTENT -->
 @section Scripts {
 
 <script type="text/javascript">
