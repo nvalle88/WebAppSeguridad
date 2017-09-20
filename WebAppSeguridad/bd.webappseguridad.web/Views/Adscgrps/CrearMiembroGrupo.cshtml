@@ -1,7 +1,7 @@
 @model bd.webappseguridad.entidades.Negocio.Adscmiem
 
 @{
-    ViewData["Title"] = "BasesDatos";
+    ViewData["Title"] = "CrearMiembroGrupo";
 }
 <div id="content">
     <section id="widget-grid" class="">
@@ -16,11 +16,11 @@
                         <div class="jarviswidget-editbox">
                         </div>
                         <div class="widget-body no-padding">
-                            <form asp-action="Edit" id="checkout-form" class="smart-form" novalidate="novalidate">
+                            <form asp-action="CrearMiembroGrupoPost" id="checkout-form" class="smart-form" novalidate="novalidate">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <input type="hidden" asp-for="AdmiGrupo"/>
+                                <input type="hidden" asp-for="AdmiGrupo" />
                                 <input type="hidden" asp-for="AdmiBdd" />
-                                <input type="hidden" asp-for="AdmiEmpleado" />
+                               
                                 <fieldset>
                                     <div class="row">
 
@@ -38,14 +38,14 @@
                                                 <i class="icon-prepend fa fa-database"></i>
                                                 <input maxlength="100" disabled="disabled" asp-for="AdmiBdd" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmiBdd)" />
                                                 <span asp-validation-for="AdmiBdd" class="text-danger"></span>
-                                                
+
                                             </label>
                                         </section>
 
                                         <section class="col col-4">
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-user"></i>
-                                                <input maxlength="100" disabled="disabled" asp-for="AdmiEmpleado" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmiEmpleado)" />
+                                                <input maxlength="100" asp-for="AdmiEmpleado" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmiEmpleado)" />
                                                 <span asp-validation-for="AdmiEmpleado" class="text-danger"></span>
                                             </label>
                                         </section>

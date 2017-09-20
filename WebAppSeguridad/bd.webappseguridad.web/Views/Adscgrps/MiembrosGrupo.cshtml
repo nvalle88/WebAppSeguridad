@@ -1,0 +1,100 @@
+@model List<bd.webappseguridad.entidades.Negocio.Adscmiem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div id="content">
+    <div class="row col-lg-12" >
+        <p></p>
+        <a asp-action="Index" asp-controller="Adscgrps">
+            <button type="button" class="btn btn-labeled btn-default">
+                <span class="btn-label">
+                    <i class="glyphicon glyphicon-arrow-left"></i>
+                </span>Regresar
+
+            </button>
+        </a>
+        <p> </p>
+                <p></p>
+        @Html.ActionLink("Miembros", "CrearMiembroGrupo", "Adscgrps", new { adgrBdd = Model.FirstOrDefault().AdmiBdd, adgrGrupo = Model.FirstOrDefault().AdmiGrupo }) |
+            <button type="button" class="btn btn-labeled btn-default">
+                <span class="btn-label">
+                    <i class="glyphicon glyphicon-arrow-left"></i>
+                </span>Nuevo miembro
+
+            </button>
+        </a>
+        <p> </p>
+    </div>
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-users fa-users"></i> </span>
+                        <h2>Miembros</h2>
+                    </header>
+                    <div>
+                        <div class="jarviswidget-editbox">
+                        </div>
+                        <div class="widget-body no-padding">
+                            <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th data-class="expand">
+                                            <i class="fa fa-fw fa-users text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdmiGrupo)
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-database text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdmiBdd)
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdmiEmpleado)
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-user-md text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdmiTotal)
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-qrcode text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdmiCodigoEmpleado)
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdmiGrupo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdmiBdd)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdmiEmpleado)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdmiTotal)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdmiCodigoEmpleado)
+                                            </td>
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+@section Scripts {
+    <script src='~/js/datatables/init.js'></script>
+}
+}

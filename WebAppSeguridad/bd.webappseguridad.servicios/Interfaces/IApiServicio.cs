@@ -19,6 +19,7 @@ namespace bd.webappseguridad.servicios.Interfaces
         Task<Response> SeleccionarAsync<T>(T model,Uri baseAddress, string url) where T : class;
         Task<DetalleMenu> DetalleMenuAsync<T>(T model, Uri baseAddress, string url) where T : class;
         Task<List<T>> Listar<T>(Uri baseAddress, string url) where T :class;
+        Task<List<T>> Listar<T>(object model, Uri baseAddress, string url) where T : class;
         Task<List<Adscbdd>> Listar<T>(T model, Uri baseAddress, string url) where T : class;
         Task<List<Adscmenu>> ListarPadresPorSistema<T>(T model, Uri baseAddress, string url) where T : class;
         Task<List<Adscgrp>> ListarGrupoPorBdd<T>(T model, Uri baseAddress, string url) where T : class;

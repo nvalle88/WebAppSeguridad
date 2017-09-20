@@ -29,7 +29,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         public async Task<IActionResult> Index()
         {
 
-           
+
             try
             {
                 var ListaAdscgrp = await apiServicio.Listar<Adscgrp>(new Uri(WebApp.BaseAddress), "api/Adscgrps/ListarAdscgrp");
@@ -71,7 +71,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         UserName = "Usuario 1",
                         LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
                         LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                        EntityID = string.Format("{0} {1} {2}", "Grupo:",adscgrp.AdgrGrupo, adscgrp.AdgrBdd),
+                        EntityID = string.Format("{0} {1} {2}", "Grupo:", adscgrp.AdgrGrupo, adscgrp.AdgrBdd),
                     });
 
                     return RedirectToAction("Index");
@@ -112,8 +112,8 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     var grupo = new Adscgrp
                     {
-                         AdgrBdd=adgrBdd,
-                         AdgrGrupo= adgrGrupo,
+                        AdgrBdd = adgrBdd,
+                        AdgrGrupo = adgrGrupo,
                     };
                     Response respuesta = await apiServicio.SeleccionarAsync(grupo, new Uri(WebApp.BaseAddress),
                                                                   "/api/Adscgrps/SeleccionarAdscgrp");
@@ -133,6 +133,93 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
         }
 
+
+
+        [HttpGet]
+        public async Task<IActionResult> CrearMiembroGrupo(string adgrBdd, string adgrGrupo)
+        {
+            var miem = new Adscmiem
+            {
+                AdmiBdd=adgrBdd,
+                AdmiGrupo=adgrGrupo,
+            };
+
+            return View(miem);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CrearMiembroGrupoPost(Adscmiem adscmiem)
+        {
+            Response response = new Response();
+            try
+            {
+                response = await apiServicio.InsertarAsync(adscmiem,
+                                                             new Uri(WebApp.BaseAddress),
+                                                             "/api/Adscmiems/InsertarAdscmiem");
+                if (response.IsSuccess)
+                {
+
+                    var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                    {
+                        ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
+                        ExceptionTrace = null,
+                        Message = "Se ha creado un grupo",
+                        UserName = "Usuario 1",
+                        LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
+                        LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
+                        EntityID = string.Format("{0} {1} {2} {3}", "Grupo:", adscmiem.AdmiEmpleado, adscmiem.AdmiGrupo, adscmiem.AdmiBdd),
+                    });
+
+                   
+                    return RedirectToAction("MiembrosGrupo",new { adgrBdd = adscmiem.AdmiBdd, adgrGrupo = adscmiem.AdmiGrupo } );
+                }
+                await CargarListaBdd();
+                ViewData["Error"] = response.Message;
+                return View(adscmiem);
+
+            }
+            catch (Exception ex)
+            {
+                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                {
+                    ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
+                    Message = "Creando un grupo ",
+                    ExceptionTrace = ex,
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
+                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
+                    UserName = "Usuario APP Seguridad"
+                });
+
+                return BadRequest();
+            }
+        }
+
+        public async Task<IActionResult> MiembrosGrupo(string adgrBdd, string adgrGrupo)
+        {
+            try
+            {
+                if (adgrBdd != null || adgrGrupo != null)
+                {
+                    var grupo = new Adscgrp
+                    {
+                        AdgrBdd = adgrBdd,
+                        AdgrGrupo = adgrGrupo,
+                    };
+                    var respuesta = await apiServicio.Listar<Adscmiem>(grupo, new Uri(WebApp.BaseAddress),
+                                                                  "/api/Adscgrps/MiembrosGrupo");
+
+                    return View(respuesta);
+
+                }
+                return View(new List<Adscmiem>());
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Adscgrp adscgrp)
@@ -140,17 +227,17 @@ namespace bd.webappseguridad.web.Controllers.MVC
             Response response = new Response();
             try
             {
-                if (!string.IsNullOrEmpty(adscgrp.AdgrBdd ) || !string.IsNullOrEmpty(adscgrp.AdgrGrupo))
+                if (!string.IsNullOrEmpty(adscgrp.AdgrBdd) || !string.IsNullOrEmpty(adscgrp.AdgrGrupo))
                 {
                     response = await apiServicio.EditarAsync(adscgrp, new Uri(WebApp.BaseAddress),
                                                                  "/api/Adscgrps/EditarAdscgrp");
-                  
+
                     if (response.IsSuccess)
                     {
                         await GuardarLogService.SaveLogEntry(new LogEntryTranfer
                         {
                             ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                            EntityID = string.Format("{0} : {1} {2}", "Grupo", adscgrp.AdgrGrupo,adscgrp.AdgrBdd),
+                            EntityID = string.Format("{0} : {1} {2}", "Grupo", adscgrp.AdgrGrupo, adscgrp.AdgrBdd),
                             LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
                             LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
                             Message = "Se ha actualizado un registro Grupo",
@@ -200,7 +287,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         await GuardarLogService.SaveLogEntry(new LogEntryTranfer
                         {
                             ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                            EntityID = string.Format("{0} : {1} {2}", "Grupo", adgrGrupo,adgrBdd),
+                            EntityID = string.Format("{0} : {1} {2}", "Grupo", adgrGrupo, adgrBdd),
                             Message = "Registro eliminado",
                             LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
                             LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
@@ -208,7 +295,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         });
                         return RedirectToAction("Index");
                     }
-                    return BadRequest(); 
+                    return BadRequest();
                 }
                 return BadRequest();
             }

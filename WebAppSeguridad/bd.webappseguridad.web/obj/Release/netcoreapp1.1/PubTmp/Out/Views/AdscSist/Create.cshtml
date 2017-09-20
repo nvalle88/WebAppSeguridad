@@ -18,7 +18,50 @@
                         <div class="widget-body no-padding">
                             <form  asp-action="Create" id="checkout-form"  class="smart-form" novalidate="novalidate">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                               @{await Html.RenderPartialAsync("_AdscSistPartialView", Model);}
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-building"></i>
+                                                <input maxlength="20" asp-for="AdstSistema" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdstSistema)" />
+                                                <span asp-validation-for="AdstSistema" class="text-danger"></span>
+                                            </label>
+                                        </section>
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-tasks"></i>
+                                                <input maxlength="250" asp-for="AdstHost" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdstHost)" />
+                                                <span asp-validation-for="AdstHost" class="text-danger"></span>
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row">
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-tags"></i>
+                                                <input maxlength="3" asp-for="AdstTipo" class="form-control" data-mask="aaa" placeholder="@Html.DisplayNameFor(model=>model.AdstTipo)" />
+                                                <span asp-validation-for="AdstTipo" class="text-danger"></span>
+                                            </label>
+                                        </section>
+                                        <section class="col col-6">
+                                            <label class="input">
+                                                <select asp-for="AdstBdd" asp- class="form-control" asp-items="ViewBag.AdbdBdd">
+                                                    <option class="fa-database" value="0" selected="" disabled="">@Html.DisplayNameFor(model => model.AdstBdd)</option>
+                                                </select>
+                                                <span asp-validation-for="AdstBdd" class="text-danger"></span>
+                                            </label>
+                                        </section>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                        <section>
+                                            <label class="textarea">
+                                                <i class="icon-prepend fa fa-comment"></i>
+                                                <textarea rows="3" maxlength="64" asp-for="AdstDescripcion" placeholder="@Html.DisplayNameFor(model=>model.AdstDescripcion)"></textarea>
+                                                <span asp-validation-for="AdstDescripcion" class="text-danger"></span>
+                                            </label>
+                                        </section>
+                                    </fieldset>
                                 <footer>
                                     <input type="submit" value="Guardar" class="btn btn-primary" />
                                     <a asp-action="Index"  class="btn btn-default">Cancelar</a>

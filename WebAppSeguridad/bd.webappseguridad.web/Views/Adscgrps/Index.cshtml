@@ -79,6 +79,7 @@
                                             </td>
                                            
                                             <td>
+                                                @Html.ActionLink("Miembros", "MiembrosGrupo", new { adgrBdd = item.AdgrBdd, adgrGrupo = item.AdgrGrupo }) |
                                                 @Html.ActionLink("Editar", "Edit", new { adgrBdd = item.AdgrBdd, adgrGrupo=item.AdgrGrupo }) |
                                                 @Html.ActionLink("Eliminar", "Delete", new { adgrBdd = item.AdgrBdd, adgrGrupo = item.AdgrGrupo }, new { onclick = "return confirm('Desea eliminar el Usuario... ?');" })
                                             </td>
