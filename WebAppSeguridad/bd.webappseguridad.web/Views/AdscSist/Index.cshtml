@@ -4,14 +4,28 @@
     ViewData["Title"] = "Index";
 }
 <div id="content">
-    <a asp-action="Create">
-        <button type="button" asp-action="Create" class="btn btn-labeled btn-default">
-            <span class="btn-label">
-                <i class="glyphicon glyphicon-plus"></i>
-            </span>Nuevo sistema
-        </button>
-    </a>
-   <p> </p>
+    <div>
+        <div class="row col-lg-10">
+            <div class="col-lg-2 ">
+                <a asp-action="Create" >
+                    <button type="button" class="btn btn-labeled btn-default">
+                        <span class="btn-label">
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </span>Nuevo sistema
+
+                    </button>
+                </a>
+            </div>
+            <div class="col-lg-2 ">
+                <p></p>
+            </div>
+
+            <div class="col-lg-8">
+                <span class="text-danger">@ViewData["Error"]</span>
+            </div>
+        </div>
+        <p></p>
+    </div>
     <section id="widget-grid" class="">
         <div class="row">
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -90,5 +104,4 @@
 
 <script src='~/js/datatables/init.js'></script>
     
-}
 }

@@ -22,11 +22,16 @@ namespace bd.webappseguridad.web.Controllers.MVC
             this.apiServicio = apiServicio;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string mensaje)
         {
             try
             {
                 var ListaAdscgrp = await apiServicio.Listar<Adscmiem>(new Uri(WebApp.BaseAddress), "api/Adscmiems/ListarAdscmiem");
+                if (mensaje == null)
+                {
+                    mensaje = "";
+                }
+                ViewData["Error"] = mensaje;
                 return View(ListaAdscgrp);
             }
             catch (Exception ex)
@@ -207,7 +212,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         });
                         return RedirectToAction("Index");
                     }
-                    return BadRequest();
+                    return RedirectToAction("Index", new { mensaje = response.Message });
                 }
                 return BadRequest();
             }

@@ -85,40 +85,11 @@ namespace bd.webappseguridad.servicios.Servicios
         public async Task<Response> EliminarAsync(string id)
         {
             Response response = new Response();
-            try
-            {
                 response = await apiservicio.EliminarAsync(id,
-                                                              new Uri(WebApp.BaseAddress),
-                                                              "/api/Adscsists");
-                if (response.IsSuccess)
-                {
-                    await GuardarLogService.SaveLogEntry(new LogEntryTranfer
-                    {
-                        ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                        EntityID = string.Format("{0} : {1}", "Sistema", id),
-                        Message = "Registro eliminado",
-                        LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
-                        LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                        UserName = "Usuario APP Seguridad"
-                    });
-                }
+                                                           new Uri(WebApp.BaseAddress),
+                                                           "/api/Adscsists");
                 return response;
-            }
-            catch (Exception ex)
-            {
-                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
-                {
-                    ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                    Message = "Eliminar Base de datos",
-                    ExceptionTrace = ex,
-                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
-                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
-                    UserName = "Usuario APP Seguridad"
-                });
-                response.IsSuccess = false;
-                response.Message = ex.Message;
-                return response;
-            }
+           
         }
 
         public async Task<Response> EditarAsync(string id, Adscsist adscsist)

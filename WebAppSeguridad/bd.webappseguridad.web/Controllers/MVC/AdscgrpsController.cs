@@ -14,6 +14,7 @@ using bd.log.guardar.ObjectTranfer;
 using bd.webappseguridad.entidades.Enumeradores;
 using bd.log.guardar.Enumeradores;
 using Newtonsoft.Json;
+using bd.webappseguridad.entidades.ViewModels;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
@@ -26,13 +27,18 @@ namespace bd.webappseguridad.web.Controllers.MVC
             this.apiServicio = apiServicio;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string mensaje)
         {
 
 
             try
             {
                 var ListaAdscgrp = await apiServicio.Listar<Adscgrp>(new Uri(WebApp.BaseAddress), "api/Adscgrps/ListarAdscgrp");
+                if (mensaje==null)
+                {
+                    mensaje = "";
+                }
+                ViewData["Error"] = mensaje;
                 return View(ListaAdscgrp);
             }
             catch (Exception ex)
@@ -133,20 +139,146 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
         }
 
+        
+
+        public async Task<IActionResult> MenusGrupo(string adgrBdd, string adgrGrupo)
+        {
+            try
+            {
+                if (adgrBdd != null || adgrGrupo != null)
+                {
+                    var grupo = new Adscgrp
+                    {
+                        AdgrBdd = adgrBdd,
+                        AdgrGrupo = adgrGrupo,
+                    };
+                    var respuesta = await apiServicio.Listar<Adscmenu>(grupo, new Uri(WebApp.BaseAddress),
+                                                                  "/api/Adscgrps/MenusGrupo");
+
+
+                    var menusGrupo = new MenusGrupo
+                    {
+                       Adgrbdd=adgrBdd,
+                       Adgrgrupo=adgrGrupo,
+                       listaMenus=respuesta,
+                    };
+
+                    return View(menusGrupo);
+
+                }
+                return View(new List<Adscmiem>());
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        private async Task CargarListaCombox()
+        {
+
+            var ListaSistema = await apiServicio.Listar<Adscmenu>(new Uri(WebApp.BaseAddress), "/api/Adscmenus/ListarMenuDistinct");
+            ViewData["AdexSistema"] = new SelectList(ListaSistema, "AdmeSistema", "AdmeSistema");
+        }
+
+
+        private async Task CargarListaCombox(Adscexe adscexe)
+        {
+
+            var ListaSistema = await apiServicio.Listar<Adscmenu>(new Uri(WebApp.BaseAddress), "/api/Adscmenus/ListarMenuDistinct");
+            ViewData["AdexSistema"] = new SelectList(ListaSistema, "AdmeSistema", "AdmeSistema", adscexe.AdexSistema);
+
+            var adscMenu = new Adscmenu
+            {
+                AdmeSistema = adscexe.AdexSistema,
+            };
+
+            var listaAplicacion = await apiServicio.ListarAplicacionPorSistema<Adscmenu>(adscMenu, new Uri(WebApp.BaseAddress), "api/Adscmenus/ListarPadresPorSistema");
+            ViewData["AdexAplicacion"] = new SelectList(listaAplicacion, "AdmeAplicacion", "AdmeAplicacion");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CrearPermisoGrupoPost(Adscexe adscexe)
+        {
+            Response response = new Response();
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+
+                    await CargarListaCombox(adscexe);
+                    return RedirectToAction("CrearPermisoGrupo", new { adgrBdd = adscexe.AdexBdd, adgrGrupo = adscexe.AdexGrupo });
+                }
+                response = await apiServicio.InsertarAsync(adscexe,
+                                                             new Uri(WebApp.BaseAddress),
+                                                             "api/Adscexes/InsertarAdscexe");
+                if (response.IsSuccess)
+                {
+
+                    var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                    {
+                        ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
+                        ExceptionTrace = null,
+                        Message = "Se ha creado un menú",
+                        UserName = "Usuario 1",
+                        LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
+                        LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
+                        EntityID = string.Format("{0} {1} {2} {3} {4}", "AdscExe:", adscexe.AdexSistema, adscexe.AdexAplicacion, adscexe.AdexBdd, adscexe.AdexGrupo),
+                    });
+
+                    return RedirectToAction("MenusGrupo", new { adgrBdd = adscexe.AdexBdd, adgrGrupo = adscexe.AdexGrupo});
+                }
+                await CargarListaCombox();
+               
+                return RedirectToAction("CrearPermisoGrupo", new { adgrBdd = adscexe.AdexBdd, adgrGrupo = adscexe.AdexGrupo,mensaje=response.Message });
+
+            }
+            catch (Exception ex)
+            {
+                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                {
+                    ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
+                    Message = "Creando un menu ",
+                    ExceptionTrace = ex,
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
+                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
+                    UserName = "Usuario APP Seguridad"
+                });
+
+                return BadRequest();
+            }
+        }
 
 
         [HttpGet]
-        public async Task<IActionResult> CrearMiembroGrupo(string adgrBdd, string adgrGrupo)
+        public async Task<IActionResult> CrearPermisoGrupo(string adgrBdd, string adgrGrupo,string mensaje)
+        {
+            var miem = new Adscexe
+            {
+                AdexBdd = adgrBdd,
+                AdexGrupo = adgrGrupo,
+            };
+
+            await CargarListaCombox();
+            ViewData["Error"] = mensaje;
+            return View(miem);
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> CrearMiembroGrupo(string adgrBdd, string adgrGrupo,string mensaje)
         {
             var miem = new Adscmiem
             {
                 AdmiBdd=adgrBdd,
                 AdmiGrupo=adgrGrupo,
             };
-
-            return View(miem);
+            ViewData["Error"] = mensaje;
+            return   View(miem);
         }
 
+     
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CrearMiembroGrupoPost(Adscmiem adscmiem)
@@ -170,13 +302,10 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
                         EntityID = string.Format("{0} {1} {2} {3}", "Grupo:", adscmiem.AdmiEmpleado, adscmiem.AdmiGrupo, adscmiem.AdmiBdd),
                     });
-
-                   
                     return RedirectToAction("MiembrosGrupo",new { adgrBdd = adscmiem.AdmiBdd, adgrGrupo = adscmiem.AdmiGrupo } );
                 }
                 await CargarListaBdd();
-                ViewData["Error"] = response.Message;
-                return View(adscmiem);
+                return RedirectToAction("CrearMiembroGrupo", new { adgrBdd = adscmiem.AdmiBdd, adgrGrupo = adscmiem.AdmiGrupo,mensaje=response.Message});
 
             }
             catch (Exception ex)
@@ -209,7 +338,13 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     var respuesta = await apiServicio.Listar<Adscmiem>(grupo, new Uri(WebApp.BaseAddress),
                                                                   "/api/Adscgrps/MiembrosGrupo");
 
-                    return View(respuesta);
+                    var miembrosGrupo = new MiembrosGrupo
+                    {
+                        Adgrbdd=adgrBdd,
+                        Adgrgrupo=adgrGrupo,
+                        ListaMiembros=respuesta,
+                    };
+                    return View(miembrosGrupo);
 
                 }
                 return View(new List<Adscmiem>());
@@ -295,8 +430,9 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         });
                         return RedirectToAction("Index");
                     }
-                    return BadRequest();
+                    return RedirectToAction("Index", new { mensaje = response.Message });
                 }
+
                 return BadRequest();
             }
             catch (Exception ex)
@@ -313,6 +449,16 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
                 return BadRequest();
             }
+        }
+
+        public async Task<JsonResult> ListarAplicacionPorSistema(string AdexSistema)
+        {
+            var sistema = new Adscmenu
+            {
+                AdmeSistema = AdexSistema,
+            };
+            var listaGrupos = await apiServicio.ListarAplicacionPorSistema(sistema, new Uri(WebApp.BaseAddress), "api/Adscmenus/ListarPadresPorSistema");
+            return Json(listaGrupos);
         }
 
         private async Task CargarListaBdd()

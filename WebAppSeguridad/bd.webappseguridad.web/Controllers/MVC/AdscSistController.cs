@@ -4,6 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using bd.webappseguridad.servicios.Interfaces;
 using bd.webappseguridad.entidades.Negocio;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using bd.log.guardar.Servicios;
+using bd.log.guardar.ObjectTranfer;
+using bd.webappseguridad.entidades.Enumeradores;
+using bd.log.guardar.Enumeradores;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
@@ -99,9 +103,14 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string mensaje)
         {
             var listado = await adscSistServicio.ListarAdscSistAsync();
+            if (mensaje == null)
+            {
+                mensaje = "";
+            }
+            ViewData["Error"] = mensaje;
             return View(listado);
         }
 
@@ -109,19 +118,40 @@ namespace bd.webappseguridad.web.Controllers.MVC
         {
             try
             {
-                if (!ModelState.IsValid)
+                if (id != null)
                 {
-                    return NotFound();
+                  
+
+                    var response = await adscSistServicio.EliminarAsync(id);
+                    if (response.IsSuccess)
+                    {
+                        await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                        {
+                            ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
+                            EntityID = string.Format("{0} : {1}", "Sistema", id),
+                            Message = "Registro eliminado",
+                            LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
+                            LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
+                            UserName = "Usuario APP Seguridad"
+                        });
+                        return RedirectToAction("Index");
+                    }
+                    return RedirectToAction("Index", new { mensaje = response.Message });
                 }
-                var respuesta = await adscSistServicio.EliminarAsync(id);
-                if (!respuesta.IsSuccess)
-                {
-                    return BadRequest();
-                }
-                return RedirectToAction("Index");
+
+                return BadRequest();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                {
+                    ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
+                    Message = "Eliminar Base de datos",
+                    ExceptionTrace = ex,
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
+                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
+                    UserName = "Usuario APP Seguridad"
+                });
                 return BadRequest();
             }
         }

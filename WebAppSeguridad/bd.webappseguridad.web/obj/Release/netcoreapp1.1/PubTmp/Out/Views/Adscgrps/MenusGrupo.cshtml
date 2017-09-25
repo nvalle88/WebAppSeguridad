@@ -1,0 +1,117 @@
+@model List<bd.webappseguridad.entidades.Negocio.Adscmenu>
+
+    @{
+    ViewData["Title"] = "Index";
+    }
+    <div id="content">
+        <p></p>
+        <a asp-action="Index" asp-controller="Adscgrps">
+            <button type="button" asp-action="Create" class="btn btn-labeled btn-default">
+                <span class="btn-label">
+                    <i class="glyphicon glyphicon-arrow-left"></i>
+                </span>Regresar
+
+            </button>
+        </a>
+        <p> </p>
+        <section id="widget-grid" class="">
+            <div class="row">
+                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                        <header>
+                            <span class="widget-icon"> <i class="fa fa-home"></i> </span>
+                            <h2>Men&uacute;</h2>
+                        </header>
+                        <div>
+                            <div class="jarviswidget-editbox">
+                            </div>
+                            <div class="widget-body no-padding">
+                                <table id="dt_basic" class="table table-striped table-bordered table-responsive" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th data-class="expand">
+                                                <i class="fa fa-fw fa-building text-muted hidden-md hidden-sm hidden-xs"></i>
+                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeSistema)
+                                            </th>
+                                            <th data-hide="phone">
+                                                <i class="fa fa-fw fa-thumb-tack text-muted hidden-md hidden-sm hidden-xs"></i>
+                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeAplicacion)
+                                            </th>
+                                            <th data-hide="phone">
+                                                <i class="fa fa-fw fa-gear text-muted hidden-md hidden-sm hidden-xs"></i>
+                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeControlador)
+                                            </th>
+                                            <th data-hide="phone">
+                                                <i class="fa fa-fw fa-gears text-muted hidden-md hidden-sm hidden-xs"></i>
+                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeAccionControlador)
+                                            </th>
+                                            <th data-hide="phone">
+                                                <i class="fa fa-fw fa-rebel text-muted hidden-md hidden-sm hidden-xs"></i>
+                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmePadre)
+                                            </th>
+                                            <th data-hide="">
+                                                <i class="fa fa-crosshairs text-muted hidden-md hidden-sm hidden-xs"></i>
+                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeObjetivo)
+                                            </th>
+                                            <th data-hide="phone">
+                                                <i class="fa fa-fw fa-globe text-muted hidden-md hidden-sm hidden-xs"></i>
+                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeUrl)
+                                            </th>
+                                            <th data-hide="phone">
+                                                <i class="fa fa-fw fa-check-square-o text-muted hidden-md hidden-sm hidden-xs"></i>
+                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeEstado)
+                                            </th>
+                                            <th data-hide="phone">
+                                                <i class="fa fa-fw fa-retweet text-muted hidden-md hidden-sm hidden-xs"></i>
+                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeEnsamblado)
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                    {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AdmeSistema)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AdmeAplicacion)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AdmeControlador)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AdmeAccionControlador)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AdmePadre)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AdmeObjetivo)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AdmeUrl)
+                                                </td>
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AdmeEstado)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.AdmeEnsamblado)
+                                                </td>
+                                            </tr>
+                                     }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+    @section Scripts {
+        <script src='~/js/datatables/init.js'></script>
+    }
+    }

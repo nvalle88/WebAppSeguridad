@@ -4,16 +4,37 @@
     ViewData["Title"] = "Index";
 }
 <div id="content">
-    <p></p>
-    <a asp-action="Create">
-        <button type="button" asp-action="Create" class="btn btn-labeled btn-default">
-            <span class="btn-label">
-                <i class="glyphicon glyphicon-plus"></i>
-            </span>Nuevo miembro
+    <div>
+        <div class="row col-lg-10">
+            <div class="col-lg-2 ">
+                <a asp-action="Create" asp-controller="Adscgrps">
+                    <button type="button" class="btn btn-labeled btn-default">
+                        <span class="btn-label">
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </span>Nuevo miembro
 
-        </button>
-    </a>
-    <p> </p>
+                    </button>
+                </a>
+            </div>
+            <div class="col-lg-2 ">
+              
+            </div>
+
+           @if (@ViewData["Error"].ToString() != "")
+           {
+            <div class="col-lg-9">
+                <div class="alert alert-block alert-info">
+                    <a class="close" data-dismiss="alert" href="#"><p>X</p></a>
+                    <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Informaci&oacute;n!</h4>
+                    <p>
+                        <span class="text-danger">@ViewData["Error"]</span>
+                    </p>
+                </div>
+            </div>
+           }
+        </div>
+        <p></p>
+    </div>
     <section id="widget-grid" class="">
         <div class="row">
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

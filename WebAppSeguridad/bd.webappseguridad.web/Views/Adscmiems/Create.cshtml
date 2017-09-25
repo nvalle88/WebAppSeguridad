@@ -1,8 +1,7 @@
 @model bd.webappseguridad.entidades.Negocio.Adscmiem
-
-@{
-    ViewData["Title"] = "Miembros";
-}
+<link rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" />
+<link rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" />
+<link rel="stylesheet" href="~/lib/waitMe/waitMe.min.css" />
 <div id="content">
     <section id="widget-grid" class="">
         <div class="row">
@@ -83,11 +82,26 @@
         </div>
     </section>
 </div>
+
+
+
 @section Scripts {
+    <script src='~/lib/select2/dist/js/select2.min.js'></script>
+    <script src='~/lib/select2/dist/js/i18n/es.js'></script>
+    <script src='~/lib/waitMe/waitMe.min.js'></script>
+    <script src='~/js/site.js'></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Init_Select2();
+        });
+    </script>
+
 
 <script type="text/javascript">
-        $(document).ready(function () {
-            $("#AdmiGrupo").change(function () {
+    $(document).ready(function () {
+       
+        $("#AdmiGrupo").change(function () {
+            mostrarLoadingPanel("checkout-form", "Cargando modelos...");
                 $("#AdmiBdd").empty();
                 $("#AdmiBdd").append('<option value="0">[Seleccione una base de datos]</option>');
                 $.ajax({
@@ -100,8 +114,12 @@
                             $("#AdmiBdd").append('<option value="'
                                 + data.adbdBdd + '">'
                                 + data.adbdBdd + '</option>');
+                            Init_Select2()
                         });
+                    }, complete: function (data) {
+                        $("#checkout-form").waitMe("hide");
                     },
+                   
                     error: function (ex) {
                         alert('Failed to retrieve Departments.' + ex);
                     }

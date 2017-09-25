@@ -6,16 +6,39 @@
 
 			<!-- MAIN CONTENT -->
 <div id="content">
-    <p></p>
-    <a asp-action="Create">
-        <button type="button" asp-action="Create" class="btn btn-labeled btn-default">
-            <span class="btn-label">
-                <i class="glyphicon glyphicon-plus"></i>
-            </span>Nuevo grupo
 
-        </button>
-    </a>
-    <p> </p>
+
+    <div>
+        <div class="row col-lg-10">
+            <div class="col-lg-2 ">
+                <a asp-action="Create" asp-controller="Adscgrps">
+                    <button type="button" class="btn btn-labeled btn-default">
+                        <span class="btn-label">
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </span>Nuevo grupo
+
+                    </button>
+                </a>
+            </div>
+            <div class="col-lg-1 ">
+             
+            </div>
+            @if (@ViewData["Error"].ToString()!="")
+	        {
+            <div class="col-lg-9">
+                <div class="alert alert-block alert-info">
+                    <a class="close" data-dismiss="alert" href="#"><p>X</p></a>
+                    <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Informaci&oacute;n!</h4>
+                    <p>
+                        <span class="text-danger">@ViewData["Error"]</span>
+                    </p>
+                </div>
+            </div>
+            }
+        </div>
+        <p></p>
+    </div>
+   
     <!-- widget grid -->
     <section id="widget-grid" class="">
         <!-- row -->
@@ -79,9 +102,10 @@
                                             </td>
                                            
                                             <td>
+                                                @Html.ActionLink("Permisos", "MenusGrupo", new { adgrBdd = item.AdgrBdd, adgrGrupo = item.AdgrGrupo }) |
                                                 @Html.ActionLink("Miembros", "MiembrosGrupo", new { adgrBdd = item.AdgrBdd, adgrGrupo = item.AdgrGrupo }) |
                                                 @Html.ActionLink("Editar", "Edit", new { adgrBdd = item.AdgrBdd, adgrGrupo=item.AdgrGrupo }) |
-                                                @Html.ActionLink("Eliminar", "Delete", new { adgrBdd = item.AdgrBdd, adgrGrupo = item.AdgrGrupo }, new { onclick = "return confirm('Desea eliminar el Usuario... ?');" })
+                                                @Html.ActionLink("Eliminar", "Delete", new { adgrBdd = item.AdgrBdd, adgrGrupo = item.AdgrGrupo }, new { onclick = "return confirm('Desea eliminar el grupo... ?');" })
                                             </td>
                                         </tr>
                                     }

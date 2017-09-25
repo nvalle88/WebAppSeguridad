@@ -24,7 +24,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
             this.apiServicio = apiServicio;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string mensaje)
         {
             try
             {
@@ -258,27 +258,29 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
         }
 
-        public async Task<IActionResult> Delete(string admeSistema, string admeAplicacion)
+        public async Task<IActionResult> Delete(string sistema, string baseDatos,string grupo, string aplicacion)
         {
 
             try
             {
-                if (admeSistema != null || admeAplicacion != null)
+                if (sistema != null || baseDatos != null || grupo != null || grupo != null)
                 {
-                    var menu = new Adscmenu
+                    var permiso = new Adscexe
                     {
-                        AdmeSistema = admeSistema,
-                        AdmeAplicacion = admeAplicacion,
+                        AdexSistema = sistema,
+                        AdexBdd = baseDatos,
+                        AdexGrupo=grupo,
+                        AdexAplicacion=aplicacion
                     };
 
-                    var response = await apiServicio.EliminarAsync(menu, new Uri(WebApp.BaseAddress)
+                    var response = await apiServicio.EliminarAsync(permiso, new Uri(WebApp.BaseAddress)
                                                                            , "api/Adscexes/EliminarAdscexe");
                     if (response.IsSuccess)
                     {
                         await GuardarLogService.SaveLogEntry(new LogEntryTranfer
                         {
                             ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                            EntityID = string.Format("{0} : {1} {2}", "Menu", admeSistema, admeAplicacion),
+                            EntityID = string.Format("{0} : {1} {2} {3} {4}", "Permiso", sistema, baseDatos,grupo,aplicacion),
                             Message = "Registro eliminado",
                             LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
                             LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
@@ -286,7 +288,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         });
                         return RedirectToAction("Index");
                     }
-                    return BadRequest();
+                    return RedirectToAction("Index", new { mensaje = response.Message });
                 }
                 return BadRequest();
             }

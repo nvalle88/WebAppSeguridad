@@ -3,9 +3,11 @@ using bd.webappseguridad.servicios.Interfaces;
 using bd.webappseguridad.servicios.Servicios;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 using System;
 
 namespace bd.webappcompartido.web
@@ -33,7 +35,8 @@ namespace bd.webappcompartido.web
             services.AddSingleton<IBaseDatosServicio, BaseDatosServicio>();
             services.AddSingleton<IAdscSistServicio, AdscSistServicio>();
             services.AddSingleton<IApiServicio, ApiServicio>();
-           
+            services.AddResponseCaching();
+
             services.AddSingleton<IAdscpasswServicio, AdscpasswServicio>();
             await InicializarWebApp.InicializarWeb("SeguridadWebService", new Uri("http://localhost:4000"));
             await InicializarWebApp.InicializarLogEntry("LogWebService", new Uri("http://localhost:4000"));
@@ -71,6 +74,9 @@ namespace bd.webappcompartido.web
                 app.UseExceptionHandler("/Home/Error");
             }
 
+           
+
+
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
@@ -78,6 +84,21 @@ namespace bd.webappcompartido.web
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+
+            app.UseResponseCaching();
+
+            app.Run(async (context) =>
+            {
+                context.Response.GetTypedHeaders().CacheControl = new CacheControlHeaderValue()
+                {
+                    Public = true,
+                    
+                    
+                };
+
+
             });
         }
     }
