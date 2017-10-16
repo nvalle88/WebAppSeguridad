@@ -8,6 +8,7 @@ using bd.log.guardar.Servicios;
 using bd.log.guardar.ObjectTranfer;
 using bd.webappseguridad.entidades.Enumeradores;
 using bd.log.guardar.Enumeradores;
+using bd.webappseguridad.entidades.Utils;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
@@ -23,9 +24,18 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
         }
 
-        public async Task<IActionResult> Create()
+        private void InicializarMensaje(string mensaje)
+        {
+            if (mensaje == null)
+            {
+                mensaje = "";
+            }
+            ViewData["Error"] = mensaje;
+        }
+        public async Task<IActionResult> Create(string mensaje)
         {
 
+            InicializarMensaje(mensaje);
             ViewData["AdbdBdd"] = new SelectList(await baseDatosServicio.ListarBaseDatosAsync(), "AdbdBdd", "AdbdBdd");
             return View();
         }
@@ -36,16 +46,18 @@ namespace bd.webappseguridad.web.Controllers.MVC
         {
             try
             {
+                var response = new Response();
                 if (ModelState.IsValid)
                 {
-                    var response = await adscSistServicio.CrearAsync(Adscsist);
+                     response = await adscSistServicio.CrearAsync(Adscsist);
                     if (response.IsSuccess)
                     {
                         return RedirectToAction("Index");
                     }
 
-                    ViewData["Error"] = response.Message;
+                    
                 }
+                InicializarMensaje(response.Message);
                 ViewData["AdbdBdd"] = new SelectList(await baseDatosServicio.ListarBaseDatosAsync(), "AdbdBdd", "AdbdBdd");
                 return View(Adscsist);
             }

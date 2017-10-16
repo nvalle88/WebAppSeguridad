@@ -1,4 +1,4 @@
-@model List<bd.webappseguridad.entidades.Negocio.Adscmiem>
+@model bd.webappseguridad.entidades.ViewModels.MiembrosGrupo
 
 @{
     ViewData["Title"] = "Index";
@@ -20,7 +20,7 @@
                 </a>
             </div>
             <div class="col-lg-3">
-                <a asp-action="CrearMiembroGrupo" asp-controller="Adscgrps" asp-route-adgrBdd="@Model.FirstOrDefault().AdmiBdd" asp-route-adgrGrupo="@Model.FirstOrDefault().AdmiGrupo">
+                <a asp-action="CrearMiembroGrupo" asp-controller="Adscgrps" asp-route-adgrBdd="@Model.Adgrbdd" asp-route-adgrGrupo="@Model.Adgrgrupo">
                     <button type="button" class="btn btn-labeled btn-default">
                         <span class="btn-label">
                             <i class="glyphicon glyphicon-plus"></i>
@@ -52,28 +52,28 @@
                                                     <tr>
                                                         <th data-class="expand">
                                                             <i class="fa fa-fw fa-users text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdmiGrupo)
+                                                            @Html.DisplayNameFor(model => model.Adgrgrupo)
                                                         </th>
                                                         <th data-hide="phone">
                                                             <i class="fa fa-fw fa-database text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdmiBdd)
+                                                            @Html.DisplayNameFor(model => model.Adgrbdd)
                                                         </th>
                                                         <th data-hide="phone">
                                                             <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdmiEmpleado)
+                                                            @Html.DisplayNameFor(model => model.ListaMiembros.FirstOrDefault().AdmiEmpleado)
                                                         </th>
                                                         <th data-hide="phone">
                                                             <i class="fa fa-fw fa-user-md text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdmiTotal)
+                                                            @Html.DisplayNameFor(model => model.ListaMiembros.FirstOrDefault().AdmiTotal)
                                                         </th>
                                                         <th data-hide="phone">
                                                             <i class="fa fa-fw fa-qrcode text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdmiCodigoEmpleado)
+                                                            @Html.DisplayNameFor(model => model.ListaMiembros.FirstOrDefault().AdmiCodigoEmpleado)
                                                         </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    @foreach (var item in Model)
+                                                    @foreach (var item in Model.ListaMiembros)
                                                     {
                                                         <tr>
                                                             <td>

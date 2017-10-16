@@ -1,10 +1,9 @@
 @model bd.webappseguridad.entidades.Negocio.Adscexe
 
-@{
-    ViewData["Title"] = "Menu";
-}
+<link rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" />
+<link rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" />
+<link rel="stylesheet" href="~/lib/waitMe/waitMe.min.css" />
 
-<!-- MAIN CONTENT -->
 <div id="content">
 
     <!-- widget grid -->
@@ -76,7 +75,7 @@
                                         <section class="col col-6">
                                             <label class="input">
                                                 <select asp-for="AdexAplicacion" asp- class="form-control" asp-items="ViewBag.AdexAplicacion">
-                                                    <option value="Raiz" selected="" disabled="">@Html.DisplayNameFor(model => model.AdexAplicacion)</option>
+                                                    <option value="0" selected="" disabled="">@Html.DisplayNameFor(model => model.AdexAplicacion)</option>
                                                 </select>
                                                 <span asp-validation-for="AdexAplicacion" class="text-danger"></span>
                                             </label>
@@ -156,10 +155,20 @@
 <!-- END MAIN CONTENT -->
 @section Scripts {
 
+<script src='~/lib/select2/dist/js/select2.min.js'></script>
+<script src='~/lib/select2/dist/js/i18n/es.js'></script>
+<script src='~/lib/waitMe/waitMe.min.js'></script>
+<script src='~/js/site.js'></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        Init_Select2();
+    });
+</script>
 
 <script type="text/javascript">
         $(document).ready(function () {
             $("#AdexSistema").change(function () {
+                mostrarLoadingPanel("checkout-form", "Cargando...");
                 $("#AdexAplicacion").empty();
                 $("#AdexAplicacion").append('<option value="0">[Seleccione un grupo]</option>');
                 $.ajax({
@@ -172,7 +181,10 @@
                             $("#AdexAplicacion").append('<option value="'
                                 + data.admeAplicacion + '">'
                                 + data.admeAplicacion + '</option>');
+                            Init_Select2()
                         });
+                    }, complete: function (data) {
+                        $("#checkout-form").waitMe("hide");
                     },
                     error: function (ex) {
                         alert('Failed to retrieve Departments.' + ex);
@@ -186,6 +198,7 @@
 <script type="text/javascript">
         $(document).ready(function () {
             $("#AdexBdd").change(function () {
+                mostrarLoadingPanel("checkout-form", "Cargando...");
                 $("#AdexGrupo").empty();
                 $("#AdexGrupo").append('<option value="0">[Seleccione un grupo]</option>');
                 $.ajax({
@@ -198,7 +211,10 @@
                             $("#AdexGrupo").append('<option value="'
                                 + data.adgrGrupo + '">'
                                 + data.adgrGrupo + '</option>');
+                            Init_Select2()
                         });
+                    }, complete: function (data) {
+                        $("#checkout-form").waitMe("hide");
                     },
                     error: function (ex) {
                         alert('Failed to retrieve Departments.' + ex);

@@ -8,3 +8,4 @@ C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw.externos\obj\Release\netcoreapp1.1\bd.sw.externos.AssemblyInfo.cs
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw.externos\obj\Release\netcoreapp1.1\bd.sw.externos.dll
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw.externos\obj\Release\netcoreapp1.1\bd.sw.externos.pdb
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw.externos\obj\Release\netcoreapp1.1\bd.sw.externos.AssemblyInfoInputs.cache

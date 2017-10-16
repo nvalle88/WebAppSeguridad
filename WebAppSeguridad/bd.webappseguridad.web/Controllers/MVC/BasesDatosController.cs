@@ -7,6 +7,7 @@ using bd.log.guardar.Servicios;
 using bd.log.guardar.ObjectTranfer;
 using bd.webappseguridad.entidades.Enumeradores;
 using bd.log.guardar.Enumeradores;
+using bd.webappseguridad.entidades.Utils;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
@@ -22,9 +23,19 @@ namespace bd.webappseguridad.web.Controllers.MVC
            
         }
 
-        public IActionResult Create()
+        public IActionResult Create(string mensaje)
         {
+            InicializarMensaje(mensaje);
             return View();
+        }
+
+        private void InicializarMensaje(string mensaje)
+        {
+            if (mensaje == null)
+            {
+                mensaje = "";
+            }
+            ViewData["Error"] = mensaje;
         }
 
         [HttpPost]
@@ -33,16 +44,17 @@ namespace bd.webappseguridad.web.Controllers.MVC
         {
             try
             {
+                var response = new Response();
                 if (ModelState.IsValid)
                 {
-                    var response = await baseDatosServicio.CrearAsync(baseDato);
+                    response = await baseDatosServicio.CrearAsync(baseDato);
                     if (response.IsSuccess)
                     {
                         return RedirectToAction("Index");
                     }
 
-                    ViewData["Error"] = response.Message;
                 }
+                InicializarMensaje(response.Message);
                 return View(baseDato);
             }
             catch (Exception )

@@ -10,6 +10,7 @@ using bd.webappseguridad.entidades.Enumeradores;
 using bd.log.guardar.Enumeradores;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
@@ -54,30 +55,37 @@ namespace bd.webappseguridad.web.Controllers.MVC
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Adscmiem adscmiem)
         {
-            Response response = new Response();
+            
             try
             {
-                response = await apiServicio.InsertarAsync(adscmiem,
-                                                             new Uri(WebApp.BaseAddress),
-                                                             "/api/Adscmiems/InsertarAdscmiem");
-                if (response.IsSuccess)
+
+                var response = new Response();
+
+                if (ModelState.IsValid)
                 {
-
-                    var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                    response = await apiServicio.InsertarAsync(adscmiem,
+                                                                         new Uri(WebApp.BaseAddress),
+                                                                         "/api/Adscmiems/InsertarAdscmiem");
+                    if (response.IsSuccess)
                     {
-                        ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                        ExceptionTrace = null,
-                        Message = "Se ha creado un grupo",
-                        UserName = "Usuario 1",
-                        LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
-                        LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                        EntityID = string.Format("{0} {1} {2} {3}", "Grupo:", adscmiem.AdmiEmpleado, adscmiem.AdmiGrupo,adscmiem.AdmiBdd),
-                    });
 
-                    return RedirectToAction("Index");
+                        var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                        {
+                            ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
+                            ExceptionTrace = null,
+                            Message = "Se ha creado un grupo",
+                            UserName = "Usuario 1",
+                            LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
+                            LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
+                            EntityID = string.Format("{0} {1} {2} {3}", "Grupo:", adscmiem.AdmiEmpleado, adscmiem.AdmiGrupo, adscmiem.AdmiBdd),
+                        });
+
+                        return RedirectToAction("Index");
+                    } 
                 }
                 await CargarListaBdd();
-                ViewData["Error"] = response.Message;
+                await CargarListaBddPorGrupo(adscmiem.AdmiGrupo);
+                InicializarMensaje(response.Message);
                 return View(adscmiem);
 
             }
@@ -97,9 +105,20 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
         }
 
-        public async Task<IActionResult> Create()
+
+        private void InicializarMensaje(string mensaje)
+        {
+            if (mensaje == null)
+            {
+                mensaje = "";
+            }
+            ViewData["Error"] = mensaje;
+        }
+
+        public async Task<IActionResult> Create(string mensaje)
         {
             await CargarListaBdd();
+            InicializarMensaje(mensaje);
             return View();
         }
 
@@ -230,6 +249,19 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
                 return BadRequest();
             }
+        }
+
+
+        private async Task CargarListaBddPorGrupo(string admiGrupo)
+        {
+            var grupo = new Adscgrp
+            {
+                AdgrGrupo = admiGrupo,
+                AdgrBdd = null,
+
+            };
+            var listaBdd = await apiServicio.Listar<Adscbdd>(grupo, new Uri(WebApp.BaseAddress), "api/Adscgrps/ListarBddPorGrupo");
+            ViewData["AdbdBdd"] = new SelectList(listaBdd, "AdbdBdd", "AdbdBdd");
         }
 
         private async Task CargarListaBdd()

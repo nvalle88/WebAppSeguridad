@@ -1,10 +1,8 @@
 @model bd.webappseguridad.entidades.Negocio.Adscmenu
 
-@{
-    ViewData["Title"] = "Menu";
-}
-
 <link rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" />
+<link rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" />
+<link rel="stylesheet" href="~/lib/waitMe/waitMe.min.css" />
 <div id="content">
     <section id="widget-grid" class="">
         <div class="row">
@@ -21,6 +19,18 @@
                             <form  asp-action="Create" id="checkout-form"  class="smart-form" novalidate="novalidate">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <fieldset>
+                                    @if (@ViewData["Error"].ToString() != "")
+                                    {
+                                        <div class="col-lg-12">
+                                            <div class="alert alert-block  bordered">
+                                                <a class="close" data-dismiss="alert" href="#"><p><strong> <bold>X</bold></strong></p></a>
+                                                <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Informaci&oacute;n!</h4>
+                                                <p>
+                                                    <span class="text-info"><strong> <bold> @ViewData["Error"]</bold></strong></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
                                     <div class="row">
                                         <section class="col col-3">
                                             <label class="input">
@@ -154,7 +164,7 @@
                                     </section>
                                 </fieldset>
                                 <footer>
-                                    <span class="text-danger">@ViewData["Error"]</span>
+                                   
                                     <input type="submit" value="Guardar" class="btn btn-primary" />
                                     <a asp-action="Index"  class="btn btn-default">Cancelar</a>
                                 </footer>
@@ -168,12 +178,25 @@
 </div>
 @section Scripts {
 
+<script src='~/lib/select2/dist/js/select2.min.js'></script>
+<script src='~/lib/select2/dist/js/i18n/es.js'></script>
+<script src='~/lib/waitMe/waitMe.min.js'></script>
+<script src='~/js/site.js'></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        Init_Select2();
+    });
+</script>
+
+
 
 
 
 <script type="text/javascript">
-        $(document).ready(function () {
-            $("#AdmeSistema").change(function () {
+    $(document).ready(function () {
+       
+        $("#AdmeSistema").change(function () {
+            mostrarLoadingPanel("checkout-form", "Cargando...");
                 $("#AdmePadre").empty();
                 $("#AdmePadre").append('<option value="0">[Seleccione un menu padre]</option>');
                 $.ajax({
@@ -186,7 +209,10 @@
                             $("#AdmePadre").append('<option value="'
                                 + data.admeAplicacion + '">'
                                 + data.admeAplicacion + '</option>');
+                            Init_Select2()
                         });
+                    }, complete: function (data) {
+                        $("#checkout-form").waitMe("hide");
                     },
                     error: function (ex) {
                         alert('Failed to retrieve Departments.' + ex);

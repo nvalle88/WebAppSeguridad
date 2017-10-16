@@ -5,37 +5,38 @@
 }
 <div id="content">
 
-        <div>
-            <div class="row col-lg-10">
-                <div class="col-lg-2 ">
-                    <a asp-action="Create">
-                        <button type="button" class="btn btn-labeled btn-default">
-                            <span class="btn-label">
-                                <i class="glyphicon glyphicon-plus"></i>
-                            </span>Nuevo men&uacute;
+    <div>
+        <div class="row col-lg-10">
+            <div class="col-lg-2 ">
+                <a asp-action="Create">
+                    <button type="button" class="btn btn-labeled btn-default">
+                        <span class="btn-label">
+                            <i class="glyphicon glyphicon-plus"></i>
+                        </span>Nuevo grupo
 
-                        </button>
-                    </a>
-                </div>
-                <div class="col-lg-1 ">
-
-                </div>
-
-                @if (@ViewData["Error"].ToString() != "")
-            {
-                    <div class="col-lg-9">
-                        <div class="alert alert-block alert-info">
-                            <a class="close" data-dismiss="alert" href="#"><p>X</p></a>
-                            <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Informaci&oacute;n!</h4>
-                            <p>
-                                <span class="text-danger">@ViewData["Error"]</span>
-                            </p>
-                        </div>
-                    </div>
-                }
+                    </button>
+                </a>
             </div>
-            <p></p>
+
+            <div class="col-lg-1 ">
+
+            </div>
+
+            @if (@ViewData["Error"].ToString() != "")
+            {
+                <div class="col-lg-9">
+                    <div class="alert alert-block alert-dismissable">
+                        <a class="close" data-dismiss="alert" href="#"><p>X</p></a>
+                        <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Informaci&oacute;n!</h4>
+                        <p>
+                            <span class="text-danger"><strong><bold> @ViewData["Error"]</bold></strong></span>
+                        </p>
+                    </div>
+                </div>
+            }
         </div>
+        <p></p>
+    </div>
 
         <section id="widget-grid" class="">
             <div class="row">

@@ -59,17 +59,13 @@ namespace bd.webappseguridad.web.Controllers.MVC
             Response response = new Response();
             try
             {
-                if (!ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
-                   await CargarListaCombox();
-                    return View(adscmenu);
-                }
                 response = await apiServicio.InsertarAsync(adscmenu,
                                                              new Uri(WebApp.BaseAddress),
                                                              "/api/Adscmenus/InsertarAdscmenu");
                 if (response.IsSuccess)
                 {
-
                     var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
                     {
                         ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
@@ -83,8 +79,9 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
                     return RedirectToAction("Index");
                 }
+                }
                 await CargarListaCombox();
-                ViewData["Error"] = response.Message;
+                InicializarMensaje(response.Message);
                 return View(adscmenu);
 
             }
@@ -104,9 +101,19 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
         }
 
-        public async Task<IActionResult> Create()
+        private void InicializarMensaje(string mensaje)
+        {
+            if (mensaje == null)
+            {
+                mensaje = "";
+            }
+            ViewData["Error"] = mensaje;
+        }
+
+        public async Task<IActionResult> Create(string mensaje)
         {
             await CargarListaCombox();
+            InicializarMensaje(mensaje);
             return View();
         }
 

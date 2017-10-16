@@ -9,26 +9,28 @@
     <div>
         <div class="row col-lg-10">
             <div class="col-lg-2 ">
-                <a asp-action="Create" asp-controller="Adscgrps">
+                <a asp-action="Create">
                     <button type="button" class="btn btn-labeled btn-default">
                         <span class="btn-label">
                             <i class="glyphicon glyphicon-plus"></i>
-                        </span>Nuevo base de datos
+                        </span>Nueva base de datos
 
                     </button>
                 </a>
             </div>
-            <div class="col-lg-2 ">
+
+            <div class="col-lg-1 ">
 
             </div>
+
             @if (@ViewData["Error"].ToString() != "")
             {
                 <div class="col-lg-9">
-                    <div class="alert alert-block alert-info">
+                    <div class="alert alert-block alert-dismissable">
                         <a class="close" data-dismiss="alert" href="#"><p>X</p></a>
                         <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Informaci&oacute;n!</h4>
                         <p>
-                            <span class="text-danger">@ViewData["Error"]</span>
+                            <span class="text-danger"><strong><bold> @ViewData["Error"]</bold></strong></span>
                         </p>
                     </div>
                 </div>
@@ -36,39 +38,18 @@
         </div>
         <p></p>
     </div>
-    <!-- widget grid -->
+
     <section id="widget-grid" class="">
-        <!-- row -->
         <div class="row">
-            <!-- NEW WIDGET START -->
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
-                    <!-- widget options:
-                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
-
-                    data-widget-colorbutton="false"
-                    data-widget-editbutton="false"
-                    data-widget-togglebutton="false"
-                    data-widget-deletebutton="false"
-                    data-widget-fullscreenbutton="false"
-                    data-widget-custombutton="false"
-                    data-widget-collapsed="true"
-                    data-widget-sortable="false"
-
-                    -->
                     <header>
                         <span class="widget-icon"> <i class="fa fa-database"></i> </span>
                         <h2>Bases de datos</h2>
                     </header>
-                    <!-- widget div-->
                     <div>
-                        <!-- widget edit box -->
                         <div class="jarviswidget-editbox">
-                            <!-- This area used as dropdown edit box -->
                         </div>
-                        <!-- end widget edit box -->
-                        <!-- widget content -->
                         <div class="widget-body no-padding">
                             <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
                                 <thead>
@@ -99,7 +80,9 @@
                                                 @Html.DisplayFor(modelItem => item.AdbdServidor)
                                             </td>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.AdbdDescripcion)
+                                                <p class="lead">
+                                                    @Html.DisplayFor(modelItem => item.AdbdDescripcion)
+                                                </p>
                                             </td>
 
                                             <td>
