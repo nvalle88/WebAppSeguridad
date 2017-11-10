@@ -15,7 +15,7 @@
                         <div class="jarviswidget-editbox">
                         </div>
                         <div class="widget-body no-padding">
-                            <form  asp-action="Create" id="checkout-form"  class="smart-form" novalidate="novalidate">
+                            <form  asp-action="Create" id="ejemplo"  class="smart-form" novalidate="novalidate">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <fieldset>
                                     @if (@ViewData["Error"].ToString() != "")
@@ -113,9 +113,8 @@
     $(document).ready(function () {
        
         $("#AdmiGrupo").change(function () {
-            mostrarLoadingPanel("checkout-form", "Cargando bases de datos...");
+            mostrarLoadingPanel("ejemplo", "Cargando bases de datos...");
                 $("#AdmiBdd").empty();
-                $("#AdmiBdd").append('<option value="0">[Seleccione una base de datos]</option>');
                 $.ajax({
                     type: 'POST',
                     url: '@Url.Action("ListarBdd")',

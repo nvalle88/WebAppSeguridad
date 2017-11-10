@@ -75,7 +75,7 @@
                                         <section class="col col-6">
                                             <label class="input">
                                                 <select asp-for="AdexAplicacion" asp- class="form-control" asp-items="ViewBag.AdexAplicacion">
-                                                    <option value="Raiz" selected="" disabled="">@Html.DisplayNameFor(model => model.AdexAplicacion)</option>
+                                                    <option value="0" selected="" disabled="">@Html.DisplayNameFor(model => model.AdexAplicacion)</option>
                                                 </select>
                                                 <span asp-validation-for="AdexAplicacion" class="text-danger"></span>
                                             </label>
