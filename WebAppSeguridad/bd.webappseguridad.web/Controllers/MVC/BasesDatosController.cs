@@ -50,6 +50,16 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     response = await baseDatosServicio.CrearAsync(baseDato);
                     if (response.IsSuccess)
                     {
+                        var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                        {
+                            ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
+                            ExceptionTrace = null,
+                            Message = "Se ha creado una base de datos",
+                            UserName = "Usuario Nestor Nuevo",
+                            LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
+                            LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
+                            EntityID = string.Format("{0} {1}", "Base de datos:", baseDato.AdbdBdd),
+                        });
                         return RedirectToAction("Index");
                     }
 

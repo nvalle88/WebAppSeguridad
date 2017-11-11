@@ -31,7 +31,8 @@ namespace bd.webappseguridad.servicios.Servicios
                     var response = JsonConvert.DeserializeObject<Response>(resultado);
                     var sistema = JsonConvert.DeserializeObject<Adscsist>(response.Resultado.ToString());
                     WebApp.BaseAddress = sistema.AdstHost;
-                    WebApp.NombreAplicacionSeguridad = sistema.AdstSistema;
+                    
+
                 }
                 // WebApp.BaseAddress = "http://localhost:53317";
             }
@@ -49,9 +50,10 @@ namespace bd.webappseguridad.servicios.Servicios
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    client.BaseAddress =baseAddress;
-                    var url = string.Format("{0}/{1}/{2}", "/api/Adscsists",WebApp.NombreAplicacionLog, id);
-                    var respuesta = await client.GetAsync(url);
+
+                    var url = string.Format("{0}/{1}", "/api/Adscsists", id);
+                    var uri = string.Format("{0}/{1}", baseAddress, url);
+                    var respuesta = await client.GetAsync(new Uri(uri));
 
                     var resultado = await respuesta.Content.ReadAsStringAsync();
                     var response = JsonConvert.DeserializeObject<Response>(resultado);
