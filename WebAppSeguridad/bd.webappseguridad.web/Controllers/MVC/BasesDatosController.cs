@@ -8,6 +8,7 @@ using bd.log.guardar.ObjectTranfer;
 using bd.webappseguridad.entidades.Enumeradores;
 using bd.log.guardar.Enumeradores;
 using bd.webappseguridad.entidades.Utils;
+using Newtonsoft.Json;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
@@ -15,11 +16,12 @@ namespace bd.webappseguridad.web.Controllers.MVC
     {
 
         private readonly IBaseDatosServicio baseDatosServicio;
-       
+        private readonly IApiServicio apiServicio;
 
-        public BasesDatosController(IBaseDatosServicio baseDatosServicio)
+        public BasesDatosController(IBaseDatosServicio baseDatosServicio, IApiServicio apiServicio)
         {
             this.baseDatosServicio = baseDatosServicio;
+            this.apiServicio = apiServicio;
            
         }
 
@@ -55,10 +57,10 @@ namespace bd.webappseguridad.web.Controllers.MVC
                             ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                             ExceptionTrace = null,
                             Message = "Se ha creado una base de datos",
-                            UserName = "Usuario Nestor Nuevo",
+                            UserName = "Irma",
                             LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
                             LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                            EntityID = string.Format("{0} {1}", "Base de datos:", baseDato.AdbdBdd),
+                            EntityID = string.Format("{0}/{1}/{2}", "Base de datos:", baseDato.AdbdBdd,baseDato.AdbdDescripcion),
                         });
                         return RedirectToAction("Index");
                     }
@@ -81,6 +83,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
                 if (respuesta.IsSuccess)
                 {
+                     
                     return View(respuesta.Resultado);
                 }
 
@@ -101,10 +104,27 @@ namespace bd.webappseguridad.web.Controllers.MVC
             {
                 if (ModelState.IsValid)
                 {
+
+                    var resultado = await baseDatosServicio.SeleccionarAsync(id);
+                    Adscbdd Response = (Adscbdd)resultado.Resultado;
                     var respuesta = await baseDatosServicio.EditarAsync(id, adscbdd);
 
                     if (respuesta.IsSuccess)
                     {
+                        var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                        {
+                            ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
+                            ExceptionTrace = null,
+                            Message =Request.Path,
+                            UserName = "Irma",
+                            LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
+                            LogLevelShortName = Convert.ToString(LogLevelParameter.INFO),
+                            EntityID = string.Format("Datos Originales:[Base de datos:{0}|Descripción:{1}| Servidor:{2}] |||" +
+                            " Datos nuevos:[Base de datos:{3}|Descripción:{4}| Servidor:{5}]"
+                            , Response.AdbdBdd, Response.AdbdDescripcion, Response.AdbdServidor
+                            , adscbdd.AdbdBdd, adscbdd.AdbdDescripcion, adscbdd.AdbdServidor
+                            ),
+                        });
                         return RedirectToAction("Index");
                     }
 
@@ -112,7 +132,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 }
                 return View(adscbdd);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return BadRequest();
             }
@@ -148,7 +168,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                             Message = "Registro eliminado",
                             LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
                             LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                            UserName = "Usuario APP Seguridad"
+                            UserName = "Irma"
                         });
                         return RedirectToAction("Index");
                     }
