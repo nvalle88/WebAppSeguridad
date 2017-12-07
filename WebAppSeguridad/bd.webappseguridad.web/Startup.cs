@@ -40,16 +40,13 @@ namespace bd.webappcompartido.web
             
             services.AddSingleton<IAdscpasswServicio, AdscpasswServicio>();
 
-            var ServicioSeguridad = Configuration.GetSection("ServicioSeguridad").Value;
-            var ServiciosLog = Configuration.GetSection("ServiciosLog").Value;
             var HostSeguridad = Configuration.GetSection("HostServicioSeguridad").Value;
-            WebApp.NombreAplicacionSeguridad = Configuration.GetSection("NombreAplicacionSeguridad").Value;
-            WebApp.NombreAplicacionLog = Configuration.GetSection("NombreAplicacionSeguridad").Value;
+            WebApp.NombreAplicacion = Configuration.GetSection("NombreAplicacion").Value;
 
             //await InicializarWebApp.InicializarWeb("SeguridadWebService", new Uri("http://192.168.100.21:8081"));
             //await InicializarWebApp.InicializarLogEntry("LogWebService", new Uri("http://192.168.100.21:8081"));
-            await InicializarWebApp.InicializarWeb(ServicioSeguridad, new Uri(HostSeguridad));
-            await InicializarWebApp.InicializarLogEntry(ServiciosLog, new Uri(HostSeguridad));
+            await InicializarWebApp.InicializarWeb(Configuration.GetSection("ServicioSeguridad").Value, new Uri(HostSeguridad));
+            await InicializarWebApp.InicializarLogEntry(Configuration.GetSection("ServiciosLog").Value, new Uri(HostSeguridad));
 
 
         }

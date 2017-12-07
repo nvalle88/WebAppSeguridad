@@ -54,14 +54,17 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     {
                         var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
                         {
-                            ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
+                            ApplicationName = Convert.ToString(""),
                             ExceptionTrace = null,
-                            Message = "Se ha creado una base de datos",
-                            UserName = "Irma",
+                            Message = "Se ha creado una actividad esencial",
+                            UserName = "Usuario 1",
                             LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
                             LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                            EntityID = string.Format("{0}/{1}/{2}", "Base de datos:", baseDato.AdbdBdd,baseDato.AdbdDescripcion),
-                        });
+                            EntityID = "Actividades Esenciales",
+                            ObjectPrevious = "NULL",
+                            ObjectNext = JsonConvert.SerializeObject(response.Resultado),
+                        }
+                        );
                         return RedirectToAction("Index");
                     }
 
@@ -140,7 +143,6 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
         public async Task<IActionResult> Index(string mensaje)
         {
-
             var listado = await baseDatosServicio.ListarBaseDatosAsync();
             if (mensaje == null)
             {

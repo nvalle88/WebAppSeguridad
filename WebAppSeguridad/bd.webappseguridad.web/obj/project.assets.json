@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v1.1": {
-      "bd.log.guardar/1.0.1": {
+      "bd.log.guardar/1.0.5": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
@@ -4208,12 +4208,12 @@
     }
   },
   "libraries": {
-    "bd.log.guardar/1.0.1": {
-      "sha512": "5bDDWMelf4e2rqC867Abp0VQZklR/ehvIODAYh53gx7Y9l3EYXFnCiMquJTy3ct6J2qTG1XzYeUD23Omv2gjnw==",
+    "bd.log.guardar/1.0.5": {
+      "sha512": "deDQCVOYObvTtctcFp12NpE6mJzs6sUp7OOFCXzwTusFzBWG/v1TTrC2vPsJ2+ABiwZ3DXSG3QHwUaTJjmxvag==",
       "type": "package",
-      "path": "bd.log.guardar/1.0.1",
+      "path": "bd.log.guardar/1.0.5",
       "files": [
-        "bd.log.guardar.1.0.1.nupkg.sha512",
+        "bd.log.guardar.1.0.5.nupkg.sha512",
         "bd.log.guardar.nuspec",
         "lib/netcoreapp1.1/bd.log.guardar.dll"
       ]
@@ -10855,7 +10855,7 @@
       "Microsoft.NETCore.App >= 1.1.2",
       "Microsoft.VisualStudio.Web.BrowserLink >= 1.1.2",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 1.1.1",
-      "bd.log.guardar >= 1.0.1",
+      "bd.log.guardar >= 1.0.5",
       "bd.sw.externos >= 1.0.0",
       "bd.webappseguridad.entidades >= 1.0.0",
       "bd.webappseguridad.servicios >= 1.0.0"
@@ -10964,7 +10964,7 @@
           },
           "bd.log.guardar": {
             "target": "Package",
-            "version": "1.0.1"
+            "version": "1.0.5"
           },
           "Microsoft.AspNetCore.StaticFiles": {
             "target": "Package",

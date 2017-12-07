@@ -12,7 +12,7 @@ namespace bd.webappseguridad.servicios.Servicios
 {
     public class InicializarWebApp
     {
-       
+
         #region Methods
 
         public static async Task InicializarWeb(string id,Uri baseAddreess)
