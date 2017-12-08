@@ -42,7 +42,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Listando sistemas",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.NetActivity),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"
@@ -95,7 +95,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Creando un grupo ",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"
@@ -190,7 +190,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Editando una Grupos",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP "
@@ -241,7 +241,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Eliminar Base de datos",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"

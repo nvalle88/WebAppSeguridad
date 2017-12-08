@@ -37,7 +37,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Listando Permisos",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.NetActivity),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"
@@ -64,18 +64,16 @@ namespace bd.webappseguridad.web.Controllers.MVC
                                                              "api/Adscexes/InsertarAdscexe");
                 if (response.IsSuccess)
                 {
-
-                    var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                    var responseLog = new EntradaLog
                     {
-                        ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                         ExceptionTrace = null,
-                        Message = "Se ha creado un menú",
-                        UserName = "Usuario 1",
                         LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
                         LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                        EntityID = string.Format("{0} {1} {2} {3} {4}", "AdscExe:", adscexe.AdexSistema, adscexe.AdexAplicacion,adscexe.AdexBdd,adscexe.AdexGrupo),
-                    });
+                        ObjectPrevious = null,
+                        ObjectNext = JsonConvert.SerializeObject(response.Resultado),
+                    };
 
+                    await apiServicio.SalvarLog<Response>(HttpContext, responseLog);
                     return RedirectToAction("Index");
                 }
                 await CargarListaCombox();
@@ -89,7 +87,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Creando un menu ",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"
@@ -201,7 +199,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Editando una Grupos",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP "
@@ -248,7 +246,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Eliminar Base de datos",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"
@@ -298,7 +296,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Eliminar Base de datos",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"

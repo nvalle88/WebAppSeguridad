@@ -2,14 +2,19 @@
 using bd.webappseguridad.entidades.Utils;
 using bd.webappseguridad.servicios.Interfaces;
 using bd.webappseguridad.servicios.Servicios;
+using bd.webappseguridad.web.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Net.Http.Headers;
 using System;
+using System.IO;
 
 namespace bd.webappcompartido.web
 {
@@ -36,6 +41,17 @@ namespace bd.webappcompartido.web
             services.AddSingleton<IBaseDatosServicio, BaseDatosServicio>();
             services.AddSingleton<IAdscSistServicio, AdscSistServicio>();
             services.AddSingleton<IApiServicio, ApiServicio>();
+
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("EstaAutorizado",
+                                  policy => policy.Requirements.Add(new RolesRequirement()));
+            });
+
+            services.AddSingleton<IAuthorizationHandler, RolesHandler>();
+
             services.AddResponseCaching();
             
             services.AddSingleton<IAdscpasswServicio, AdscpasswServicio>();
@@ -60,6 +76,8 @@ namespace bd.webappcompartido.web
 
 
 
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -80,11 +98,19 @@ namespace bd.webappcompartido.web
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
-           
-
-
             app.UseStaticFiles();
+
+            app.UseCookieAuthentication(new CookieAuthenticationOptions
+            {
+                AuthenticationScheme = "Cookies",
+                LoginPath = new PathString("/"),
+                AccessDeniedPath = new PathString("/"),
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                CookieName = "ASPTest",
+                ExpireTimeSpan = new TimeSpan(1, 0, 0), //1 hour
+                DataProtectionProvider = DataProtectionProvider.Create(new DirectoryInfo(@"c:\shared-auth-ticket-keys\"))
+            });
 
             app.UseMvc(routes =>
             {

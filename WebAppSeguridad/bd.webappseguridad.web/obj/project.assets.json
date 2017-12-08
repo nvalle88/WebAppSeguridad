@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v1.1": {
-      "bd.log.guardar/1.0.5": {
+      "bd.log.guardar/1.1.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
@@ -138,6 +138,39 @@
           "lib/netstandard1.3/Microsoft.AspNetCore.Antiforgery.dll": {}
         }
       },
+      "Microsoft.AspNetCore.Authentication/1.1.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.DataProtection": "1.1.2",
+          "Microsoft.AspNetCore.Http": "1.1.2",
+          "Microsoft.AspNetCore.Http.Extensions": "1.1.2",
+          "Microsoft.Extensions.Logging.Abstractions": "1.1.2",
+          "Microsoft.Extensions.Options": "1.1.2",
+          "Microsoft.Extensions.WebEncoders": "1.1.2",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.Authentication.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.Authentication.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Authentication.Cookies/1.1.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication": "1.1.2",
+          "Microsoft.Extensions.Options": "1.1.2",
+          "Microsoft.Extensions.WebEncoders": "1.1.2",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.Authentication.Cookies.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.Authentication.Cookies.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Authorization/1.1.2": {
         "type": "package",
         "dependencies": {
@@ -169,7 +202,7 @@
           "lib/netstandard1.3/Microsoft.AspNetCore.Cors.dll": {}
         }
       },
-      "Microsoft.AspNetCore.Cryptography.Internal/1.1.2": {
+      "Microsoft.AspNetCore.Cryptography.Internal/1.1.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1"
@@ -181,12 +214,25 @@
           "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.Internal.dll": {}
         }
       },
-      "Microsoft.AspNetCore.DataProtection/1.1.2": {
+      "Microsoft.AspNetCore.Cryptography.KeyDerivation/1.1.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Cryptography.Internal": "1.1.2",
-          "Microsoft.AspNetCore.DataProtection.Abstractions": "1.1.2",
-          "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.2",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.DataProtection/1.1.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Cryptography.Internal": "1.1.3",
+          "Microsoft.AspNetCore.DataProtection.Abstractions": "1.1.3",
+          "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.3",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.1",
           "Microsoft.Extensions.Logging.Abstractions": "1.1.2",
           "Microsoft.Extensions.Options": "1.1.2",
@@ -202,7 +248,7 @@
           "lib/netstandard1.3/Microsoft.AspNetCore.DataProtection.dll": {}
         }
       },
-      "Microsoft.AspNetCore.DataProtection.Abstractions/1.1.2": {
+      "Microsoft.AspNetCore.DataProtection.Abstractions/1.1.3": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -213,6 +259,20 @@
         },
         "runtime": {
           "lib/netstandard1.3/Microsoft.AspNetCore.DataProtection.Abstractions.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.DataProtection.Extensions/1.1.3": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.DataProtection": "1.1.3",
+          "Microsoft.Extensions.DependencyInjection": "1.1.1",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.DataProtection.Extensions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.DataProtection.Extensions.dll": {}
         }
       },
       "Microsoft.AspNetCore.Diagnostics/1.1.2": {
@@ -276,10 +336,10 @@
           "lib/netstandard1.5/Microsoft.AspNetCore.Hosting.dll": {}
         }
       },
-      "Microsoft.AspNetCore.Hosting.Abstractions/1.1.2": {
+      "Microsoft.AspNetCore.Hosting.Abstractions/1.1.3": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Hosting.Server.Abstractions": "1.1.2",
+          "Microsoft.AspNetCore.Hosting.Server.Abstractions": "1.1.3",
           "Microsoft.AspNetCore.Http.Abstractions": "1.1.2",
           "Microsoft.Extensions.Configuration.Abstractions": "1.1.2",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "1.1.1",
@@ -294,7 +354,7 @@
           "lib/netstandard1.3/Microsoft.AspNetCore.Hosting.Abstractions.dll": {}
         }
       },
-      "Microsoft.AspNetCore.Hosting.Server.Abstractions/1.1.2": {
+      "Microsoft.AspNetCore.Hosting.Server.Abstractions/1.1.3": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Http.Features": "1.1.2",
@@ -402,6 +462,21 @@
         },
         "runtime": {
           "lib/netstandard1.3/Microsoft.AspNetCore.HttpOverrides.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Identity/1.1.2": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication.Cookies": "1.1.2",
+          "Microsoft.AspNetCore.Cryptography.KeyDerivation": "1.1.2",
+          "Microsoft.AspNetCore.Hosting.Abstractions": "1.1.2",
+          "NETStandard.Library": "1.6.1"
+        },
+        "compile": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.Identity.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/Microsoft.AspNetCore.Identity.dll": {}
         }
       },
       "Microsoft.AspNetCore.JsonPatch/1.1.2": {
@@ -4163,7 +4238,7 @@
         "framework": ".NETCoreApp,Version=v1.1",
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
-          "bd.log.guardar": "1.0.1",
+          "bd.log.guardar": "1.1.0",
           "bd.webappseguridad.entidades": "1.0.0"
         },
         "compile": {
@@ -4178,7 +4253,7 @@
         "framework": ".NETCoreApp,Version=v1.1",
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
-          "bd.log.guardar": "1.0.1"
+          "bd.log.guardar": "1.1.0"
         },
         "compile": {
           "bin/placeholder/bd.webappseguridad.entidades.dll": {}
@@ -4194,7 +4269,7 @@
           "Microsoft.AspNetCore.Mvc": "1.1.3",
           "Microsoft.NETCore.App": "1.1.2",
           "Newtonsoft.Json": "10.0.3",
-          "bd.log.guardar": "1.0.1",
+          "bd.log.guardar": "1.1.0",
           "bd.sw.externos": "1.0.0",
           "bd.webappseguridad.entidades": "1.0.0"
         },
@@ -4208,12 +4283,12 @@
     }
   },
   "libraries": {
-    "bd.log.guardar/1.0.5": {
-      "sha512": "deDQCVOYObvTtctcFp12NpE6mJzs6sUp7OOFCXzwTusFzBWG/v1TTrC2vPsJ2+ABiwZ3DXSG3QHwUaTJjmxvag==",
+    "bd.log.guardar/1.1.0": {
+      "sha512": "+z52hPQvt41lkjjFuOQn9ETcYTPIq8g8BM6oYfDMKWoBICLyW2BBg+dHg0DFxz/d7vZOwR4Cric1Mgd6fUpljg==",
       "type": "package",
-      "path": "bd.log.guardar/1.0.5",
+      "path": "bd.log.guardar/1.1.0",
       "files": [
-        "bd.log.guardar.1.0.5.nupkg.sha512",
+        "bd.log.guardar.1.1.0.nupkg.sha512",
         "bd.log.guardar.nuspec",
         "lib/netcoreapp1.1/bd.log.guardar.dll"
       ]
@@ -4291,6 +4366,32 @@
         "microsoft.aspnetcore.antiforgery.nuspec"
       ]
     },
+    "Microsoft.AspNetCore.Authentication/1.1.2": {
+      "sha512": "nG9AcO8Do23L/KcQayxx0r11wEPjB303TCV/0pqE8j3q1eMcamThFDQ3RtD/qXwk0rmMbyP3zGgZ+5I8TSLvCQ==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication/1.1.2",
+      "files": [
+        "lib/net451/Microsoft.AspNetCore.Authentication.dll",
+        "lib/net451/Microsoft.AspNetCore.Authentication.xml",
+        "lib/netstandard1.3/Microsoft.AspNetCore.Authentication.dll",
+        "lib/netstandard1.3/Microsoft.AspNetCore.Authentication.xml",
+        "microsoft.aspnetcore.authentication.1.1.2.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Authentication.Cookies/1.1.2": {
+      "sha512": "oqcuY3+r/vuanOnM1LulYMq3HJk7AGIxYYcmC6qRfLt2aEUQLzpwsgA3wYj456XbzNSXf51hu0m+fjj/V2LsVQ==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.authentication.cookies/1.1.2",
+      "files": [
+        "lib/net451/Microsoft.AspNetCore.Authentication.Cookies.dll",
+        "lib/net451/Microsoft.AspNetCore.Authentication.Cookies.xml",
+        "lib/netstandard1.3/Microsoft.AspNetCore.Authentication.Cookies.dll",
+        "lib/netstandard1.3/Microsoft.AspNetCore.Authentication.Cookies.xml",
+        "microsoft.aspnetcore.authentication.cookies.1.1.2.nupkg.sha512",
+        "microsoft.aspnetcore.authentication.cookies.nuspec"
+      ]
+    },
     "Microsoft.AspNetCore.Authorization/1.1.2": {
       "sha512": "AsU8htkFXX8VYb6Q+kz6c1n67AwAcPzgc0rnNiKuoDdcnj011b1uJrUp4IYMfmtsguJuhXi6+6q/p3zLJoYILg==",
       "type": "package",
@@ -4317,43 +4418,69 @@
         "microsoft.aspnetcore.cors.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Cryptography.Internal/1.1.2": {
-      "sha512": "DeDm7XO+/QVlxp+tefXbt2Mm10mw3BpUWvN9YVgl1Ykg08nBox95ZQ9EKLt/CpaANFGp//nJqpc93NTMKlwNnQ==",
+    "Microsoft.AspNetCore.Cryptography.Internal/1.1.3": {
+      "sha512": "ireGhyBUGTjb6he/uyV99kKGa2fb7l9QnxB4Vlg/7iNjWoZ5apNGwxH7DVbgQV3ixwfV2bKwOpUreMxJI6Xb9w==",
       "type": "package",
-      "path": "microsoft.aspnetcore.cryptography.internal/1.1.2",
+      "path": "microsoft.aspnetcore.cryptography.internal/1.1.3",
       "files": [
         "lib/net451/Microsoft.AspNetCore.Cryptography.Internal.dll",
         "lib/net451/Microsoft.AspNetCore.Cryptography.Internal.xml",
         "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.Internal.dll",
         "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.Internal.xml",
-        "microsoft.aspnetcore.cryptography.internal.1.1.2.nupkg.sha512",
+        "microsoft.aspnetcore.cryptography.internal.1.1.3.nupkg.sha512",
         "microsoft.aspnetcore.cryptography.internal.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.DataProtection/1.1.2": {
-      "sha512": "QY8ufMUZItjfwAkcR/TcQBj2DWl+Z3N2ItNwdVFlAQMsPa24Ya9u/NmrlkJHZo29nk52EQbH/iaKfic+LG66RA==",
+    "Microsoft.AspNetCore.Cryptography.KeyDerivation/1.1.2": {
+      "sha512": "LG4cN68fvL151M/+sVfOl3DkLe8a/GPSHnQtde/8hth7Najpb64ZQE3q0WRvhflc8GzStdNWmxb8Sx3j3PWliQ==",
       "type": "package",
-      "path": "microsoft.aspnetcore.dataprotection/1.1.2",
+      "path": "microsoft.aspnetcore.cryptography.keyderivation/1.1.2",
+      "files": [
+        "lib/net451/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
+        "lib/net451/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
+        "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.KeyDerivation.dll",
+        "lib/netstandard1.3/Microsoft.AspNetCore.Cryptography.KeyDerivation.xml",
+        "microsoft.aspnetcore.cryptography.keyderivation.1.1.2.nupkg.sha512",
+        "microsoft.aspnetcore.cryptography.keyderivation.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.DataProtection/1.1.3": {
+      "sha512": "4am4PmrTDYexofUWxGdnyUItxPDLkhFUoY8JzPb4Cp3l8RCNs9e4WqLOynPLU/FZ3fJRdr+EJ6ub60LukHO7TA==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.dataprotection/1.1.3",
       "files": [
         "lib/net451/Microsoft.AspNetCore.DataProtection.dll",
         "lib/net451/Microsoft.AspNetCore.DataProtection.xml",
         "lib/netstandard1.3/Microsoft.AspNetCore.DataProtection.dll",
         "lib/netstandard1.3/Microsoft.AspNetCore.DataProtection.xml",
-        "microsoft.aspnetcore.dataprotection.1.1.2.nupkg.sha512",
+        "microsoft.aspnetcore.dataprotection.1.1.3.nupkg.sha512",
         "microsoft.aspnetcore.dataprotection.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.DataProtection.Abstractions/1.1.2": {
-      "sha512": "zknV0YBRRzqwOkxIetiV0rstv8xI1qZZ86hIeBw9eiQGP61hWfEoSPHS5y/Dk6+TDwtU6OjPbKqdEBXQj2jYQQ==",
+    "Microsoft.AspNetCore.DataProtection.Abstractions/1.1.3": {
+      "sha512": "bl3RN1XQcgx46mOzRaHA+pB+J35eH/P+SrCs5lG4vbk+B2TF1EeUvvRYPMr3QZpu32VyksKRDuF9HxmULFdV7A==",
       "type": "package",
-      "path": "microsoft.aspnetcore.dataprotection.abstractions/1.1.2",
+      "path": "microsoft.aspnetcore.dataprotection.abstractions/1.1.3",
       "files": [
         "lib/net451/Microsoft.AspNetCore.DataProtection.Abstractions.dll",
         "lib/net451/Microsoft.AspNetCore.DataProtection.Abstractions.xml",
         "lib/netstandard1.3/Microsoft.AspNetCore.DataProtection.Abstractions.dll",
         "lib/netstandard1.3/Microsoft.AspNetCore.DataProtection.Abstractions.xml",
-        "microsoft.aspnetcore.dataprotection.abstractions.1.1.2.nupkg.sha512",
+        "microsoft.aspnetcore.dataprotection.abstractions.1.1.3.nupkg.sha512",
         "microsoft.aspnetcore.dataprotection.abstractions.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.DataProtection.Extensions/1.1.3": {
+      "sha512": "MwUvueo5PxRchwTjyYBw+RmDE+3XYmm48C7y56n+oYTPgrrNgV+wboPNVeieIJj41fK3wIK9oEPaRWwtk0A+Ag==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.dataprotection.extensions/1.1.3",
+      "files": [
+        "lib/net451/Microsoft.AspNetCore.DataProtection.Extensions.dll",
+        "lib/net451/Microsoft.AspNetCore.DataProtection.Extensions.xml",
+        "lib/netstandard1.3/Microsoft.AspNetCore.DataProtection.Extensions.dll",
+        "lib/netstandard1.3/Microsoft.AspNetCore.DataProtection.Extensions.xml",
+        "microsoft.aspnetcore.dataprotection.extensions.1.1.3.nupkg.sha512",
+        "microsoft.aspnetcore.dataprotection.extensions.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Diagnostics/1.1.2": {
@@ -4395,29 +4522,29 @@
         "microsoft.aspnetcore.hosting.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Hosting.Abstractions/1.1.2": {
-      "sha512": "aYGMEERRtETBguFEk315gw+qdqNAUUpLsbnNDeNy38n9kgIrUR6n3T0irtYbXVZiDZ8p6SFvRZgZlyx0S9xLWQ==",
+    "Microsoft.AspNetCore.Hosting.Abstractions/1.1.3": {
+      "sha512": "PW/WRPMLkzMGOAgC5Wfyh+eKOeQvdVHbIvEEbpOQoRBd1FmUE41n0v/0nhxN50jER94SmnHlSrXRzKwr3EJpUg==",
       "type": "package",
-      "path": "microsoft.aspnetcore.hosting.abstractions/1.1.2",
+      "path": "microsoft.aspnetcore.hosting.abstractions/1.1.3",
       "files": [
         "lib/net451/Microsoft.AspNetCore.Hosting.Abstractions.dll",
         "lib/net451/Microsoft.AspNetCore.Hosting.Abstractions.xml",
         "lib/netstandard1.3/Microsoft.AspNetCore.Hosting.Abstractions.dll",
         "lib/netstandard1.3/Microsoft.AspNetCore.Hosting.Abstractions.xml",
-        "microsoft.aspnetcore.hosting.abstractions.1.1.2.nupkg.sha512",
+        "microsoft.aspnetcore.hosting.abstractions.1.1.3.nupkg.sha512",
         "microsoft.aspnetcore.hosting.abstractions.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Hosting.Server.Abstractions/1.1.2": {
-      "sha512": "v86xpouHWDE56Zj/sJmhyy8aYi+iLAH8ClNqh3r3coIHWUQ7jDT/K7VE40k7dwThGBOVwmosCiEk3nfM+bH4Mg==",
+    "Microsoft.AspNetCore.Hosting.Server.Abstractions/1.1.3": {
+      "sha512": "RxJzm3vIoEjlyrnVkZGQynQL/TCDmZwwuPajaVE22C1qv9CdXvdMj9LPGVG9a9qIAoRHTxmReeDv/koD0DscUg==",
       "type": "package",
-      "path": "microsoft.aspnetcore.hosting.server.abstractions/1.1.2",
+      "path": "microsoft.aspnetcore.hosting.server.abstractions/1.1.3",
       "files": [
         "lib/net451/Microsoft.AspNetCore.Hosting.Server.Abstractions.dll",
         "lib/net451/Microsoft.AspNetCore.Hosting.Server.Abstractions.xml",
         "lib/netstandard1.3/Microsoft.AspNetCore.Hosting.Server.Abstractions.dll",
         "lib/netstandard1.3/Microsoft.AspNetCore.Hosting.Server.Abstractions.xml",
-        "microsoft.aspnetcore.hosting.server.abstractions.1.1.2.nupkg.sha512",
+        "microsoft.aspnetcore.hosting.server.abstractions.1.1.3.nupkg.sha512",
         "microsoft.aspnetcore.hosting.server.abstractions.nuspec"
       ]
     },
@@ -4495,6 +4622,19 @@
         "lib/netstandard1.3/Microsoft.AspNetCore.HttpOverrides.xml",
         "microsoft.aspnetcore.httpoverrides.1.1.2.nupkg.sha512",
         "microsoft.aspnetcore.httpoverrides.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Identity/1.1.2": {
+      "sha512": "OwKAA/0j+T5zOC1NkQLq1aqIh+K7AfYRktwqZ1UxVYoAd5wqvR2YQ8PXskAL7gG7+02UoOVlMAQrbBTg0efg6A==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.identity/1.1.2",
+      "files": [
+        "lib/net451/Microsoft.AspNetCore.Identity.dll",
+        "lib/net451/Microsoft.AspNetCore.Identity.xml",
+        "lib/netstandard1.3/Microsoft.AspNetCore.Identity.dll",
+        "lib/netstandard1.3/Microsoft.AspNetCore.Identity.xml",
+        "microsoft.aspnetcore.identity.1.1.2.nupkg.sha512",
+        "microsoft.aspnetcore.identity.nuspec"
       ]
     },
     "Microsoft.AspNetCore.JsonPatch/1.1.2": {
@@ -10844,6 +10984,8 @@
     ".NETCoreApp,Version=v1.1": [
       "Microsoft.ApplicationInsights.AspNetCore >= 2.0.0",
       "Microsoft.AspNetCore >= 1.1.2",
+      "Microsoft.AspNetCore.DataProtection.Extensions >= 1.1.3",
+      "Microsoft.AspNetCore.Identity >= 1.1.2",
       "Microsoft.AspNetCore.Mvc >= 1.1.3",
       "Microsoft.AspNetCore.ResponseCaching >= 1.1.2",
       "Microsoft.AspNetCore.StaticFiles >= 1.1.2",
@@ -10855,7 +10997,7 @@
       "Microsoft.NETCore.App >= 1.1.2",
       "Microsoft.VisualStudio.Web.BrowserLink >= 1.1.2",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 1.1.1",
-      "bd.log.guardar >= 1.0.5",
+      "bd.log.guardar >= 1.1.0",
       "bd.sw.externos >= 1.0.0",
       "bd.webappseguridad.entidades >= 1.0.0",
       "bd.webappseguridad.servicios >= 1.0.0"
@@ -10946,6 +11088,10 @@
             "target": "Package",
             "version": "1.1.2"
           },
+          "Microsoft.AspNetCore.DataProtection.Extensions": {
+            "target": "Package",
+            "version": "1.1.3"
+          },
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
             "version": "1.1.2"
@@ -10964,9 +11110,13 @@
           },
           "bd.log.guardar": {
             "target": "Package",
-            "version": "1.0.5"
+            "version": "1.1.0"
           },
           "Microsoft.AspNetCore.StaticFiles": {
+            "target": "Package",
+            "version": "1.1.2"
+          },
+          "Microsoft.AspNetCore.Identity": {
             "target": "Package",
             "version": "1.1.2"
           }

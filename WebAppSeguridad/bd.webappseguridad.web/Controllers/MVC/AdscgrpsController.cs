@@ -47,7 +47,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Listando sistemas",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.NetActivity),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"
@@ -77,7 +77,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     response = await apiServicio.InsertarAsync(adscgrp,
                                                                  new Uri(WebApp.BaseAddress),
-                                                                 "/api/Adscgrps/InsertarAdscgrp");
+                                                                 "api/Adscgrps/InsertarAdscgrp");
                     if (response.IsSuccess)
                     {
 
@@ -106,7 +106,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Creando un grupo ",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"
@@ -167,7 +167,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         AdgrGrupo = adgrGrupo,
                     };
                     var respuesta = await apiServicio.Listar<Adscmenu>(grupo, new Uri(WebApp.BaseAddress),
-                                                                  "/api/Adscgrps/MenusGrupo");
+                                                                  "api/Adscgrps/MenusGrupo");
 
 
                     var menusGrupo = new MenusGrupo
@@ -191,7 +191,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         private async Task CargarListaCombox()
         {
 
-            var ListaSistema = await apiServicio.Listar<Adscmenu>(new Uri(WebApp.BaseAddress), "/api/Adscmenus/ListarMenuDistinct");
+            var ListaSistema = await apiServicio.Listar<Adscmenu>(new Uri(WebApp.BaseAddress), "api/Adscmenus/ListarMenuDistinct");
             ViewData["AdexSistema"] = new SelectList(ListaSistema, "AdmeSistema", "AdmeSistema");
         }
 
@@ -199,7 +199,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         private async Task CargarListaCombox(Adscexe adscexe)
         {
 
-            var ListaSistema = await apiServicio.Listar<Adscmenu>(new Uri(WebApp.BaseAddress), "/api/Adscmenus/ListarMenuDistinct");
+            var ListaSistema = await apiServicio.Listar<Adscmenu>(new Uri(WebApp.BaseAddress), "api/Adscmenus/ListarMenuDistinct");
             ViewData["AdexSistema"] = new SelectList(ListaSistema, "AdmeSistema", "AdmeSistema", adscexe.AdexSistema);
 
             var adscMenu = new Adscmenu
@@ -254,7 +254,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Creando un menu ",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"
@@ -306,20 +306,19 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     response = await apiServicio.InsertarAsync(adscmiem,
                                                                          new Uri(WebApp.BaseAddress),
-                                                                         "/api/Adscmiems/InsertarAdscmiem");
+                                                                         "api/Adscmiems/InsertarAdscmiem");
                     if (response.IsSuccess)
                     {
-
-                        var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                        var responseLog = new EntradaLog
                         {
-                            ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                             ExceptionTrace = null,
-                            Message = "Se ha creado un grupo",
-                            UserName = "Usuario 1",
                             LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
                             LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                            EntityID = string.Format("{0} {1} {2} {3}", "Grupo:", adscmiem.AdmiEmpleado, adscmiem.AdmiGrupo, adscmiem.AdmiBdd),
-                        });
+                            ObjectPrevious = null,
+                            ObjectNext = JsonConvert.SerializeObject(response.Resultado),
+                        };
+
+                        await apiServicio.SalvarLog<Response>(HttpContext, responseLog);
                         return RedirectToAction("MiembrosGrupo", new { adgrBdd = adscmiem.AdmiBdd, adgrGrupo = adscmiem.AdmiGrupo });
                     } 
                 }
@@ -329,15 +328,16 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
             catch (Exception ex)
             {
-                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                var responseLog = new EntradaLog
                 {
-                    ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                    Message = "Creando un grupo ",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
-                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
-                    UserName = "Usuario APP Seguridad"
-                });
+                    LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+
+                await apiServicio.SalvarLog<Response>(HttpContext, responseLog);
 
                 return BadRequest();
             }
@@ -355,7 +355,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         AdgrGrupo = adgrGrupo,
                     };
                     var respuesta = await apiServicio.Listar<Adscmiem>(grupo, new Uri(WebApp.BaseAddress),
-                                                                  "/api/Adscgrps/MiembrosGrupo");
+                                                                  "api/Adscgrps/MiembrosGrupo");
 
                     var miembrosGrupo = new MiembrosGrupo
                     {
@@ -384,7 +384,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 if (!string.IsNullOrEmpty(adscgrp.AdgrBdd) || !string.IsNullOrEmpty(adscgrp.AdgrGrupo))
                 {
                     response = await apiServicio.EditarAsync(adscgrp, new Uri(WebApp.BaseAddress),
-                                                                 "/api/Adscgrps/EditarAdscgrp");
+                                                                 "api/Adscgrps/EditarAdscgrp");
 
                     if (response.IsSuccess)
                     {
@@ -410,7 +410,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Editando una Grupos",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP "
@@ -435,7 +435,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     };
 
                     var response = await apiServicio.EliminarAsync(grupo, new Uri(WebApp.BaseAddress)
-                                                                           , "/api/Adscgrps/EliminarAdscgrp");
+                                                                           , "api/Adscgrps/EliminarAdscgrp");
                     if (response.IsSuccess)
                     {
                         await GuardarLogService.SaveLogEntry(new LogEntryTranfer
@@ -460,7 +460,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Eliminar Base de datos",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"

@@ -9,11 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="bd.log.guardar" Version="1.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ModeloTransferencia\" />
+    <PackageReference Include="bd.log.guardar" Version="1.1.0" />
   </ItemGroup>
 
 </Project>

@@ -45,7 +45,7 @@ namespace bd.webappseguridad.servicios.Servicios
             {
                 response = await apiservicio.InsertarAsync(adscsist,
                                                              new Uri(WebApp.BaseAddress),
-                                                             "/api/Adscsists/InsertarAdscSist");
+                                                             "api/Adscsists/InsertarAdscSist");
                 if (response.IsSuccess)
                 {
 
@@ -70,7 +70,7 @@ namespace bd.webappseguridad.servicios.Servicios
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Creando Base de Datos",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"
@@ -124,7 +124,7 @@ namespace bd.webappseguridad.servicios.Servicios
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Editando una base de datos",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"
@@ -176,7 +176,7 @@ namespace bd.webappseguridad.servicios.Servicios
             {
 
                 lista = await apiservicio.Listar<Adscsist>(new Uri(WebApp.BaseAddress)
-                                                                    , "/api/Adscsists/ListarAdscSistema");
+                                                                    , "api/Adscsists/ListarAdscSistema");
                 return lista;
             }
             catch (Exception ex)
@@ -185,7 +185,7 @@ namespace bd.webappseguridad.servicios.Servicios
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Listando sistemas",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.NetActivity),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"

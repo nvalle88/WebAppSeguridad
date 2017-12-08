@@ -9,18 +9,19 @@ using bd.webappseguridad.entidades.Enumeradores;
 using bd.log.guardar.Enumeradores;
 using bd.webappseguridad.entidades.Utils;
 using Newtonsoft.Json;
+using bd.webappseguridad.entidades.ModeloTransferencia;
+using System.Linq;
+using System.Security.Claims;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
     public class BasesDatosController : Controller
     {
 
-        private readonly IBaseDatosServicio baseDatosServicio;
         private readonly IApiServicio apiServicio;
 
-        public BasesDatosController(IBaseDatosServicio baseDatosServicio, IApiServicio apiServicio)
+        public BasesDatosController( IApiServicio apiServicio)
         {
-            this.baseDatosServicio = baseDatosServicio;
             this.apiServicio = apiServicio;
            
         }
@@ -49,22 +50,21 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 var response = new Response();
                 if (ModelState.IsValid)
                 {
-                    response = await baseDatosServicio.CrearAsync(baseDato);
+                    response = await apiServicio.InsertarAsync(baseDato,
+                                                              new Uri(WebApp.BaseAddress),
+                                                              "api/BasesDatos/InsertarBaseDatos");
                     if (response.IsSuccess)
                     {
-                        var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                        var responseLog = new EntradaLog
                         {
-                            ApplicationName = Convert.ToString(""),
                             ExceptionTrace = null,
-                            Message = "Se ha creado una actividad esencial",
-                            UserName = "Usuario 1",
                             LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
                             LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                            EntityID = "Actividades Esenciales",
-                            ObjectPrevious = "NULL",
+                            ObjectPrevious = null,
                             ObjectNext = JsonConvert.SerializeObject(response.Resultado),
-                        }
-                        );
+                        };
+                        await apiServicio.SalvarLog<Response>(HttpContext,responseLog);
+                       
                         return RedirectToAction("Index");
                     }
 
@@ -72,7 +72,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 InicializarMensaje(response.Message);
                 return View(baseDato);
             }
-            catch (Exception )
+            catch (Exception ex )
             {
                 return BadRequest();
             }
@@ -82,8 +82,13 @@ namespace bd.webappseguridad.web.Controllers.MVC
         {
             try
             {
-                var respuesta = await baseDatosServicio.SeleccionarAsync(id);
-
+                var baseDatos = new Adscbdd
+                {
+                    AdbdBdd = id,
+                };
+                Response respuesta = await apiServicio.SeleccionarAsync(baseDatos, new Uri(WebApp.BaseAddress),
+                                                                  "api/BasesDatos/SeleccionarAdscBdd");
+                respuesta.Resultado = JsonConvert.DeserializeObject<Adscbdd>(respuesta.Resultado.ToString());
                 if (respuesta.IsSuccess)
                 {
                      
@@ -107,27 +112,22 @@ namespace bd.webappseguridad.web.Controllers.MVC
             {
                 if (ModelState.IsValid)
                 {
-
-                    var resultado = await baseDatosServicio.SeleccionarAsync(id);
-                    Adscbdd Response = (Adscbdd)resultado.Resultado;
-                    var respuesta = await baseDatosServicio.EditarAsync(id, adscbdd);
+                    var respuestaActualizar = await apiServicio.SeleccionarAsync(adscbdd, new Uri(WebApp.BaseAddress),
+                                                                  "api/BasesDatos/SeleccionarAdscBdd");
+                    var respuesta = await apiServicio.EditarAsync(adscbdd, new Uri(WebApp.BaseAddress),
+                                                                  "api/BasesDatos/EditarAdscbdd");
 
                     if (respuesta.IsSuccess)
                     {
-                        var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                        var responseLog = new EntradaLog
                         {
-                            ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                             ExceptionTrace = null,
-                            Message =Request.Path,
-                            UserName = "Irma",
                             LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
-                            LogLevelShortName = Convert.ToString(LogLevelParameter.INFO),
-                            EntityID = string.Format("Datos Originales:[Base de datos:{0}|Descripción:{1}| Servidor:{2}] |||" +
-                            " Datos nuevos:[Base de datos:{3}|Descripción:{4}| Servidor:{5}]"
-                            , Response.AdbdBdd, Response.AdbdDescripcion, Response.AdbdServidor
-                            , adscbdd.AdbdBdd, adscbdd.AdbdDescripcion, adscbdd.AdbdServidor
-                            ),
-                        });
+                            LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
+                            ObjectPrevious = JsonConvert.SerializeObject(respuestaActualizar.Resultado),
+                            ObjectNext = JsonConvert.SerializeObject(respuesta.Resultado),
+                        };
+                        await apiServicio.SalvarLog<Response>(HttpContext, responseLog);
                         return RedirectToAction("Index");
                     }
 
@@ -143,13 +143,13 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
         public async Task<IActionResult> Index(string mensaje)
         {
-            var listado = await baseDatosServicio.ListarBaseDatosAsync();
+            var Listado = await apiServicio.Listar<Adscbdd>(new Uri(WebApp.BaseAddress), "api/BasesDatos/ListarBasesDatos");
             if (mensaje == null)
             {
                 mensaje = "";
             }
             ViewData["Error"] = mensaje;
-            return View(listado);
+            return View(Listado);
         }
 
         public async Task<IActionResult> Delete(string id)
@@ -158,20 +158,21 @@ namespace bd.webappseguridad.web.Controllers.MVC
             {
                 if (id != null)
                 {
-
-
-                    var response = await baseDatosServicio.EliminarAsync(id);
+                    var response = await apiServicio.EliminarAsync(id,
+                                                              new Uri(WebApp.BaseAddress),
+                                                              "api/BasesDatos");
                     if (response.IsSuccess)
                     {
-                        await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                        var responseLog = new EntradaLog
                         {
-                            ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                            EntityID = string.Format("{0} : {1}", "Sistema", id),
-                            Message = "Registro eliminado",
+                            ExceptionTrace = null,
                             LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
                             LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                            UserName = "Irma"
-                        });
+                            ObjectPrevious = JsonConvert.SerializeObject(response.Resultado),
+                            ObjectNext = null,
+                        };
+                        await apiServicio.SalvarLog<Response>(HttpContext, responseLog);
+
                         return RedirectToAction("Index");
                     }
                     return RedirectToAction("Index", new { mensaje = response.Message });
@@ -185,7 +186,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Eliminar Base de datos",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"

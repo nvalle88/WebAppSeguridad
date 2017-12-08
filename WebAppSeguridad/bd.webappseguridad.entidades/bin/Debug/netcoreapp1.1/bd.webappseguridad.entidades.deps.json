@@ -1,20 +1,20 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "168e8849a9bb8ba9d26c794280c6b5f97e2018bd"
+    "signature": "9f043333e7f935e0cf0c13fd19e9e4361c02fd71"
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v1.1": {
       "bd.webappseguridad.entidades/1.0.0": {
         "dependencies": {
-          "bd.log.guardar": "1.0.1"
+          "bd.log.guardar": "1.1.0"
         },
         "runtime": {
           "bd.webappseguridad.entidades.dll": {}
         }
       },
-      "bd.log.guardar/1.0.1": {
+      "bd.log.guardar/1.1.0": {
         "dependencies": {
           "Newtonsoft.Json": "10.0.3"
         },
@@ -87,12 +87,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "bd.log.guardar/1.0.1": {
+    "bd.log.guardar/1.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-5bDDWMelf4e2rqC867Abp0VQZklR/ehvIODAYh53gx7Y9l3EYXFnCiMquJTy3ct6J2qTG1XzYeUD23Omv2gjnw==",
-      "path": "bd.log.guardar/1.0.1",
-      "hashPath": "bd.log.guardar.1.0.1.nupkg.sha512"
+      "sha512": "sha512-+z52hPQvt41lkjjFuOQn9ETcYTPIq8g8BM6oYfDMKWoBICLyW2BBg+dHg0DFxz/d7vZOwR4Cric1Mgd6fUpljg==",
+      "path": "bd.log.guardar/1.1.0",
+      "hashPath": "bd.log.guardar.1.1.0.nupkg.sha512"
     },
     "Newtonsoft.Json/10.0.3": {
       "type": "package",

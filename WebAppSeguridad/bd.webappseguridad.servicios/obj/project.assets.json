@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v1.1": {
-      "bd.log.guardar/1.0.1": {
+      "bd.log.guardar/1.1.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
@@ -3298,7 +3298,7 @@
         "framework": ".NETCoreApp,Version=v1.1",
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
-          "bd.log.guardar": "1.0.1",
+          "bd.log.guardar": "1.1.0",
           "bd.webappseguridad.entidades": "1.0.0"
         },
         "compile": {
@@ -3313,7 +3313,7 @@
         "framework": ".NETCoreApp,Version=v1.1",
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
-          "bd.log.guardar": "1.0.1"
+          "bd.log.guardar": "1.1.0"
         },
         "compile": {
           "bin/placeholder/bd.webappseguridad.entidades.dll": {}
@@ -3325,12 +3325,12 @@
     }
   },
   "libraries": {
-    "bd.log.guardar/1.0.1": {
-      "sha512": "5bDDWMelf4e2rqC867Abp0VQZklR/ehvIODAYh53gx7Y9l3EYXFnCiMquJTy3ct6J2qTG1XzYeUD23Omv2gjnw==",
+    "bd.log.guardar/1.1.0": {
+      "sha512": "+z52hPQvt41lkjjFuOQn9ETcYTPIq8g8BM6oYfDMKWoBICLyW2BBg+dHg0DFxz/d7vZOwR4Cric1Mgd6fUpljg==",
       "type": "package",
-      "path": "bd.log.guardar/1.0.1",
+      "path": "bd.log.guardar/1.1.0",
       "files": [
-        "bd.log.guardar.1.0.1.nupkg.sha512",
+        "bd.log.guardar.1.1.0.nupkg.sha512",
         "bd.log.guardar.nuspec",
         "lib/netcoreapp1.1/bd.log.guardar.dll"
       ]
@@ -9201,7 +9201,7 @@
       "Microsoft.AspNetCore.Mvc >= 1.1.3",
       "Microsoft.NETCore.App >= 1.1.2",
       "Newtonsoft.Json >= 10.0.3",
-      "bd.log.guardar >= 1.0.1",
+      "bd.log.guardar >= 1.1.0",
       "bd.sw.externos >= 1.0.0",
       "bd.webappseguridad.entidades >= 1.0.0"
     ]
@@ -9266,7 +9266,7 @@
           },
           "bd.log.guardar": {
             "target": "Package",
-            "version": "1.0.1"
+            "version": "1.1.0"
           },
           "Newtonsoft.Json": {
             "target": "Package",

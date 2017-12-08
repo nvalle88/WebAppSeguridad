@@ -29,7 +29,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         {
             try
             {
-                var ListaAdscgrp = await apiServicio.Listar<Adscmenu>(new Uri(WebApp.BaseAddress), "/api/Adscmenus/ListarMenu");
+                var ListaAdscgrp = await apiServicio.Listar<Adscmenu>(new Uri(WebApp.BaseAddress), "api/Adscmenus/ListarMenu");
                 if (mensaje == null)
                 {
                     mensaje = "";
@@ -43,7 +43,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Listando menus",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.NetActivity),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"
@@ -63,21 +63,20 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                 response = await apiServicio.InsertarAsync(adscmenu,
                                                              new Uri(WebApp.BaseAddress),
-                                                             "/api/Adscmenus/InsertarAdscmenu");
+                                                             "api/Adscmenus/InsertarAdscmenu");
                 if (response.IsSuccess)
                 {
-                    var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
-                    {
-                        ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                        ExceptionTrace = null,
-                        Message = "Se ha creado un menú",
-                        UserName = "Usuario 1",
-                        LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
-                        LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                        EntityID = string.Format("{0} {1} {2}", "Menu:", adscmenu.AdmeSistema, adscmenu.AdmeAplicacion),
-                    });
+                        var responseLog = new EntradaLog
+                        {
+                            ExceptionTrace = null,
+                            LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
+                            LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
+                            ObjectPrevious = null,
+                            ObjectNext = JsonConvert.SerializeObject(response.Resultado),
+                        };
+                        await apiServicio.SalvarLog<Response>(HttpContext, responseLog);
 
-                    return RedirectToAction("Index");
+                        return RedirectToAction("Index");
                 }
                 }
                 await CargarListaCombox();
@@ -91,7 +90,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Creando un menu ",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"
@@ -131,7 +130,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         AdmeAplicacion = admeAplicacion,
                     };
                     DetalleMenu respuesta = await apiServicio.DetalleMenuAsync(menu, new Uri(WebApp.BaseAddress),
-                                                                  "/api/Adscmenus/DetalleAdscmenu");
+                                                                  "api/Adscmenus/DetalleAdscmenu");
                     if (respuesta!=null)
                     {
                         return View(respuesta);
@@ -160,7 +159,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         AdmeAplicacion = admeAplicacion,
                     };
                     Response respuesta = await apiServicio.SeleccionarAsync(menu, new Uri(WebApp.BaseAddress),
-                                                                  "/api/Adscmenus/SeleccionarAdscMenu");
+                                                                  "api/Adscmenus/SeleccionarAdscMenu");
                     respuesta.Resultado = JsonConvert.DeserializeObject<Adscmenu>(respuesta.Resultado.ToString());
                     if (respuesta.IsSuccess)
                     {
@@ -192,7 +191,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 if (!string.IsNullOrEmpty(adscmenu.AdmeSistema) || !string.IsNullOrEmpty(adscmenu.AdmeAplicacion))
                 {
                     response = await apiServicio.EditarAsync(adscmenu, new Uri(WebApp.BaseAddress),
-                                                                 "/api/Adscmenus/EditarAdscmenu");
+                                                                 "api/Adscmenus/EditarAdscmenu");
 
                     if (response.IsSuccess)
                     {
@@ -218,7 +217,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Editando una Grupos",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP "
@@ -241,7 +240,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     };
 
                     var response = await apiServicio.EliminarAsync(menu, new Uri(WebApp.BaseAddress)
-                                                                           , "/api/Adscmenus/EliminarAdscmenu");
+                                                                           , "api/Adscmenus/EliminarAdscmenu");
                     if (response.IsSuccess)
                     {
                         await GuardarLogService.SaveLogEntry(new LogEntryTranfer
@@ -265,7 +264,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Eliminar Base de datos",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"
@@ -289,7 +288,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     };
 
                     var response = await apiServicio.EliminarAsync(menu, new Uri(WebApp.BaseAddress)
-                                                                           , "/api/Adscmenus/EliminarAdscmenu");
+                                                                           , "api/Adscmenus/EliminarAdscmenu");
                     if (response.IsSuccess)
                     {
                         await GuardarLogService.SaveLogEntry(new LogEntryTranfer
@@ -313,7 +312,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Eliminar Base de datos",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"
@@ -343,7 +342,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         AdmeAplicacion = admeAplicacion,
                     };
                     Response respuesta = await apiServicio.SeleccionarAsync(menu, new Uri(WebApp.BaseAddress),
-                                                                  "/api/Adscmenus/SeleccionarAdscMenu");
+                                                                  "api/Adscmenus/SeleccionarAdscMenu");
                     var padre = JsonConvert.DeserializeObject<Adscmenu>(respuesta.Resultado.ToString());
                     var lista = new List<Adscmenu>();
                     if (padre != null)
@@ -365,7 +364,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
             };
             var listaPadres = await apiServicio.ListarPadresPorSistema(sistema, new Uri(WebApp.BaseAddress), "api/AdscMenus/ListarPadresPorSistema");
             Response respuesta = await apiServicio.SeleccionarAsync(sistema, new Uri(WebApp.BaseAddress),
-                                                                 "/api/Adscmenus/SeleccionarAdscMenu");
+                                                                 "api/Adscmenus/SeleccionarAdscMenu");
             var padre = JsonConvert.DeserializeObject<Adscmenu>(respuesta.Resultado.ToString());
 
             if (padre.AdmePadre=="0")
@@ -381,7 +380,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
         private async Task CargarListaDePadres(string AdmeAplicacion)
         {
-            var ListaAdscgrp = await apiServicio.Listar<Adscmenu>(new Uri(WebApp.BaseAddress), "/api/Adscmenus/ListarMenu");
+            var ListaAdscgrp = await apiServicio.Listar<Adscmenu>(new Uri(WebApp.BaseAddress), "api/Adscmenus/ListarMenu");
             ViewData["AdmePadre"] = new SelectList(ListaAdscgrp, "AdmeAplicacion", "AdmeAplicacion",AdmeAplicacion);
         }
 

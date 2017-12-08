@@ -15,12 +15,12 @@ namespace bd.webappseguridad.web.Controllers.MVC
     public class AdscSistController : Controller
     {
         private readonly IAdscSistServicio adscSistServicio;
-        private readonly IBaseDatosServicio baseDatosServicio;
+        private readonly IApiServicio apiServicio;
 
-        public AdscSistController(IAdscSistServicio adscSistServicio, IBaseDatosServicio baseDatosServicio)
+        public AdscSistController(IAdscSistServicio adscSistServicio, IApiServicio apiServicio)
         {
+            this.apiServicio = apiServicio;
             this.adscSistServicio = adscSistServicio;
-            this.baseDatosServicio = baseDatosServicio;
 
         }
 
@@ -34,9 +34,9 @@ namespace bd.webappseguridad.web.Controllers.MVC
         }
         public async Task<IActionResult> Create(string mensaje)
         {
-
             InicializarMensaje(mensaje);
-            ViewData["AdbdBdd"] = new SelectList(await baseDatosServicio.ListarBaseDatosAsync(), "AdbdBdd", "AdbdBdd");
+            var Listado = await apiServicio.Listar<Adscbdd>(new Uri(WebApp.BaseAddress), "api/BasesDatos/ListarBasesDatos");
+            ViewData["AdbdBdd"] = new SelectList(Listado, "AdbdBdd", "AdbdBdd");
             return View();
         }
 
@@ -58,7 +58,8 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     
                 }
                 InicializarMensaje(response.Message);
-                ViewData["AdbdBdd"] = new SelectList(await baseDatosServicio.ListarBaseDatosAsync(), "AdbdBdd", "AdbdBdd");
+                var Listado = await apiServicio.Listar<Adscbdd>(new Uri(WebApp.BaseAddress), "api/BasesDatos/ListarBasesDatos");
+                ViewData["AdbdBdd"] = new SelectList(Listado, "AdbdBdd", "AdbdBdd");
                 return View(Adscsist);
             }
             catch (Exception)
@@ -76,7 +77,8 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 if (respuesta.IsSuccess)
                 {
                     var Adscsist = (Adscsist)respuesta.Resultado;
-                    ViewData["AdbdBdd"] = new SelectList(await baseDatosServicio.ListarBaseDatosAsync(), "AdbdBdd", "AdbdBdd", Adscsist.AdstBdd);
+                    var Listado = await apiServicio.Listar<Adscbdd>(new Uri(WebApp.BaseAddress), "api/BasesDatos/ListarBasesDatos");
+                    ViewData["AdbdBdd"] = new SelectList(Listado, "AdbdBdd", "AdbdBdd");
                     return View(respuesta.Resultado);
                 }
 
@@ -106,7 +108,8 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
                     ViewData["Error"] = respuesta.Message;
                 }
-                ViewData["AdbdBdd"] = new SelectList(await baseDatosServicio.ListarBaseDatosAsync(), "AdbdBdd", "AdbdBdd", Adscsist.AdstBdd);
+                var Listado = await apiServicio.Listar<Adscbdd>(new Uri(WebApp.BaseAddress), "api/BasesDatos/ListarBasesDatos");
+                ViewData["AdbdBdd"] = new SelectList(Listado, "AdbdBdd", "AdbdBdd");
                 return View(Adscsist);
             }
             catch (Exception)
@@ -159,7 +162,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                     Message = "Eliminar Base de datos",
-                    ExceptionTrace = ex,
+                    ExceptionTrace = ex.Message,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     UserName = "Usuario APP Seguridad"
