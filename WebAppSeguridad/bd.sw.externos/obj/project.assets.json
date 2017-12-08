@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v1.1": {
-      "bd.log.guardar/1.1.0": {
+      "bd.log.guardar/1.1.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
@@ -2406,7 +2406,7 @@
         "framework": ".NETCoreApp,Version=v1.1",
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
-          "bd.log.guardar": "1.1.0"
+          "bd.log.guardar": "1.1.1"
         },
         "compile": {
           "bin/placeholder/bd.webappseguridad.entidades.dll": {}
@@ -2418,12 +2418,12 @@
     }
   },
   "libraries": {
-    "bd.log.guardar/1.1.0": {
-      "sha512": "+z52hPQvt41lkjjFuOQn9ETcYTPIq8g8BM6oYfDMKWoBICLyW2BBg+dHg0DFxz/d7vZOwR4Cric1Mgd6fUpljg==",
+    "bd.log.guardar/1.1.1": {
+      "sha512": "58dOhDfyHW/4zXFgS+/gSnPg1vaYk5VaIRRtSbf8tU3dNYw2yKPOfZKtvE32UJEon4cPwoMWRAQLpVC52oTqfA==",
       "type": "package",
-      "path": "bd.log.guardar/1.1.0",
+      "path": "bd.log.guardar/1.1.1",
       "files": [
-        "bd.log.guardar.1.1.0.nupkg.sha512",
+        "bd.log.guardar.1.1.1.nupkg.sha512",
         "bd.log.guardar.nuspec",
         "lib/netcoreapp1.1/bd.log.guardar.dll"
       ]
@@ -7484,7 +7484,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v1.1": [
       "Microsoft.NETCore.App >= 1.1.2",
-      "bd.log.guardar >= 1.1.0",
+      "bd.log.guardar >= 1.1.1",
       "bd.webappseguridad.entidades >= 1.0.0"
     ]
   },
@@ -7514,6 +7514,7 @@
         "C:\\Paquetes Nuguet Locales": {},
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {},
+        "C:\\Users\\Nestor Yasmani Valle\\Documents\\Visual Studio 2017": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -7541,7 +7542,7 @@
           },
           "bd.log.guardar": {
             "target": "Package",
-            "version": "1.1.0"
+            "version": "1.1.1"
           }
         }
       }

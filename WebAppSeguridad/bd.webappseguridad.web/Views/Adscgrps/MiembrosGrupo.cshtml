@@ -7,34 +7,28 @@
 
 
 <div id="content">
-    <div>
-        <div class="row col-lg-8">
-            <div class="col-lg-2 ">
-                <a asp-action="Index" asp-controller="Adscgrps">
-                    <button type="button" class="btn btn-labeled btn-default">
-                        <span class="btn-label">
-                            <i class="glyphicon glyphicon-arrow-left"></i>
-                        </span>Regresar
 
-                    </button>
-                </a>
-            </div>
-            <div class="col-lg-3">
-                <a asp-action="CrearMiembroGrupo" asp-controller="Adscgrps" asp-route-adgrBdd="@Model.Adgrbdd" asp-route-adgrGrupo="@Model.Adgrgrupo">
-                    <button type="button" class="btn btn-labeled btn-default">
-                        <span class="btn-label">
-                            <i class="glyphicon glyphicon-plus"></i>
-                        </span>Nuevo miembro
-
-                    </button>
-                </a>
-            </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="btn-group">
+            <button class="btn btn-primary">
+                Acciones
+            </button>
+            <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li>
+                    <a asp-action="CrearMiembroGrupo" asp-controller="Adscgrps" asp-route-adgrBdd="@Model.Adgrbdd" asp-route-adgrGrupo="@Model.Adgrgrupo"><i class="fa fa-plus"></i>  Crear miembro</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a asp-action="Index" asp-controller="Adscgrps"><i class="fa fa-arrow-left"></i> Regresar</a>
+                </li>
+            </ul>
         </div>
+        <p></p>
+        <!-- end col -->
     </div>
-    
-    <div><hr /></div>
-   
-
                     <section id="widget-grid" class="table-striped">
                         <div class="row">
                             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

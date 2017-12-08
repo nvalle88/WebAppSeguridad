@@ -47,65 +47,106 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
         public async Task<IActionResult> Login()
         {
-          var user=  HttpContext.User;
-            if (Request.Query.Count !=2)
+            try
             {
-                return Redirect(WebApp.BaseAddressWebAppLogin);
-            }
+                var user = HttpContext.User;
+                if (Request.Query.Count != 2)
+                {
+                    return Redirect(WebApp.BaseAddressWebAppLogin);
+                }
 
-            Adscpassw adscpassw = new Adscpassw();
-            var queryStrings = Request.Query;
-            var qsList = new List<string>();
-            foreach (var key in queryStrings.Keys)
-            {
-                qsList.Add(queryStrings[key]);
-            }
-            var adscpasswSend = new Adscpassw
-            {
-                AdpsLoginAdm = qsList[0],
-                AdpsTokenTemp = qsList[1]
-            };
-            adscpassw = await GetAdscPassws(adscpasswSend);
+                Adscpassw adscpassw = new Adscpassw();
+                var queryStrings = Request.Query;
+                var qsList = new List<string>();
+                foreach (var key in queryStrings.Keys)
+                {
+                    qsList.Add(queryStrings[key]);
+                }
+                var adscpasswSend = new Adscpassw
+                {
+                    AdpsLoginAdm = qsList[0],
+                    AdpsTokenTemp = qsList[1]
+                };
+                adscpassw = await GetAdscPassws(adscpasswSend);
 
-           var a= HttpContext.Items.Count;
+                var a = HttpContext.Items.Count;
 
-            if (adscpassw !=null)
-            {
+                if (adscpassw != null)
+                {
 
-                var claim = HttpContext.User.Identities.Where(x => x.NameClaimType == ClaimTypes.Name).FirstOrDefault();
-                var token = claim.Claims.Where(c => c.Type == ClaimTypes.SerialNumber).FirstOrDefault().Value;
-                var NombreUsuario = claim.Claims.Where(c => c.Type == ClaimTypes.Name).FirstOrDefault().Value;
+                    var claim = HttpContext.User.Identities.Where(x => x.NameClaimType == ClaimTypes.Name).FirstOrDefault();
+                    var token = claim.Claims.Where(c => c.Type == ClaimTypes.SerialNumber).FirstOrDefault().Value;
+                    var NombreUsuario = claim.Claims.Where(c => c.Type == ClaimTypes.Name).FirstOrDefault().Value;
 
-                var claims = new[]
-                    {
+                    var claims = new[]
+                        {
                     new Claim(ClaimTypes.Name,NombreUsuario),
                     new Claim(ClaimTypes.SerialNumber,token)
 
                 };
 
-                var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies"));
-               // var esto= ClaimsPrincipal.Current.Identities;
-               await HttpContext.Authentication.SignInAsync("Cookies", principal,new Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties {IsPersistent=true });
+                    var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies"));
+                    // var esto= ClaimsPrincipal.Current.Identities;
+                    await HttpContext.Authentication.SignInAsync("Cookies", principal, new Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties { IsPersistent = true });
 
-                var response = await EliminarTokenTemp(adscpassw);
-                if (response.IsSuccess)
-                {
-                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                    var response = await EliminarTokenTemp(adscpassw);
+                    if (response.IsSuccess)
+                    {
+                        var responseLog = new EntradaLog
+                        {
+                            ExceptionTrace = null,
+                            LogCategoryParametre = Convert.ToString(LogCategoryParameter.Permission),
+                            LogLevelShortName = Convert.ToString(LogLevelParameter.INFO),
+                            ObjectPrevious = null,
+                            ObjectNext = JsonConvert.SerializeObject(response.Resultado),
+                        };
+                        await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+                        return RedirectToAction(nameof(HomeController.Index), "Home");
+                    }
+                    else
+                    {
+                        return Redirect(WebApp.BaseAddressWebAppLogin);
+                    }
                 }
-                else
-                {
-                    return Redirect(WebApp.BaseAddressWebAppLogin);
-                }
+
+                return Redirect(WebApp.BaseAddressWebAppLogin);
             }
-        
-            return Redirect(WebApp.BaseAddressWebAppLogin);
+            catch (Exception ex)
+            {
+                var responseLog = new EntradaLog
+                {
+                    ExceptionTrace = ex.Message,
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
+                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+                return BadRequest();
+            }
 
         }
 
         public async Task<IActionResult> Salir()
         {
-            await HttpContext.Authentication.SignOutAsync("Cookies");
-            return RedirectToAction(nameof(LoginController.Index), "Login");
+            try
+            {
+                await HttpContext.Authentication.SignOutAsync("Cookies");
+                return RedirectToAction(nameof(LoginController.Index), "Login");
+            }
+            catch (Exception ex)
+            {
+                var responseLog = new EntradaLog
+                {
+                    ExceptionTrace = ex.Message,
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
+                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+                return BadRequest();
+            }
         }
 
         public async Task<Adscpassw> GetAdscPassws (Adscpassw adscpassw)
@@ -116,9 +157,6 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     var respuesta = await apiServicio.ObtenerElementoAsync1<Response>(adscpassw, new Uri(WebApp.BaseAddress),
                                                                   "api/Adscpassws/SeleccionarMiembroLogueado");
-
-
-
 
                     if (respuesta.IsSuccess)
                     {
@@ -132,6 +170,15 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
             catch (Exception ex)
             {
+                var responseLog = new EntradaLog
+                {
+                    ExceptionTrace = ex.Message,
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
+                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
                 return null;
             }
         }
@@ -168,16 +215,15 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
             catch (Exception ex)
             {
-                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                var responseLog = new EntradaLog
                 {
-                    ApplicationName = WebApp.NombreAplicacion,
-                    Message = "Editando un estado civil",
                     ExceptionTrace = ex.Message,
-                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
-                    UserName = "Usuario APP webappth"
-                });
-
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
                 return null;
             }
         }

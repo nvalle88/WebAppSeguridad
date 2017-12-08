@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v1.1",
-    "signature": "ec193b98c0a51c44e47a3cdb20bc6b37105ceade"
+    "signature": "c840194fd7ccc348a5597015432435c018042b87"
   },
   "compilationOptions": {
     "defines": [
@@ -38,7 +38,7 @@
           "Microsoft.NETCore.App": "1.1.2",
           "Microsoft.VisualStudio.Web.BrowserLink": "1.1.2",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "1.1.1",
-          "bd.log.guardar": "1.1.0",
+          "bd.log.guardar": "1.1.1",
           "bd.sw.externos": "1.0.0",
           "bd.webappseguridad.entidades": "1.0.0",
           "bd.webappseguridad.servicios": "1.0.0"
@@ -50,7 +50,7 @@
           "bd.webappseguridad.web.dll": {}
         }
       },
-      "bd.log.guardar/1.1.0": {
+      "bd.log.guardar/1.1.1": {
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
           "Newtonsoft.Json": "10.0.3"
@@ -1908,7 +1908,7 @@
       "bd.sw.externos/1.0.0": {
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
-          "bd.log.guardar": "1.1.0",
+          "bd.log.guardar": "1.1.1",
           "bd.webappseguridad.entidades": "1.0.0"
         },
         "runtime": {
@@ -1921,7 +1921,7 @@
       "bd.webappseguridad.entidades/1.0.0": {
         "dependencies": {
           "Microsoft.NETCore.App": "1.1.2",
-          "bd.log.guardar": "1.1.0"
+          "bd.log.guardar": "1.1.1"
         },
         "runtime": {
           "bd.webappseguridad.entidades.dll": {}
@@ -1935,7 +1935,7 @@
           "Microsoft.AspNetCore.Mvc": "1.1.3",
           "Microsoft.NETCore.App": "1.1.2",
           "Newtonsoft.Json": "10.0.3",
-          "bd.log.guardar": "1.1.0",
+          "bd.log.guardar": "1.1.1",
           "bd.sw.externos": "1.0.0",
           "bd.webappseguridad.entidades": "1.0.0"
         },
@@ -3592,12 +3592,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "bd.log.guardar/1.1.0": {
+    "bd.log.guardar/1.1.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+z52hPQvt41lkjjFuOQn9ETcYTPIq8g8BM6oYfDMKWoBICLyW2BBg+dHg0DFxz/d7vZOwR4Cric1Mgd6fUpljg==",
-      "path": "bd.log.guardar/1.1.0",
-      "hashPath": "bd.log.guardar.1.1.0.nupkg.sha512"
+      "sha512": "sha512-58dOhDfyHW/4zXFgS+/gSnPg1vaYk5VaIRRtSbf8tU3dNYw2yKPOfZKtvE32UJEon4cPwoMWRAQLpVC52oTqfA==",
+      "path": "bd.log.guardar/1.1.1",
+      "hashPath": "bd.log.guardar.1.1.1.nupkg.sha512"
     },
     "Microsoft.ApplicationInsights/2.2.0": {
       "type": "package",

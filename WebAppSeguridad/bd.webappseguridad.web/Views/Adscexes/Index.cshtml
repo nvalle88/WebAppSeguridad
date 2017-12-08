@@ -6,16 +6,18 @@
 
 			<!-- MAIN CONTENT -->
 <div id="content">
-    <p></p>
-    <a asp-action="Create">
-        <button type="button"  class="btn btn-labeled btn-default">
-            <span class="btn-label">
-                <i class="glyphicon glyphicon-plus"></i>
-            </span>Nuevo Permiso
-
-        </button>
-    </a>
-    <p> </p>
+    <fieldset>
+        <div>
+            <a asp-action="Create">
+                <button type="button" class="btn btn-labeled btn-default">
+                    <span class="btn-label">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </span>Nuevo permiso
+                </button>
+            </a>
+        </div>
+        <p></p>
+    </fieldset>
     <!-- widget grid -->
     <section id="widget-grid" class="">
         <!-- row -->
@@ -124,7 +126,7 @@
 
                                                 @Html.ActionLink("Editar", "Edit", new { sistema = item.AdexSistema, baseDatos = item.AdexBdd, grupo =item.AdexGrupo, aplicacion =item.AdexAplicacion}) |
                                                 @Html.ActionLink("Eliminar", "Delete", new { sistema = item.AdexSistema, baseDatos = item.AdexBdd, grupo = item.AdexGrupo, aplicacion = item.AdexAplicacion }, new { onclick = "return confirm('Desea eliminar el Miembro... ?');" }) |
-                                                @Html.ActionLink("Detalle", "Details", new { sistema = item.AdexSistema, baseDatos = item.AdexAplicacion, grupo = item.AdexGrupo, aplicacion = item.AdexAplicacion }) )
+                                                @Html.ActionLink("Detalle", "Details", new { sistema = item.AdexSistema, baseDatos = item.AdexAplicacion, grupo = item.AdexGrupo, aplicacion = item.AdexAplicacion })
                                             </td>
                                         </tr>
                                      }

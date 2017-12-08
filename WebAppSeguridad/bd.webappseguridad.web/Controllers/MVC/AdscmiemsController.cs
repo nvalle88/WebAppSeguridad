@@ -37,17 +37,18 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
             catch (Exception ex)
             {
-                
-                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+
+                var responseLog = new EntradaLog
                 {
-                    ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                    Message = "Listando sistemas",
                     ExceptionTrace = ex.Message,
-                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.NetActivity),
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
-                    UserName = "Usuario APP Seguridad"
-                });
-                return BadRequest();
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+                ViewData["Error"] = "Ha ocurrido un error inesperado";
+                return View(new List<Adscmiem>());
             }
         }
 
@@ -55,30 +56,26 @@ namespace bd.webappseguridad.web.Controllers.MVC
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Adscmiem adscmiem)
         {
-            
             try
             {
-
                 var response = new Response();
 
                 if (ModelState.IsValid)
                 {
                     response = await apiServicio.InsertarAsync(adscmiem,
                                                                          new Uri(WebApp.BaseAddress),
-                                                                         "/api/Adscmiems/InsertarAdscmiem");
+                                                                         "api/Adscmiems/InsertarAdscmiem");
                     if (response.IsSuccess)
                     {
-
-                        var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                        var responseLog = new EntradaLog
                         {
-                            ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                             ExceptionTrace = null,
-                            Message = "Se ha creado un grupo",
-                            UserName = "Usuario 1",
                             LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
                             LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                            EntityID = string.Format("{0} {1} {2} {3}", "Grupo:", adscmiem.AdmiEmpleado, adscmiem.AdmiGrupo, adscmiem.AdmiBdd),
-                        });
+                            ObjectPrevious = null,
+                            ObjectNext = JsonConvert.SerializeObject(response.Resultado),
+                        };
+                        await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
                         return RedirectToAction("Index");
                     } 
@@ -91,17 +88,17 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
             catch (Exception ex)
             {
-                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                var responseLog = new EntradaLog
                 {
-                    ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                    Message = "Creando un grupo ",
                     ExceptionTrace = ex.Message,
-                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
-                    UserName = "Usuario APP Seguridad"
-                });
-
-                return BadRequest();
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+                InicializarMensaje("");
+                return View(adscmiem);
             }
         }
 
@@ -117,9 +114,25 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
         public async Task<IActionResult> Create(string mensaje)
         {
-            await CargarListaBdd();
-            InicializarMensaje(mensaje);
-            return View();
+            try
+            {
+                await CargarListaBdd();
+                InicializarMensaje(mensaje);
+                return View();
+            }
+            catch (Exception ex)
+            {
+                var responseLog = new EntradaLog
+                {
+                    ExceptionTrace = ex.Message,
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
+                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+                return View();
+            }
         }
 
 
@@ -137,7 +150,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                        
                     };
                     Response respuesta = await apiServicio.SeleccionarAsync(grupo, new Uri(WebApp.BaseAddress),
-                                                                  "/api/Adscmiems/SeleccionarAdscmiem");
+                                                                  "api/Adscmiems/SeleccionarAdscmiem");
                     respuesta.Resultado = JsonConvert.DeserializeObject<Adscmiem>(respuesta.Resultado.ToString());
                     if (respuesta.IsSuccess)
                     {
@@ -148,9 +161,19 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
                 return BadRequest();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                var responseLog = new EntradaLog
+                {
+                    ExceptionTrace = ex.Message,
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
+                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+
+                return View();
             }
         }
 
@@ -163,20 +186,23 @@ namespace bd.webappseguridad.web.Controllers.MVC
             {
                 if (!string.IsNullOrEmpty(adscmiem.AdmiBdd) || !string.IsNullOrEmpty(adscmiem.AdmiGrupo) || !string.IsNullOrEmpty(adscmiem.AdmiEmpleado))
                 {
+                    var respuestaActualizar = await apiServicio.SeleccionarAsync(adscmiem, new Uri(WebApp.BaseAddress),
+                                                                 "api/Adscmiems/SeleccionarAdscmiem");
+
                     response = await apiServicio.EditarAsync(adscmiem, new Uri(WebApp.BaseAddress),
-                                                                 "/api/Adscmiems/EditarAdscmiem");
+                                                                 "api/Adscmiems/EditarAdscmiem");
 
                     if (response.IsSuccess)
                     {
-                        await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                        var responseLog = new EntradaLog
                         {
-                            ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                            EntityID = string.Format("{0} : {1} {2} {3}", "Grupo", adscmiem.AdmiEmpleado, adscmiem.AdmiGrupo,adscmiem.AdmiBdd),
+                            ExceptionTrace = null,
                             LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
                             LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                            Message = "Se ha actualizado un registro Grupo",
-                            UserName = "Usuario 1"
-                        });
+                            ObjectPrevious = JsonConvert.SerializeObject(respuestaActualizar.Resultado),
+                            ObjectNext = JsonConvert.SerializeObject(response.Resultado),
+                        };
+                        await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
                         return RedirectToAction("Index");
                     }
@@ -186,16 +212,15 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
             catch (Exception ex)
             {
-                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                var responseLog = new EntradaLog
                 {
-                    ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                    Message = "Editando una Grupos",
                     ExceptionTrace = ex.Message,
-                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
-                    UserName = "Usuario APP "
-                });
-
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
                 return BadRequest();
             }
         }
@@ -217,18 +242,19 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     };
 
                     var response = await apiServicio.EliminarAsync(grupo, new Uri(WebApp.BaseAddress)
-                                                                           , "/api/Adscmiems/EliminarAdscmiem");
+                                                                           , "api/Adscmiems/EliminarAdscmiem");
                     if (response.IsSuccess)
                     {
-                        await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                        var responseLog = new EntradaLog
                         {
-                            ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                            EntityID = string.Format("{0} : {1} {2} {3}", "Grupo", admiEmpleado, admiGrupo,admiBdd),
-                            Message = "Registro eliminado",
+                            ExceptionTrace = null,
                             LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
                             LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                            UserName = "Usuario APP Seguridad"
-                        });
+                            ObjectPrevious = JsonConvert.SerializeObject(response.Resultado),
+                            ObjectNext = null,
+                        };
+                        await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+
                         return RedirectToAction("Index");
                     }
                     return RedirectToAction("Index", new { mensaje = response.Message });
@@ -237,16 +263,15 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
             catch (Exception ex)
             {
-                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                var responseLog = new EntradaLog
                 {
-                    ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                    Message = "Eliminar Base de datos",
                     ExceptionTrace = ex.Message,
-                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
-                    UserName = "Usuario APP Seguridad"
-                });
-
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
                 return BadRequest();
             }
         }

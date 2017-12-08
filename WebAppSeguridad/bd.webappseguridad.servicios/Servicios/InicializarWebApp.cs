@@ -36,7 +36,7 @@ namespace bd.webappseguridad.servicios.Servicios
                 }
         WebApp.BaseAddress = "http://localhost:53317";
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }

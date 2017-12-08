@@ -32,6 +32,10 @@ D:\GitHub\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\bin\Debug\netco
 D:\GitHub\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\bin\Debug\netcoreapp1.1\bd.webappseguridad.servicios.pdb
 D:\GitHub\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Debug\netcoreapp1.1\bd.webappseguridad.web.dll
 D:\GitHub\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Debug\netcoreapp1.1\bd.webappseguridad.web.pdb
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Debug\netcoreapp1.1\bd.webappseguridad.web.csprojResolveAssemblyReference.cache
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Debug\netcoreapp1.1\bd.webappseguridad.web.csproj.CoreCompileInputs.cache
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Debug\netcoreapp1.1\bd.webappseguridad.web.AssemblyInfoInputs.cache
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Debug\netcoreapp1.1\bd.webappseguridad.web.AssemblyInfo.cs
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\bin\Debug\netcoreapp1.1\bd.webappseguridad.web.deps.json
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\bin\Debug\netcoreapp1.1\bd.webappseguridad.web.runtimeconfig.json
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\bin\Debug\netcoreapp1.1\bd.webappseguridad.web.runtimeconfig.dev.json
@@ -43,9 +47,5 @@ C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.we
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\bin\Debug\netcoreapp1.1\bd.sw.externos.pdb
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\bin\Debug\netcoreapp1.1\bd.webappseguridad.entidades.pdb
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\bin\Debug\netcoreapp1.1\bd.webappseguridad.servicios.pdb
-C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Debug\netcoreapp1.1\bd.webappseguridad.web.csprojResolveAssemblyReference.cache
-C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Debug\netcoreapp1.1\bd.webappseguridad.web.csproj.CoreCompileInputs.cache
-C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Debug\netcoreapp1.1\bd.webappseguridad.web.AssemblyInfo.cs
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Debug\netcoreapp1.1\bd.webappseguridad.web.dll
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Debug\netcoreapp1.1\bd.webappseguridad.web.pdb
-C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Debug\netcoreapp1.1\bd.webappseguridad.web.AssemblyInfoInputs.cache

@@ -42,16 +42,16 @@ namespace bd.webappseguridad.web.Controllers.MVC
                                                              "/api/Adscpassws/InsertarAdscPassw");
                 if (response.IsSuccess)
                 {
-                    var responseLog = await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                    var responseLog = new EntradaLog
                     {
-                        ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
                         ExceptionTrace = null,
-                        Message = "Se ha creado un sistema",
-                        UserName = "Usuario 1",
                         LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
                         LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                        EntityID = string.Format("{0} {1}", "Sistema:", adscpassw.AdpsLogin),
-                    });
+                        ObjectPrevious = null,
+                        ObjectNext = JsonConvert.SerializeObject(response.Resultado),
+                    };
+                    await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+
 
                     return RedirectToAction("Index");
                 }
@@ -62,15 +62,15 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
             catch (Exception ex)
             {
-                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                var responseLog = new EntradaLog
                 {
-                    ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                    Message = "Creando Base de Datos",
                     ExceptionTrace = ex.Message,
-                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
-                    UserName = "Usuario APP Seguridad"
-                });
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
                 return BadRequest();
             }
@@ -94,8 +94,17 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
                 return BadRequest();
             }
-            catch (Exception )
+            catch (Exception ex )
             {
+                var responseLog = new EntradaLog
+                {
+                    ExceptionTrace = ex.Message,
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
+                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
                 return BadRequest();
             }
         }
@@ -109,20 +118,23 @@ namespace bd.webappseguridad.web.Controllers.MVC
             {
                 if (!string.IsNullOrEmpty(id))
                 {
+                    var respuestaActualizar = await apiServicio.SeleccionarAsync<Response>(id, new Uri(WebApp.BaseAddress),
+                                                                  "/api/Adscpassws");
+
                     response = await apiServicio.EditarAsync(id, adscpassw, new Uri(WebApp.BaseAddress),
                                                                  "/api/Adscpassws");
 
                     if (response.IsSuccess)
                     {
-                        await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                        var responseLog = new EntradaLog
                         {
-                            ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                            EntityID = string.Format("{0} : {1}", "Sistema", id),
+                            ExceptionTrace = null,
                             LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
                             LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                            Message = "Se ha actualizado un registro sistema",
-                            UserName = "Usuario 1"
-                        });
+                            ObjectPrevious = JsonConvert.SerializeObject(respuestaActualizar.Resultado),
+                            ObjectNext = JsonConvert.SerializeObject(response.Resultado),
+                        };
+                        await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
                         return RedirectToAction("Index");
                     }
@@ -132,16 +144,16 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
             catch (Exception ex)
             {
-                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                var responseLog = new EntradaLog
                 {
-                    ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                    Message = "Editando una base de datos",
                     ExceptionTrace = ex.Message,
-                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
-                    UserName = "Usuario APP Seguridad"
-                });
-             
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+
                 return BadRequest();
             }
         }
@@ -158,15 +170,15 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
             catch (Exception ex)
             {
-                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                var responseLog = new EntradaLog
                 {
-                    ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                    Message = "Listando sistemas",
                     ExceptionTrace = ex.Message,
-                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.NetActivity),
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
-                    UserName = "Usuario APP Seguridad"
-                });
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
                 return BadRequest();
             }
         }
@@ -180,31 +192,32 @@ namespace bd.webappseguridad.web.Controllers.MVC
                                                               ,"/api/Adscpassws");
                 if (response.IsSuccess)
                 {
-                    await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                    var responseLog = new EntradaLog
                     {
-                        ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                        EntityID = string.Format("{0} : {1}", "Sistema", id),
-                        Message = "Registro eliminado",
+                        ExceptionTrace = null,
                         LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
                         LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                        UserName = "Usuario APP Seguridad"
-                    });
+                        ObjectPrevious = JsonConvert.SerializeObject(response.Resultado),
+                        ObjectNext = null,
+                    };
+                    await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+
                     return RedirectToAction("Index");
                 }
                 return BadRequest();
             }
             catch (Exception ex)
             {
-                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                var responseLog = new EntradaLog
                 {
-                    ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                    Message = "Eliminar Base de datos",
                     ExceptionTrace = ex.Message,
-                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
-                    UserName = "Usuario APP Seguridad"
-                });
-               
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+
                 return BadRequest();
             }
         }
