@@ -1,5 +1,4 @@
-﻿using bd.webappcompartido.servicios.Servicios;
-using bd.webappseguridad.entidades.Utils;
+﻿using bd.webappseguridad.entidades.Utils;
 using bd.webappseguridad.servicios.Interfaces;
 using bd.webappseguridad.servicios.Servicios;
 using bd.webappseguridad.web.Models;
@@ -38,7 +37,6 @@ namespace bd.webappcompartido.web
 
             // Add framework services.
             services.AddMvc();
-            services.AddSingleton<IBaseDatosServicio, BaseDatosServicio>();
             services.AddSingleton<IAdscSistServicio, AdscSistServicio>();
             services.AddSingleton<IApiServicio, ApiServicio>();
 

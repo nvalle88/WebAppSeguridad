@@ -13,6 +13,7 @@ using bd.webappseguridad.entidades.ModeloTransferencia;
 using System.Linq;
 using System.Security.Claims;
 
+
 namespace bd.webappseguridad.web.Controllers.MVC
 {
     public class BasesDatosController : Controller
@@ -47,7 +48,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         {
             try
             {
-                var response = new Response();
+                var response = new entidades.Utils.Response();
                 if (ModelState.IsValid)
                 {
                     response = await apiServicio.InsertarAsync(baseDato,
@@ -63,7 +64,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                             ObjectPrevious = null,
                             ObjectNext = JsonConvert.SerializeObject(response.Resultado),
                         };
-                        await apiServicio.SalvarLog<Response>(HttpContext,responseLog);
+                        await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext,responseLog);
                        
                         return RedirectToAction("Index");
                     }
@@ -86,7 +87,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 {
                     AdbdBdd = id,
                 };
-                Response respuesta = await apiServicio.SeleccionarAsync(baseDatos, new Uri(WebApp.BaseAddress),
+                var respuesta = await apiServicio.SeleccionarAsync(baseDatos, new Uri(WebApp.BaseAddress),
                                                                   "api/BasesDatos/SeleccionarAdscBdd");
                 respuesta.Resultado = JsonConvert.DeserializeObject<Adscbdd>(respuesta.Resultado.ToString());
                 if (respuesta.IsSuccess)
@@ -125,9 +126,9 @@ namespace bd.webappseguridad.web.Controllers.MVC
                             LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
                             LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
                             ObjectPrevious = JsonConvert.SerializeObject(respuestaActualizar.Resultado),
-                            ObjectNext = JsonConvert.SerializeObject(respuesta.Resultado),
+                            ObjectNext = JsonConvert.SerializeObject(respuesta),
                         };
-                        await apiServicio.SalvarLog<Response>(HttpContext, responseLog);
+                        await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
                         return RedirectToAction("Index");
                     }
 
@@ -171,7 +172,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                             ObjectPrevious = JsonConvert.SerializeObject(response.Resultado),
                             ObjectNext = null,
                         };
-                        await apiServicio.SalvarLog<Response>(HttpContext, responseLog);
+                        await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
                         return RedirectToAction("Index");
                     }

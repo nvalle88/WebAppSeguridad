@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using bd.webappseguridad.entidades.ViewModels;
 
+
 namespace bd.webappseguridad.web.Controllers.MVC
 {
     public class AdscmenusController : Controller
@@ -56,7 +57,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Adscmenu adscmenu)
         {
-            Response response = new Response();
+            var response = new entidades.Utils.Response();
             try
             {
                 if (ModelState.IsValid)
@@ -74,7 +75,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                             ObjectPrevious = null,
                             ObjectNext = JsonConvert.SerializeObject(response.Resultado),
                         };
-                        await apiServicio.SalvarLog<Response>(HttpContext, responseLog);
+                        await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
                         return RedirectToAction("Index");
                 }
@@ -158,7 +159,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         AdmeSistema = admeSistema,
                         AdmeAplicacion = admeAplicacion,
                     };
-                    Response respuesta = await apiServicio.SeleccionarAsync(menu, new Uri(WebApp.BaseAddress),
+                    entidades.Utils.Response respuesta = await apiServicio.SeleccionarAsync(menu, new Uri(WebApp.BaseAddress),
                                                                   "api/Adscmenus/SeleccionarAdscMenu");
                     respuesta.Resultado = JsonConvert.DeserializeObject<Adscmenu>(respuesta.Resultado.ToString());
                     if (respuesta.IsSuccess)
@@ -180,7 +181,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Adscmenu adscmenu)
         {
-            Response response = new Response();
+            var response = new entidades.Utils.Response();
             try
             {
                 if (!ModelState.IsValid)
@@ -341,7 +342,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         AdmeSistema = admeSistema,
                         AdmeAplicacion = admeAplicacion,
                     };
-                    Response respuesta = await apiServicio.SeleccionarAsync(menu, new Uri(WebApp.BaseAddress),
+                    var respuesta = await apiServicio.SeleccionarAsync(menu, new Uri(WebApp.BaseAddress),
                                                                   "api/Adscmenus/SeleccionarAdscMenu");
                     var padre = JsonConvert.DeserializeObject<Adscmenu>(respuesta.Resultado.ToString());
                     var lista = new List<Adscmenu>();
@@ -363,7 +364,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 AdmeAplicacion = aplicacion,
             };
             var listaPadres = await apiServicio.ListarPadresPorSistema(sistema, new Uri(WebApp.BaseAddress), "api/AdscMenus/ListarPadresPorSistema");
-            Response respuesta = await apiServicio.SeleccionarAsync(sistema, new Uri(WebApp.BaseAddress),
+            var respuesta = await apiServicio.SeleccionarAsync(sistema, new Uri(WebApp.BaseAddress),
                                                                  "api/Adscmenus/SeleccionarAdscMenu");
             var padre = JsonConvert.DeserializeObject<Adscmenu>(respuesta.Resultado.ToString());
 

@@ -13,6 +13,7 @@ using bd.log.guardar.Enumeradores;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
+
 namespace bd.webappseguridad.web.Controllers.MVC
 {
     public class AdscexesController : Controller
@@ -50,7 +51,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Adscexe adscexe)
         {
-            Response response = new Response();
+            entidades.Utils.Response response = new entidades.Utils.Response();
             try
             {
                 if (!ModelState.IsValid)
@@ -73,7 +74,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         ObjectNext = JsonConvert.SerializeObject(response.Resultado),
                     };
 
-                    await apiServicio.SalvarLog<Response>(HttpContext, responseLog);
+                    await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
                     return RedirectToAction("Index");
                 }
                 await CargarListaCombox();
@@ -141,7 +142,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         AdmeSistema = admeSistema,
                         AdmeAplicacion = admeAplicacion,
                     };
-                    Response respuesta = await apiServicio.SeleccionarAsync(menu, new Uri(WebApp.BaseAddress),
+                    entidades.Utils.Response respuesta = await apiServicio.SeleccionarAsync(menu, new Uri(WebApp.BaseAddress),
                                                                   "api/Adscexes/SeleccionarAdscexe");
                     respuesta.Resultado = JsonConvert.DeserializeObject<Adscmenu>(respuesta.Resultado.ToString());
                     if (respuesta.IsSuccess)
@@ -163,7 +164,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Adscmenu adscmenu)
         {
-            Response response = new Response();
+            entidades.Utils.Response response = new entidades.Utils.Response();
             try
             {
                 if (!ModelState.IsValid)

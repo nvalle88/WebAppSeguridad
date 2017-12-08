@@ -16,6 +16,7 @@ using bd.log.guardar.Enumeradores;
 using Newtonsoft.Json;
 using bd.webappseguridad.entidades.ViewModels;
 
+
 namespace bd.webappseguridad.web.Controllers.MVC
 {
     public class AdscgrpsController : Controller
@@ -70,7 +71,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Adscgrp adscgrp)
         {
-            Response response = new Response();
+            entidades.Utils.Response response = new entidades.Utils.Response();
             try
             {
                 if (ModelState.IsValid)
@@ -135,7 +136,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         AdgrBdd = adgrBdd,
                         AdgrGrupo = adgrGrupo,
                     };
-                    Response respuesta = await apiServicio.SeleccionarAsync(grupo, new Uri(WebApp.BaseAddress),
+                    entidades.Utils.Response respuesta = await apiServicio.SeleccionarAsync(grupo, new Uri(WebApp.BaseAddress),
                                                                   "/api/Adscgrps/SeleccionarAdscgrp");
                     respuesta.Resultado = JsonConvert.DeserializeObject<Adscgrp>(respuesta.Resultado.ToString());
                     if (respuesta.IsSuccess)
@@ -215,7 +216,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CrearPermisoGrupoPost(Adscexe adscexe)
         {
-            Response response = new Response();
+            var response = new entidades.Utils.Response();
             try
             {
                 if (!ModelState.IsValid)
@@ -301,7 +302,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
             
             try
             {
-                var response = new Response();
+                var response = new entidades.Utils.Response();
                 if (ModelState.IsValid)
                 {
                     response = await apiServicio.InsertarAsync(adscmiem,
@@ -318,7 +319,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                             ObjectNext = JsonConvert.SerializeObject(response.Resultado),
                         };
 
-                        await apiServicio.SalvarLog<Response>(HttpContext, responseLog);
+                        await apiServicio.SalvarLog<log.guardar.Utiles.Response>(HttpContext, responseLog);
                         return RedirectToAction("MiembrosGrupo", new { adgrBdd = adscmiem.AdmiBdd, adgrGrupo = adscmiem.AdmiGrupo });
                     } 
                 }
@@ -337,7 +338,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
 
-                await apiServicio.SalvarLog<Response>(HttpContext, responseLog);
+                await apiServicio.SalvarLog<log.guardar.Utiles.Response>(HttpContext, responseLog);
 
                 return BadRequest();
             }
@@ -378,7 +379,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Adscgrp adscgrp)
         {
-            Response response = new Response();
+            var response = new entidades.Utils.Response();
             try
             {
                 if (!string.IsNullOrEmpty(adscgrp.AdgrBdd) || !string.IsNullOrEmpty(adscgrp.AdgrGrupo))

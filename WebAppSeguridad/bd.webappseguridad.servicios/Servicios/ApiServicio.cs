@@ -16,13 +16,13 @@ using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using bd.log.guardar.Utiles;
+
 
 namespace bd.webappseguridad.servicios.Servicios
 {
     public class ApiServicio :Controller, IApiServicio
     {
-        public async Task<entidades.Utils.Response> InsertarAsync<T>(T model, Uri baseAddress, string url)
+        public async Task<Response> InsertarAsync<T>(T model, Uri baseAddress, string url)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace bd.webappseguridad.servicios.Servicios
             }
         }
 
-        public async Task<entidades.Utils.Response> EliminarAsync<T>(T model, Uri baseAddress, string url)
+        public async Task<Response> EliminarAsync<T>(T model, Uri baseAddress, string url)
         {
             try
             {
@@ -62,14 +62,14 @@ namespace bd.webappseguridad.servicios.Servicios
 
                     var response = await client.PostAsync(new Uri(uri), content);
                     var resultado = await response.Content.ReadAsStringAsync();
-                    var respuesta = JsonConvert.DeserializeObject<entidades.Utils.Response>(resultado);
+                    var respuesta = JsonConvert.DeserializeObject<Response>(resultado);
                     return respuesta;
 
                 }
             }
             catch (Exception ex)
             {
-                return new entidades.Utils.Response
+                return new Response
                 {
                     IsSuccess = false,
                     Message = ex.Message,
@@ -77,7 +77,7 @@ namespace bd.webappseguridad.servicios.Servicios
             }
         }
 
-        public async Task<entidades.Utils.Response> EditarAsync<T>(object model, Uri baseAddress, string url)
+        public async Task<Response> EditarAsync<T>(object model, Uri baseAddress, string url)
         {
             try
             {
@@ -91,13 +91,13 @@ namespace bd.webappseguridad.servicios.Servicios
                     var response = await client.PostAsync(new Uri(uri), content);
 
                     var resultado = await response.Content.ReadAsStringAsync();
-                    var respuesta = JsonConvert.DeserializeObject<entidades.Utils.Response>(resultado);
+                    var respuesta = JsonConvert.DeserializeObject<Response>(resultado);
                     return respuesta;
                 }
             }
             catch (Exception ex)
             {
-                return new entidades.Utils.Response
+                return new Response
                 {
                     IsSuccess = true,
                     Message = ex.Message,
@@ -133,7 +133,7 @@ namespace bd.webappseguridad.servicios.Servicios
 
         }
 
-        public async Task<entidades.Utils.Response> EliminarAsync(string id, Uri baseAddress, string url)
+        public async Task<Response> EliminarAsync(string id, Uri baseAddress, string url)
         {
             try
             {
@@ -145,14 +145,14 @@ namespace bd.webappseguridad.servicios.Servicios
                     var response = await client.DeleteAsync(new Uri(uri));
 
                     var resultado = await response.Content.ReadAsStringAsync();
-                    var respuesta = JsonConvert.DeserializeObject<entidades.Utils.Response>(resultado);
+                    var respuesta = JsonConvert.DeserializeObject<Response>(resultado);
                     return respuesta;
 
                 }
             }
             catch (Exception ex)
             {
-                return new entidades.Utils.Response
+                return new Response
                 {
                     IsSuccess = true,
                     Message = ex.Message,
@@ -391,7 +391,7 @@ namespace bd.webappseguridad.servicios.Servicios
             }
         }
 
-        public async Task<entidades.Utils.Response> SeleccionarAsync<T>(T model, Uri baseAddress, string url) where T : class
+        public async Task<Response> SeleccionarAsync<T>(T model, Uri baseAddress, string url) where T : class
         {
             try
             {
@@ -405,7 +405,7 @@ namespace bd.webappseguridad.servicios.Servicios
                     var response = await client.PostAsync(new Uri(uri), content);
 
                     var resultado = await response.Content.ReadAsStringAsync();
-                    var respuesta = JsonConvert.DeserializeObject<entidades.Utils.Response>(resultado);
+                    var respuesta = JsonConvert.DeserializeObject<Response>(resultado);
                     return respuesta;
                 }
             }
@@ -438,7 +438,7 @@ namespace bd.webappseguridad.servicios.Servicios
 
         }
 
-        public async Task<log.guardar.Utiles.Response> SalvarLog<T>(HttpContext context, EntradaLog model)
+        public async Task<Response> SalvarLog<T>(HttpContext context, EntradaLog model)
         {
             var menuRespuesta = await ObtenerElementoAsync1<log.guardar.Utiles.Response>(new ModuloAplicacion { Path = context.Request.Path }, new Uri(WebApp.BaseAddress), "api/Adscmenus/GetMenuPadre");
             var menu = JsonConvert.DeserializeObject<Adscmenu>(menuRespuesta.Resultado.ToString());
@@ -459,7 +459,7 @@ namespace bd.webappseguridad.servicios.Servicios
                 UserName=NombreUsuario,
             };
             var responseLog = await GuardarLogService.SaveLogEntry(Log);
-            return new log.guardar.Utiles.Response { IsSuccess=responseLog.IsSuccess};
+            return new Response { IsSuccess=responseLog.IsSuccess};
         }
     }
 }

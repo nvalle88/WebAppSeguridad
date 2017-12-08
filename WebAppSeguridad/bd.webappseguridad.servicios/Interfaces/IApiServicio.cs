@@ -8,19 +8,19 @@ using bd.webappseguridad.entidades.ViewModels;
 using bd.log.guardar.ObjectTranfer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-using bd.log.guardar.Utiles;
+
 
 namespace bd.webappseguridad.servicios.Interfaces
 {
    public interface IApiServicio
     {
-        Task<log.guardar.Utiles.Response> SalvarLog<T>(HttpContext context, EntradaLog model);
-        Task<entidades.Utils.Response> InsertarAsync<T>(T model,Uri baseAddress, string url );
-        Task<entidades.Utils.Response> EliminarAsync(string id, Uri baseAddress, string url);
-        Task<entidades.Utils.Response> EliminarAsync<T>(T model, Uri baseAddress, string url);
-        Task<entidades.Utils.Response> EditarAsync<T>(string id, T model, Uri baseAddress, string url);
-        Task<entidades.Utils.Response> EditarAsync<T>(T model, Uri baseAddress, string url);
-        Task<entidades.Utils.Response> EditarAsync<T>(object model, Uri baseAddress, string url);
+        Task<Response> SalvarLog<T>(HttpContext context, EntradaLog model);
+        Task<Response> InsertarAsync<T>(T model,Uri baseAddress, string url );
+        Task<Response> EliminarAsync(string id, Uri baseAddress, string url);
+        Task<Response> EliminarAsync<T>(T model, Uri baseAddress, string url);
+        Task<Response> EditarAsync<T>(string id, T model, Uri baseAddress, string url);
+        Task<Response> EditarAsync<T>(T model, Uri baseAddress, string url);
+        Task<Response> EditarAsync<T>(object model, Uri baseAddress, string url);
         Task<T> ObtenerElementoAsync1<T>(object model, Uri baseAddress, string url) where T : class;
         Task<T> SeleccionarAsync<T>(string id, Uri baseAddress, string url) where T : class;
         Task<entidades.Utils.Response> SeleccionarAsync<T>(T model,Uri baseAddress, string url) where T : class;
