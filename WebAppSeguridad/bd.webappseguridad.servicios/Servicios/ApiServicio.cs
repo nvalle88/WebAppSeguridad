@@ -16,7 +16,7 @@ using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
-
+using bd.log.guardar.Enumeradores;
 
 namespace bd.webappseguridad.servicios.Servicios
 {
@@ -438,28 +438,61 @@ namespace bd.webappseguridad.servicios.Servicios
 
         }
 
+        private async Task<bool> SalvarLog(LogEntryTranfer logEntryTranfer)
+        {
+            var responseLog = await GuardarLogService.SaveLogEntry(logEntryTranfer);
+            if (responseLog.IsSuccess)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public async Task<Response> SalvarLog<T>(HttpContext context, EntradaLog model)
         {
-            var menuRespuesta = await ObtenerElementoAsync1<log.guardar.Utiles.Response>(new ModuloAplicacion { Path = context.Request.Path }, new Uri(WebApp.BaseAddress), "api/Adscmenus/GetMenuPadre");
-            var menu = JsonConvert.DeserializeObject<Adscmenu>(menuRespuesta.Resultado.ToString());
-
-            var claim = context.User.Identities.Where(x => x.NameClaimType == ClaimTypes.Name).FirstOrDefault();
-            var NombreUsuario = claim.Claims.Where(c => c.Type == ClaimTypes.Name).FirstOrDefault().Value;
-
-            var Log = new LogEntryTranfer
+            var NombreUsuario = "";
+            try
             {
-                ApplicationName = WebApp.NombreAplicacion,
-                EntityID = menu.AdmeAplicacion,
-                ExceptionTrace = model.ExceptionTrace,
-                LogCategoryParametre = model.LogCategoryParametre,
-                LogLevelShortName = model.LogLevelShortName,
-                Message=context.Request.Path,
-                ObjectNext=model.ObjectNext,
-                ObjectPrevious=model.ObjectPrevious,
-                UserName=NombreUsuario,
-            };
-            var responseLog = await GuardarLogService.SaveLogEntry(Log);
-            return new Response { IsSuccess=responseLog.IsSuccess};
+                var claim = context.User.Identities.Where(x => x.NameClaimType == ClaimTypes.Name).FirstOrDefault();
+                NombreUsuario = claim.Claims.Where(c => c.Type == ClaimTypes.Name).FirstOrDefault().Value;
+
+                var menuRespuesta = await ObtenerElementoAsync1<log.guardar.Utiles.Response>(new ModuloAplicacion { Path = context.Request.Path, NombreAplicacion = WebApp.NombreAplicacion }, new Uri(WebApp.BaseAddress), "api/Adscmenus/GetMenuPadre");
+                var menu = JsonConvert.DeserializeObject<Adscmenu>(menuRespuesta.Resultado.ToString());
+               
+                var Log = new LogEntryTranfer
+                {
+                    ApplicationName = WebApp.NombreAplicacion,
+                    EntityID = menu.AdmeAplicacion,
+                    ExceptionTrace = model.ExceptionTrace,
+                    LogCategoryParametre = model.LogCategoryParametre,
+                    LogLevelShortName = model.LogLevelShortName,
+                    Message = context.Request.Path,
+                    ObjectNext = model.ObjectNext,
+                    ObjectPrevious = model.ObjectPrevious,
+                    UserName = NombreUsuario,
+                };
+                var responseLog = await GuardarLogService.SaveLogEntry(Log);
+                return new Response { IsSuccess = responseLog.IsSuccess };
+            }
+            catch (Exception ex)
+            {
+                var Log = new LogEntryTranfer
+                {
+                    ApplicationName = WebApp.NombreAplicacion,
+                    EntityID = Mensaje.NoExisteModulo,
+                    ExceptionTrace = ex.Message,
+                    LogCategoryParametre = model.LogCategoryParametre,
+                    LogLevelShortName = model.LogLevelShortName,
+                    Message = context.Request.Path,
+                    ObjectNext = model.ObjectNext,
+                    ObjectPrevious = model.ObjectPrevious,
+                    UserName = NombreUsuario,
+                };
+              var resultado= await SalvarLog(Log);
+                return new Response { IsSuccess = resultado };
+            }
+
         }
     }
 }

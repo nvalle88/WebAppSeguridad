@@ -188,44 +188,19 @@ namespace bd.webappseguridad.web.Controllers.MVC
         public async Task<Response> EliminarTokenTemp(Adscpassw adscpassw)
         {
             Response response = new Response();
-            try
+
+            if (!string.IsNullOrEmpty(adscpassw.AdpsLogin))
             {
-                if (!string.IsNullOrEmpty(adscpassw.AdpsLogin))
+                response = await apiServicio.EditarAsync<Response>(adscpassw, new Uri(WebApp.BaseAddress),
+                                                             "api/Adscpassws/EliminarTokenTemp");
+
+                if (response.IsSuccess)
                 {
-                    response = await apiServicio.EditarAsync<Response>(adscpassw, new Uri(WebApp.BaseAddress),
-                                                                 "api/Adscpassws/EliminarTokenTemp");
-
-                    if (response.IsSuccess)
-                    {
-                        await GuardarLogService.SaveLogEntry(new LogEntryTranfer
-                        {
-                            ApplicationName = "",
-                            EntityID = string.Format("{0} : {1}", "Sistema", adscpassw.AdpsLogin),
-                            LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
-                            LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                            Message = "Se ha actualizado un estado civil",
-                            UserName = "Usuario 1"
-                        });
-
-                        return response;
-                    }                
-
+                    return response;
                 }
-                return null;
             }
-            catch (Exception ex)
-            {
-                var responseLog = new EntradaLog
-                {
-                    ExceptionTrace = ex.Message,
-                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
-                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
-                    ObjectPrevious = null,
-                    ObjectNext = null,
-                };
-                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return null;
-            }
+            return null;
+
         }
 
 
