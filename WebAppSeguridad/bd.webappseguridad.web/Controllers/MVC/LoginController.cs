@@ -101,7 +101,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                             ObjectNext = JsonConvert.SerializeObject(response.Resultado),
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                        return RedirectToAction(nameof(HomeController.Index), "Home");
+                        return RedirectToActionPermanent(nameof(HomeController.Index), "Home");
                     }
                     else
                     {
@@ -132,7 +132,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
             try
             {
                 await HttpContext.Authentication.SignOutAsync("Cookies");
-                return RedirectToAction(nameof(LoginController.Index), "Login");
+                return RedirectPermanent("http://localhost:62905/");
             }
             catch (Exception ex)
             {
