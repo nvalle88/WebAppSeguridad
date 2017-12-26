@@ -15,26 +15,12 @@ namespace bd.webappseguridad.servicios.Servicios
 
         #region Methods
 
-        public static async Task InicializarWeb(string id,Uri baseAddreess)
+        public static async Task InicializarWeb(string baseAddreess)
         {
             try
             {
-                using (HttpClient client = new HttpClient())
-                {
-                    //client.BaseAddress = baseAddreess;
-
-                    var url = string.Format("{0}/{1}", "/api/Adscsists", id);
-                    var uri = string.Format("{0}{1}",baseAddreess,url);
-                    var respuesta = await client.GetAsync(new Uri(uri));
-
-                    var resultado = await respuesta.Content.ReadAsStringAsync();
-                    var response = JsonConvert.DeserializeObject<Response>(resultado);
-                    var sistema = JsonConvert.DeserializeObject<Adscsist>(response.Resultado.ToString());
-                    WebApp.BaseAddress = sistema.AdstHost;
-                    
-
-                }
-       // WebApp.BaseAddress = "http://localhost:53317";
+                WebApp.BaseAddress = baseAddreess;
+               // WebApp.BaseAddress = "http://localhost:53317";
             }
             catch (Exception)
             {

@@ -14,9 +14,11 @@ using bd.webappseguridad.servicios.Interfaces;
 using bd.webappseguridad.entidades.Utils;
 using bd.webappseguridad.entidades.Negocio;
 using bd.log.web.Controllers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
+
     public class LoginController : Controller
     {
 
@@ -45,6 +47,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
             return View();
         }
 
+        
         public async Task<IActionResult> Login()
         {
             try
@@ -132,7 +135,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
             try
             {
                 await HttpContext.Authentication.SignOutAsync("Cookies");
-                return RedirectPermanent("http://localhost:62905/");
+                return RedirectPermanent(WebApp.BaseAddressWebAppLogin+"/Login/Salir");
             }
             catch (Exception ex)
             {

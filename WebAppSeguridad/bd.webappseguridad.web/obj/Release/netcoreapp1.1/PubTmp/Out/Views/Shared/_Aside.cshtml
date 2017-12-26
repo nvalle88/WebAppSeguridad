@@ -22,11 +22,11 @@
             </li>
 
             <li class="@Html.RouteIf("Administrar", "active")">
-                <a href="#"><i class="fa fa-lg fa-fw fa-cogs"></i> <span class="menu-item-parent">Administrar</span></a>
+                <a href="#"><i class="fa fa-lg fa-cogs"></i> <span class="">Administrar</span></a>
                 <ul>
 
                     <li class="@Html.RouteIf("BasesDatos", "active")">
-                        <a href="@Url.Action("Index", "BasesDatos")"><span class="fa fa-database">    Bases de datos</span></a>
+                        <a href="@Url.Action("Index", "BasesDatos")"><span class="fa fa-database ">    Bases de datos</span></a>
                     </li>
                     <li class="@Html.RouteIf("AdscSist", "active")">
                         <a href="@Url.Action("Index", "AdscSist")" ><span class="fa fa-building">   Sistemas</span></a>

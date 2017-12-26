@@ -10,9 +10,11 @@ using bd.webappseguridad.entidades.Enumeradores;
 using bd.log.guardar.Enumeradores;
 using bd.webappseguridad.entidades.Utils;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Authorization;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
+    [Authorize(Policy = "EstaAutorizado")]
     public class AdscSistController : Controller
     {
         

@@ -1,26 +1,22 @@
-@model IEnumerable<bd.webappseguridad.entidades.Negocio.Adscsist>
+ @model IEnumerable<bd.webappseguridad.entidades.Negocio.Adscsist>
 
 @{
     ViewData["Title"] = "Index";
 }
 <div id="content">
+        <fieldset>
+        <div>
+            <a asp-action="Create">
+                <button type="button" class="btn btn-labeled btn-default">
+                    <span class="btn-label">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </span>Nuevo sistema
+                </button>
+            </a>
+        </div>
+        <p></p>
+    </fieldset>
     <div>
-        <div class="row col-lg-10">
-            <div class="col-lg-2 ">
-                <a asp-action="Create">
-                    <button type="button" class="btn btn-labeled btn-default">
-                        <span class="btn-label">
-                            <i class="glyphicon glyphicon-plus"></i>
-                        </span>Nuevo sistema
-
-                    </button>
-                </a>
-            </div>
-
-            <div class="col-lg-1 ">
-
-            </div>
-
             @if (@ViewData["Error"].ToString() != "")
             {
                 <div class="col-lg-9">
@@ -33,7 +29,6 @@
                     </div>
                 </div>
             }
-        </div>
         <p></p>
     </div>
     <section id="widget-grid" class="">
@@ -42,7 +37,7 @@
                 <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="true">
                     <header>
                         <span class="widget-icon"> <i class="fa fa-building"></i> </span>
-                        <h2>@Html.DisplayNameFor(model => model.FirstOrDefault().AdstSistema) Sis</h2>
+                        <h2>@Html.DisplayNameFor(model => model.FirstOrDefault().AdstSistema)</h2>
                     </header>
                     <div>
                         <div class="jarviswidget-editbox">

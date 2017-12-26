@@ -55,11 +55,10 @@ namespace bd.webappcompartido.web
             services.AddSingleton<IAdscpasswServicio, AdscpasswServicio>();
 
             var HostSeguridad = Configuration.GetSection("HostServicioSeguridad").Value;
+            WebApp.BaseAddressWebAppLogin= Configuration.GetSection("HostLogin").Value;
             WebApp.NombreAplicacion = Configuration.GetSection("NombreAplicacion").Value;
 
-            //await InicializarWebApp.InicializarWeb("SeguridadWebService", new Uri("http://192.168.100.21:8081"));
-            //await InicializarWebApp.InicializarLogEntry("LogWebService", new Uri("http://192.168.100.21:8081"));
-            await InicializarWebApp.InicializarWeb(Configuration.GetSection("ServicioSeguridad").Value, new Uri(HostSeguridad));
+            await InicializarWebApp.InicializarWeb(HostSeguridad);
             await InicializarWebApp.InicializarLogEntry(Configuration.GetSection("ServiciosLog").Value, new Uri(HostSeguridad));
 
 
@@ -70,11 +69,6 @@ namespace bd.webappcompartido.web
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
-
-
-
-
 
             if (env.IsDevelopment())
             {
@@ -98,15 +92,19 @@ namespace bd.webappcompartido.web
             }
             app.UseStaticFiles();
 
+            var TiempoVidaCookieHoras = Configuration.GetSection("TiempoVidaCookieHoras").Value;
+            var TiempoVidaCookieMinutos = Configuration.GetSection("TiempoVidaCookieMinutos").Value;
+            var TiempoVidaCookieSegundos = Configuration.GetSection("TiempoVidaCookieSegundos").Value;
+
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationScheme = "Cookies",
                 LoginPath = new PathString("/"),
-                AccessDeniedPath = new PathString("/"),
+                AccessDeniedPath = new PathString("/Home/AccesoDenegado"),
                 AutomaticAuthenticate = true,
                 AutomaticChallenge = true,
                 CookieName = "ASPTest",
-                ExpireTimeSpan = new TimeSpan(1, 0, 0), //1 hour
+                ExpireTimeSpan = new TimeSpan(Convert.ToInt32(TiempoVidaCookieHoras), Convert.ToInt32(TiempoVidaCookieMinutos), Convert.ToInt32(TiempoVidaCookieSegundos)),
                 DataProtectionProvider = DataProtectionProvider.Create(new DirectoryInfo(@"c:\shared-auth-ticket-keys\"))
             });
 
@@ -114,7 +112,7 @@ namespace bd.webappcompartido.web
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Login}/{action=Login}/{id?}");
             });
 
 

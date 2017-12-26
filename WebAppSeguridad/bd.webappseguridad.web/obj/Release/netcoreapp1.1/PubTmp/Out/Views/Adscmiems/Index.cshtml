@@ -4,22 +4,19 @@
     ViewData["Title"] = "Index";
 }
 <div id="content">
+    <fieldset>
+        <div>
+            <a asp-action="Create">
+                <button type="button" class="btn btn-labeled btn-default">
+                    <span class="btn-label">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </span>Nuevo miembro
+                </button>
+            </a>
+        </div>
+        <p></p>
+    </fieldset>
     <div>
-        <div class="row col-lg-10">
-            <div class="col-lg-2 ">
-                <a asp-action="Create">
-                    <button type="button" class="btn btn-labeled btn-default">
-                        <span class="btn-label">
-                            <i class="glyphicon glyphicon-plus"></i>
-                        </span>Nuevo miembro
-
-                    </button>
-                </a>
-            </div>
-            <div class="col-lg-2 ">
-              
-            </div>
-
            @if (@ViewData["Error"].ToString() != "")
            {
             <div class="col-lg-9">
@@ -32,7 +29,6 @@
                 </div>
             </div>
            }
-        </div>
         <p></p>
     </div>
     <section id="widget-grid" class="">

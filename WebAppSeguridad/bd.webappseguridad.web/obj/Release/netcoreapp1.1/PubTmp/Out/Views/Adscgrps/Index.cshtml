@@ -2,22 +2,19 @@
 
 
 <div id="content">
+    <fieldset>
+        <div >
+            <a asp-action="Create">
+                <button type="button" class="btn btn-labeled btn-default">
+                    <span class="btn-label">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </span>Nuevo grupo
+                </button>
+            </a>
+        </div>
+    </fieldset>
     <div>
         <div class="row col-lg-10">
-            <div class="col-lg-2 ">
-                <a asp-action="Create">
-                    <button type="button" class="btn btn-labeled btn-default">
-                        <span class="btn-label">
-                            <i class="glyphicon glyphicon-plus"></i>
-                        </span>Nuevo grupo
-
-                    </button>
-                </a>
-            </div>
-
-            <div class="col-lg-1 ">
-
-            </div>
 
             @if (@ViewData["Error"].ToString() != "")
             {

@@ -13,10 +13,11 @@ using bd.log.guardar.Enumeradores;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using bd.webappseguridad.entidades.ViewModels;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
+    [Authorize(Policy = "EstaAutorizado")]
     public class AdscmenusController : Controller
     {
         private readonly IApiServicio apiServicio;

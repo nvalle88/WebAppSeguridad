@@ -11,9 +11,11 @@ using bd.log.guardar.Enumeradores;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
+    [Authorize(Policy = "EstaAutorizado")]
     public class AdscmiemsController : Controller
     {
         private readonly IApiServicio apiServicio;

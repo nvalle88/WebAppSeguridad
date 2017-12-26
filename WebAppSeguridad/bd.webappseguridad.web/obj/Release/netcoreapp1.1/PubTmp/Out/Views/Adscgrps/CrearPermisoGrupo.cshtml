@@ -80,7 +80,7 @@
                                             <section class="col col-2">
                                                 <label class="checkbox">
                                                     <input type="checkbox" asp-for="Ins" class="form-control">
-                                                    <i></i>¿Insertar?
+                                                    <i></i> &iquest; Insertar ?
                                                     <span asp-validation-for="Ins" class="text-danger"></span>
                                                 </label>
                                             </section>
@@ -132,7 +132,9 @@
     });
 </script>
 
+    
     <script type="text/javascript">
+
         $(document).ready(function () {
             $("#AdexSistema").change(function () {
                 mostrarLoadingPanel("checkout-form", "Cargando...");
@@ -159,6 +161,6 @@
                 return false;
             })
         });
-    </script>
+</script>
 
 }

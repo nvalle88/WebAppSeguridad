@@ -7,9 +7,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace bd.log.web.Controllers
 {
-  [Authorize(ActiveAuthenticationSchemes = "Cookies")]
+    [Authorize(Policy = "EstaAutorizado")]
     public class HomeController : Controller
     {
+        
         public IActionResult Index()
         {
             return View();
@@ -22,10 +23,8 @@ namespace bd.log.web.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult AccesoDenegado()
         {
-            ViewData["Message"] = "Your contact page.";
-
             return View();
         }
 

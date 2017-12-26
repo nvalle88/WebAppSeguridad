@@ -4,16 +4,18 @@
     ViewData["Title"] = "Index";
 }
 <div id="content">
-    <p></p>
-    <a asp-action="Create">
-        <button type="button" asp-action="Create" class="btn btn-labeled btn-default">
-            <span class="btn-label">
-                <i class="glyphicon glyphicon-plus"></i>
-            </span>Nuevo Usuario
-
-        </button>
-    </a>
-    <p> </p>
+    <fieldset>
+        <div>
+            <a asp-action="Create">
+                <button type="button" class="btn btn-labeled btn-default">
+                    <span class="btn-label">
+                        <i class="glyphicon glyphicon-plus"></i>
+                    </span>Nuevo usuario
+                </button>
+            </a>
+        </div>
+        <p></p>
+    </fieldset>
     <section id="widget-grid" class="">
         <div class="row">
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

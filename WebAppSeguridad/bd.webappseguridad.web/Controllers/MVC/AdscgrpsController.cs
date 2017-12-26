@@ -15,10 +15,11 @@ using bd.webappseguridad.entidades.Enumeradores;
 using bd.log.guardar.Enumeradores;
 using Newtonsoft.Json;
 using bd.webappseguridad.entidades.ViewModels;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
+    [Authorize(Policy = "EstaAutorizado")]
     public class AdscgrpsController : Controller
     {
         private readonly IApiServicio apiServicio;

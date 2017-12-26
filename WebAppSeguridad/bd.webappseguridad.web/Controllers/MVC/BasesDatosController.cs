@@ -12,10 +12,11 @@ using Newtonsoft.Json;
 using bd.webappseguridad.entidades.ModeloTransferencia;
 using System.Linq;
 using System.Security.Claims;
-
+using Microsoft.AspNetCore.Authorization;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
+    [Authorize(Policy = "EstaAutorizado")]
     public class BasesDatosController : Controller
     {
 
@@ -26,7 +27,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
             this.apiServicio = apiServicio;
            
         }
-
+        
         public IActionResult Create(string mensaje)
         {
             InicializarMensaje(mensaje);
