@@ -28,11 +28,24 @@ namespace bd.webappseguridad.web.Models
         {
             try
             {
-                //Obtención del Context
+                /// <summary>
+                /// Se obtiene el contexto de datos 
+                /// </summary>
+                /// <returns></returns>
                 var recurso = context.Resource as Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext;
-
                 var httpContext = recurso.HttpContext;
+
+                /// <summary>
+                /// Se obtiene el path solicitado 
+                /// </summary>
+                /// <returns></returns>
                 var request = httpContext.Request;
+
+
+                /// <summary>
+                /// Se obtiene información del usuario autenticado
+                /// </summary>
+                /// <returns></returns>
                 var claim = context.User.Identities.Where(x => x.NameClaimType == ClaimTypes.Name).FirstOrDefault();
                 var token = claim.Claims.Where(c => c.Type == ClaimTypes.SerialNumber).FirstOrDefault().Value;
                 var NombreUsuario = claim.Claims.Where(c => c.Type == ClaimTypes.Name).FirstOrDefault().Value;
@@ -44,7 +57,11 @@ namespace bd.webappseguridad.web.Models
                     Usuario=NombreUsuario,
                 };
 
-               var respuesta=  apiServicio.ObtenerElementoAsync1<Response>(permiso, new Uri(WebApp.BaseAddress), "api/Adscpassws/TienePermiso");
+                /// <summary>
+                /// Se valida que la información del usuario actual tenga permiso para acceder al path solicitado... 
+                /// </summary>
+                /// <returns></returns>
+                var respuesta =  apiServicio.ObtenerElementoAsync1<Response>(permiso, new Uri(WebApp.BaseAddress), "api/Adscpassws/TienePermiso");
 
                 //respuesta.Result.IsSuccess = true;
                 if (respuesta.Result.IsSuccess)

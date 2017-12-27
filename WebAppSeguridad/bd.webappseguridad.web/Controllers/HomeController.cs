@@ -16,13 +16,7 @@ namespace bd.log.web.Controllers
             return View();
         }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
+        [AllowAnonymous]
         public IActionResult AccesoDenegado()
         {
             return View();

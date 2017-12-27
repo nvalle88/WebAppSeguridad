@@ -47,7 +47,13 @@ namespace bd.webappseguridad.web.Controllers.MVC
             return View();
         }
 
-        
+        /// <summary>
+        /// Método que es invocado desde la aplicaciín de Login
+        /// Donde se valida el token temporal que el generado por la aplicación de Login para el usuario actual
+        /// Si el token temporal es válido se elimina sino lo enviá a la aplicación de Login
+        /// Si todo es satisfactorio se autentica a la cookie...
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Login()
         {
             try
@@ -130,6 +136,10 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
         }
 
+        /// <summary>
+        /// Elimina el Token de la base de datos y desautentica al usuario de la Cookie
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Salir()
         {
             try
@@ -152,7 +162,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
         }
 
-        public async Task<Adscpassw> GetAdscPassws (Adscpassw adscpassw)
+        private async Task<Adscpassw> GetAdscPassws (Adscpassw adscpassw)
         {
             try
             {
@@ -186,9 +196,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<Response> EliminarTokenTemp(Adscpassw adscpassw)
+        private async Task<Response> EliminarTokenTemp(Adscpassw adscpassw)
         {
             Response response = new Response();
 

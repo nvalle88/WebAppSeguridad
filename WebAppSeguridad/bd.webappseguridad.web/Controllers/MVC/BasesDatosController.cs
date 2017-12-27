@@ -16,10 +16,24 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
+    /// <summary>
+    /// Es donde se gestiona todo sobre las base de datos como mostrar vistas para crear 
+    /// editar listar así como las acciones Post que llaman a los servicios web que afectan 
+    /// la base de datos.
+    /// Este controlador está protegido con la política de autorización "EstaAutorizado" 
+    /// que es la que le da el permiso o no 
+    /// de acceder al método que se solicite en el path del contexto de la aplicación 
+    /// Se hace uso de la inyección de dependencia donde se inyecta la 
+    /// interfaz IApiServicio y se inicializa en el contructor del controlador.
+    /// Los métodos son etiquetado con anotaciones [Get] y [Post] 
+    /// todos los métodos por defecto son [Get] por eso no es necesario colocarle la anotación
+    /// en los métodos [Post] hay una validación de seguridad AntiForgeryToken 
+    /// para más información sobre AntiForgery visitar:https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery.
+    /// </summary>
     [Authorize(Policy = "EstaAutorizado")]
     public class BasesDatosController : Controller
     {
-
+      
         private readonly IApiServicio apiServicio;
 
         public BasesDatosController( IApiServicio apiServicio)
@@ -57,15 +71,23 @@ namespace bd.webappseguridad.web.Controllers.MVC
                                                               "api/BasesDatos/InsertarBaseDatos");
                     if (response.IsSuccess)
                     {
-                        var responseLog = new EntradaLog
+                        try
                         {
-                            ExceptionTrace = null,
-                            LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
-                            LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                            ObjectPrevious = null,
-                            ObjectNext = JsonConvert.SerializeObject(response.Resultado),
-                        };
-                        await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext,responseLog);
+                            var responseLog = new EntradaLog
+                            {
+                                ExceptionTrace = null,
+                                LogCategoryParametre = Convert.ToString(LogCategoryParameter.Create),
+                                LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
+                                ObjectPrevious = null,
+                                ObjectNext = JsonConvert.SerializeObject(response.Resultado),
+                            };
+                            await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+                        }
+                        catch (Exception)
+                        {
+                            return RedirectToAction("Index");
+                            throw;
+                        }
                        
                         return RedirectToAction("Index");
                     }

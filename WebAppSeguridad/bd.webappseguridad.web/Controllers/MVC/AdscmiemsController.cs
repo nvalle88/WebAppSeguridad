@@ -15,6 +15,20 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
+    /// <summary>
+    /// Es donde se gestiona las acciones realizadas en las vistas: como mostrar vistas para crear 
+    /// editar listar así como las acciones Post que llaman a los servicios web que afectan 
+    /// la base de datos.
+    /// Este controlador está protegido con la política de autorización "EstaAutorizado" 
+    /// que es la que le da el permiso o no 
+    /// de acceder al método que se solicite en el path del contexto de la aplicación 
+    /// Se hace uso de la inyección de dependencia donde se inyecta la 
+    /// interfaz IApiServicio y se inicializa en el contructor del controlador.
+    /// Los métodos son etiquetado con anotaciones [Get] y [Post] 
+    /// todos los métodos por defecto son [Get] por eso no es necesario colocarle la anotación
+    /// en los métodos [Post] hay una validación de seguridad AntiForgeryToken 
+    /// para más información sobre AntiForgery visitar:https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery.
+    /// </summary>
     [Authorize(Policy = "EstaAutorizado")]
     public class AdscmiemsController : Controller
     {

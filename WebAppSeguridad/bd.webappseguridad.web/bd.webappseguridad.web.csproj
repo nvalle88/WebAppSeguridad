@@ -42,8 +42,6 @@
     <Folder Include="Controllers\API\" />
     <Folder Include="Controllers\API\" />
     <Folder Include="Controllers\MVC\" />
-    <Folder Include="Models\" />
-    <Folder Include="Models\" />
     <Folder Include="Properties\PublishProfiles\" />
     <Folder Include="Views\PartialView\" />
     <Folder Include="wwwroot\Downloads\" />

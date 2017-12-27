@@ -10,10 +10,27 @@ using Microsoft.Extensions.Configuration;
 
 namespace bd.webappseguridad.servicios.Servicios
 {
+
+
+    /// <summary>
+    /// Está clase es la encargada de inicializar variables necesarias para el uso de la aplicación 
+    /// estas variables son los host donde se encuentran los servicios web 
+    /// Ejemplo:WebApp.BaseAddressSeguridad es el host donde se encuentran los servicios de Seguridad.
+    ///  AppGuardarLog.BaseAddress es el host donde se encuentran los servicios de Log.
+    /// </summary>
+    /// 
     public class InicializarWebApp
     {
 
         #region Methods
+
+
+        /// <summary>
+        /// Inicializar el host de Seguridad para poder consumir los servicios de seguridad
+        /// </summary>
+        /// <param name="baseAddreess">Host donde se encuentra el servicio de seguridad (appsetting.json)</param>
+        /// <returns></returns>
+        /// 
 
         public static async Task InicializarWeb(string baseAddreess)
         {
@@ -28,6 +45,14 @@ namespace bd.webappseguridad.servicios.Servicios
             }
 
         }
+
+        /// <summary>
+        /// Inicializar en la variable AppGuardarLog.BaseAddress el host de los Log 
+        /// para poder consumir los servicios de log
+        /// </summary>
+        /// <param name="id">Nombre del sistema de log igual que como esté en la base de datos</param>
+        /// <param name="baseAddress">Host donde se encuentra el servicio de seguridad (appsetting.json)</param>
+        /// <returns></returns>
 
         public static async Task InicializarLogEntry(string id,Uri baseAddress)
         {
