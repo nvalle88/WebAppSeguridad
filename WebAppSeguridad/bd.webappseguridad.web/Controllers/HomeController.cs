@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace bd.log.web.Controllers
 {
-    [Authorize(Policy = "EstaAutorizado")]
+   
     public class HomeController : Controller
     {
-        
+        [Authorize(Policy = "EstaAutorizado")]
         public IActionResult Index()
         {
             return View();

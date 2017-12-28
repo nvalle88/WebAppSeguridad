@@ -142,27 +142,37 @@ namespace bd.webappseguridad.web.Controllers.MVC
         /// <returns></returns>
         public async Task<IActionResult> Salir()
         {
+
             try
             {
-                await HttpContext.Authentication.SignOutAsync("Cookies");
-                return RedirectPermanent(WebApp.BaseAddressWebAppLogin+"/Login/Salir");
-            }
-            catch (Exception ex)
-            {
-                var responseLog = new EntradaLog
+                var claim = HttpContext.User.Identities.Where(x => x.NameClaimType == ClaimTypes.Name).FirstOrDefault();
+                var token = claim.Claims.Where(c => c.Type == ClaimTypes.SerialNumber).FirstOrDefault().Value;
+                var NombreUsuario = claim.Claims.Where(c => c.Type == ClaimTypes.Name).FirstOrDefault().Value;
+
+                var adscpasswSend = new Adscpassw
                 {
-                    ExceptionTrace = ex.Message,
-                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
-                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
-                    ObjectPrevious = null,
-                    ObjectNext = null,
+                    AdpsLoginAdm = NombreUsuario,
+                    AdpsToken = token
                 };
-                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+
+                Adscpassw adscpassw = new Adscpassw();
+                adscpassw = await GetAdscPassws(adscpasswSend);
+                var response = await EliminarToken(adscpassw);
+                if (response.IsSuccess)
+                {
+                    await HttpContext.Authentication.SignOutAsync("Cookies");
+                    return RedirectPermanent(WebApp.BaseAddressWebAppLogin);
+                }
+                return RedirectPermanent(WebApp.BaseAddressWebAppLogin);
             }
+            catch (Exception)
+            {
+                return RedirectToAction(nameof(LoginController.Index), "Login");
+            }
+           
         }
 
-        private async Task<Adscpassw> GetAdscPassws (Adscpassw adscpassw)
+        private async Task<Adscpassw> GetAdscPassws(Adscpassw adscpassw)
         {
             try
             {
@@ -183,15 +193,49 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
             catch (Exception ex)
             {
-                var responseLog = new EntradaLog
+                return null;
+            }
+        }
+
+        private async Task<Response> EliminarToken(Adscpassw adscpassw)
+        {
+            Response response = new Response();
+            try
+            {
+                if (!string.IsNullOrEmpty(adscpassw.AdpsLogin))
                 {
-                    ExceptionTrace = ex.Message,
-                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
+                    response = await apiServicio.EditarAsync<Response>(adscpassw, new Uri(WebApp.BaseAddress),
+                                                                 "api/Adscpassws/EliminarToken");
+
+                    if (response.IsSuccess)
+                    {
+                        await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                        {
+                            ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
+                            EntityID = string.Format("{0} : {1}", "Sistema", adscpassw.AdpsLogin),
+                            LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
+                            LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
+                            Message = "Se ha actualizado un estado civil",
+                            UserName = "Usuario 1"
+                        });
+
+                        return response;
+                    }
+
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
+                {
+                    ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
+                    Message = "Editando un estado civil",
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
-                    ObjectPrevious = null,
-                    ObjectNext = null,
-                };
-                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+                    UserName = "Usuario APP webappth"
+                });
+
                 return null;
             }
         }
