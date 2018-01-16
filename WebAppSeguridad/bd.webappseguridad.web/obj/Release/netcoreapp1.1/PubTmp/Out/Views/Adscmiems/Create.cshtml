@@ -53,8 +53,9 @@
 
                                         <section class="col col-4">
                                             <label class="input">
-                                                <i class="icon-prepend fa fa-user"></i>
-                                                <input maxlength="100" asp-for="AdmiEmpleado" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmiEmpleado)" />
+                                                <select asp-for="AdmiEmpleado" asp- class="form-control" asp-items="ViewBag.AdpsLogin">
+                                                    <option value="0" selected="" disabled="">@Html.DisplayNameFor(model => model.AdmiEmpleado)</option>
+                                                </select>
                                                 <span asp-validation-for="AdmiEmpleado" class="text-danger"></span>
                                             </label>
                                         </section>
@@ -132,7 +133,7 @@
                     },
                    
                     error: function (ex) {
-                        alert('Failed to retrieve Departments.' + ex);
+                        alert('No tiene permiso para listar la base de datos.' + ex);
                     }
                 });
                 return false;

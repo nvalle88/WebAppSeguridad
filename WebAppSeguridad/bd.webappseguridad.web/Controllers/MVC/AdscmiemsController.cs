@@ -96,6 +96,8 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         return RedirectToAction("Index");
                     } 
                 }
+
+                await CargarUsuarios();
                 await CargarListaBdd();
                 await CargarListaBddPorGrupo(adscmiem.AdmiGrupo);
                 InicializarMensaje(response.Message);
@@ -133,6 +135,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
             try
             {
                 await CargarListaBdd();
+                await CargarUsuarios();
                 InicializarMensaje(mensaje);
                 return View();
             }
@@ -151,6 +154,11 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
         }
 
+        private async Task CargarUsuarios()
+        {
+            var listaUsuarios = await apiServicio.Listar<Adscpassw>(new Uri(WebApp.BaseAddress), "/api/Adscpassws/ListarAdscPassw");
+            ViewData["AdpsLogin"] = new SelectList(listaUsuarios, "AdpsLogin", "AdpsLogin");
+        }
 
         public async Task<IActionResult> Edit(string admiBdd, string admiGrupo, string admiEmpleado)
         {

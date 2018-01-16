@@ -35,7 +35,10 @@
                         <a href="@Url.Action("Index", "Adscgrps")" ><span class="fa fa-users">  Grupos</span></a>
                     </li>
                     <li class="@Html.RouteIf("Adscmiems", "active")">
-                        <a href="@Url.Action("Index", "Adscmiems")"><span class="fa fa-user">   Usuarios</span></a>
+                        <a href="@Url.Action("Index", "Adscmiems")"><span class="fa fa-user">   Miembros</span></a>
+
+                    <li class="@Html.RouteIf("Adscpassws", "active")">
+                        <a href="@Url.Action("Index", "Adscpassws")"><span class="fa fa-user">   Usuarios</span></a>
                     </li>
                     <li class="@Html.RouteIf("Adscmenus", "active")">
                         <a href="@Url.Action("Index", "Adscmenus")"><span class="fa fa-thumb-tack"> Men&uacute; de aplicaciones</span></a>
