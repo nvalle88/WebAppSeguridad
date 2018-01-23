@@ -33,6 +33,7 @@
                                      }
                                     <div class="row">
                                         <section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdgrBdd)</label>
                                             <label class="input">
 
                                                 <select asp-for="AdgrBdd" asp- class="form-control" asp-items="ViewBag.AdbdBdd">
@@ -43,6 +44,7 @@
                                         </section>
 
                                         <section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdgrGrupo)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-users"></i>
                                                 <input maxlength="32" asp-for="AdgrGrupo" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdgrGrupo)" />
@@ -51,6 +53,7 @@
                                         </section>
 
                                         <section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdgrNombre)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-delicious"></i>
                                                 <input maxlength="32" asp-for="AdgrNombre" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdgrNombre)" />
@@ -58,13 +61,13 @@
                                             </label>
                                         </section>
                                     </div>
-
                                 </fieldset>
                                 <fieldset>
                                     <section>
+                                        <label class="label">@Html.DisplayNameFor(model => model.AdgrDescripcion)</label>
                                         <label class="textarea">
                                             <i class="icon-prepend fa fa-comment"></i>
-                                            <textarea rows="3" maxlength="64" asp-for="AdgrDescripcion" placeholder="@Html.DisplayNameFor(model=>model.AdgrDescripcion)"></textarea>
+                                            <textarea rows="6" maxlength="64" asp-for="AdgrDescripcion" placeholder="@Html.DisplayNameFor(model=>model.AdgrDescripcion)"></textarea>
                                             <span asp-validation-for="AdgrDescripcion" class="text-danger"></span>
                                         </label>
                                     </section>

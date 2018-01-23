@@ -10,7 +10,7 @@ namespace bd.log.web.Controllers
    
     public class HomeController : Controller
     {
-        [Authorize(Policy = "EstaAutorizado")]
+        [Authorize(Policy = PoliticasSeguridad.TienePermiso)]
         public IActionResult Index()
         {
             return View();

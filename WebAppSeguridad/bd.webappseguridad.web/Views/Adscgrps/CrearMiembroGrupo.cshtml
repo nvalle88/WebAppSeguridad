@@ -3,6 +3,10 @@
 @{
     ViewData["Title"] = "CrearMiembroGrupo";
 }
+<link rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" />
+<link rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" />
+<link rel="stylesheet" href="~/lib/waitMe/waitMe.min.css" />
+
 <div id="content">
     <section id="widget-grid" class="">
         <div class="row">
@@ -38,27 +42,29 @@
                                     <div class="row">
 
                                         <section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmiGrupo)</label>
                                             <label class="input">
-
                                                 <i class="icon-prepend fa fa-users"></i>
                                                 <input maxlength="100" disabled="disabled" asp-for="AdmiGrupo" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmiGrupo)" />
                                                 <span asp-validation-for="AdmiGrupo" class="text-danger"></span>
                                             </label>
                                         </section>
                                         <section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmiBdd)</label>
                                             <label class="input">
-
                                                 <i class="icon-prepend fa fa-database"></i>
                                                 <input maxlength="100" disabled="disabled" asp-for="AdmiBdd" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmiBdd)" />
                                                 <span asp-validation-for="AdmiBdd" class="text-danger"></span>
 
                                             </label>
                                         </section>
-
+                                        
                                         <section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmiEmpleado)</label>
                                             <label class="input">
-                                                <i class="icon-prepend fa fa-user"></i>
-                                                <input maxlength="100" asp-for="AdmiEmpleado" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmiEmpleado)" />
+                                                <select asp-for="AdmiEmpleado" asp- class="form-control" asp-items="ViewBag.AdpsLogin">
+                                                    <option value="0" selected="" disabled="">@Html.DisplayNameFor(model => model.AdmiEmpleado)</option>
+                                                </select>
                                                 <span asp-validation-for="AdmiEmpleado" class="text-danger"></span>
                                             </label>
                                         </section>
@@ -67,6 +73,7 @@
 
                                     <div class="row">
                                         <section class="col col-6">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmiTotal)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-user-md"></i>
                                                 <input maxlength="3" data-mask="aaa" asp-for="AdmiTotal" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmiTotal)" />
@@ -75,6 +82,7 @@
                                         </section>
 
                                         <section class="col col-6">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmiCodigoEmpleado)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-qrcode"></i>
                                                 <input maxlength="100" asp-for="AdmiCodigoEmpleado" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmiCodigoEmpleado)" />
@@ -97,5 +105,12 @@
     </section>
 </div>
 @section Scripts {
+
+<script src='~/js/site.js'></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        Init_Select2();
+    });
+</script>
     
 }

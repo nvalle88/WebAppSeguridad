@@ -58,7 +58,29 @@ namespace bd.webappseguridad.web.Controllers.MVC
         {
             try
             {
-                var user = HttpContext.User;
+
+                var claim = HttpContext.User.Identities.Where(x => x.NameClaimType == ClaimTypes.Name).FirstOrDefault();
+                var token = claim.Claims.Where(c => c.Type == ClaimTypes.SerialNumber).FirstOrDefault().Value;
+                var NombreUsuario = claim.Claims.Where(c => c.Type == ClaimTypes.Name).FirstOrDefault().Value;
+
+                var permiso = new PermisoUsuario
+                {
+                    Contexto = HttpContext.Request.Path,
+                    Token = token,
+                    Usuario = NombreUsuario,
+                };
+
+                /// <summary>
+                /// Se valida que la información del usuario actual tenga permiso para acceder al path solicitado... 
+                /// </summary>
+                /// <returns></returns>
+                var respuesta = apiServicio.ObtenerElementoAsync1<Response>(permiso, new Uri(WebApp.BaseAddress), "api/Adscpassws/TienePermiso");
+
+                if (!respuesta.Result.IsSuccess)
+                {
+                    return Redirect(WebApp.BaseAddressWebAppLogin);
+                }
+
                 if (Request.Query.Count != 2)
                 {
                     return Redirect(WebApp.BaseAddressWebAppLogin);
@@ -78,26 +100,8 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 };
                 adscpassw = await GetAdscPassws(adscpasswSend);
 
-                var a = HttpContext.Items.Count;
-
                 if (adscpassw != null)
                 {
-
-                    var claim = HttpContext.User.Identities.Where(x => x.NameClaimType == ClaimTypes.Name).FirstOrDefault();
-                    var token = claim.Claims.Where(c => c.Type == ClaimTypes.SerialNumber).FirstOrDefault().Value;
-                    var NombreUsuario = claim.Claims.Where(c => c.Type == ClaimTypes.Name).FirstOrDefault().Value;
-
-                    var claims = new[]
-                        {
-                    new Claim(ClaimTypes.Name,NombreUsuario),
-                    new Claim(ClaimTypes.SerialNumber,token)
-
-                };
-
-                    var principal = new ClaimsPrincipal(new ClaimsIdentity(claims, "Cookies"));
-                    // var esto= ClaimsPrincipal.Current.Identities;
-                    await HttpContext.Authentication.SignInAsync("Cookies", principal, new Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties { IsPersistent = true });
-
                     var response = await EliminarTokenTemp(adscpassw);
                     if (response.IsSuccess)
                     {
@@ -131,7 +135,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return Redirect(WebApp.BaseAddressWebAppLogin);
             }
 
         }

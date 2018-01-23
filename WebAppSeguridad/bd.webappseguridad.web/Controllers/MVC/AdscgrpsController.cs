@@ -33,13 +33,14 @@ namespace bd.webappseguridad.web.Controllers.MVC
     /// en los métodos [Post] hay una validación de seguridad AntiForgeryToken 
     /// para más información sobre AntiForgery visitar:https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery.
     /// </summary>
-    [Authorize(Policy = "EstaAutorizado")]
+    [Authorize(Policy = PoliticasSeguridad.TienePermiso)]
     public class AdscgrpsController : Controller
     {
         private readonly IApiServicio apiServicio;
 
         public AdscgrpsController(IApiServicio apiServicio)
         {
+            
             this.apiServicio = apiServicio;
         }
 
@@ -334,10 +335,16 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 AdmiGrupo=adgrGrupo,
             };
             InicializarMensaje(mensaje);
+            await CargarUsuarios();
             return   View(miem);
         }
 
-     
+        private async Task CargarUsuarios()
+        {
+            var listaUsuarios = await apiServicio.Listar<Adscpassw>(new Uri(WebApp.BaseAddress), "/api/Adscpassws/ListarAdscPassw");
+            ViewData["AdpsLogin"] = new SelectList(listaUsuarios, "AdpsLogin", "AdpsLogin");
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CrearMiembroGrupoPost(Adscmiem adscmiem)
@@ -366,6 +373,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         return RedirectToAction("MiembrosGrupo", new { adgrBdd = adscmiem.AdmiBdd, adgrGrupo = adscmiem.AdmiGrupo });
                     } 
                 }
+                await CargarUsuarios();
                 await CargarListaBdd();
                 return RedirectToAction("CrearMiembroGrupo", new { adgrBdd = adscmiem.AdmiBdd, adgrGrupo = adscmiem.AdmiGrupo,mensaje=response.Message});
 
@@ -517,6 +525,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
         }
 
+       
         public async Task<JsonResult> ListarAplicacionPorSistema(string AdexSistema)
         {
             var sistema = new Adscmenu

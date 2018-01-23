@@ -40,6 +40,7 @@
                                 <fieldset>
                                     <div class="row">
                                         <section class="col col-3">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmeSistema)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-building"></i>
                                                 <input maxlength="30" disabled="disabled" asp-for="AdmeSistema" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeSistema)" />
@@ -48,6 +49,7 @@
                                         </section>
 
                                         <section class="col col-3">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmePadre)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-rebel"></i>
                                                 <input maxlength="30" disabled="disabled" asp-for="AdmePadre" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmePadre)" />
@@ -56,6 +58,7 @@
                                         </section>
 
                                         <section class="col col-3">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmeAplicacion)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-thumb-tack"></i>
                                                 <input maxlength="30" asp-for="AdmeAplicacion" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeAplicacion)" />
@@ -64,6 +67,7 @@
                                         </section>
 
                                         <section class="col col-3">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmeTipo)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-tags"></i>
                                                 <input maxlength="1" asp-for="AdmeTipo" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeTipo)" />
@@ -76,6 +80,7 @@
 
                                     <div class="row">
                                         <section class="col col-3">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmeObjetivo)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-crosshairs"></i>
                                                 <input maxlength="32" asp-for="AdmeObjetivo" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeObjetivo)" />
@@ -84,6 +89,7 @@
                                         </section>
 
                                         <section class="col col-3">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmeTipoObjeto)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-cubes"></i>
                                                 <input maxlength="10" asp-for="AdmeTipoObjeto" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeTipoObjeto)" />
@@ -92,6 +98,7 @@
                                         </section>
 
                                         <section class="col col-3">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmeOrden)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-sort-numeric-asc"></i>
                                                 <input maxlength="1" asp-for="AdmeOrden" data-mask="9" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeOrden)" />
@@ -100,6 +107,7 @@
                                         </section>
 
                                         <section class="col col-3">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmeEstado)</label>
                                             <label class="input">
                                                 <select asp-for="AdmeEstado" asp- class="form-control">
                                                     <option value="ACTIVO">ACTIVO</option>
@@ -111,6 +119,7 @@
                                     </div>
                                     <div class="row">
                                         <section class="col col-6">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmeUrl)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-globe"></i>
                                                 <input maxlength="150" asp-for="AdmeUrl" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeUrl)" />
@@ -119,6 +128,7 @@
                                         </section>
 
                                         <section class="col col-6">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmeEnsamblado)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-tint"></i>
                                                 <input maxlength="100" asp-for="AdmeEnsamblado" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeEnsamblado)" />
@@ -129,6 +139,7 @@
                                     <div class="row">
 
                                         <section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmeControlador)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-gear"></i>
                                                 <input maxlength="150" asp-for="AdmeControlador" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeControlador)" />
@@ -137,6 +148,7 @@
                                         </section>
 
                                         <section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdmeAccionControlador)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-gears"></i>
                                                 <input maxlength="150" asp-for="AdmeAccionControlador" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeAccionControlador)" />
@@ -147,6 +159,7 @@
 
                                         <div class="row">
                                             <section class="col col-4">
+                                                <label class="label">@Html.DisplayNameFor(model => model.AdmeElemento)</label>
                                                 <label class="input">
                                                     <i class="icon-prepend fa fa-random"></i>
                                                     <input maxlength="100" asp-for="AdmeElemento" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeElemento)" />
@@ -161,6 +174,7 @@
 
                                 <fieldset>
                                     <section>
+                                        <label class="label">@Html.DisplayNameFor(model => model.AdmeDescripcion)</label>
                                         <label class="textarea">
                                             <i class="icon-prepend fa fa-comment"></i>
                                             <textarea rows="6" maxlength="128" asp-for="AdmeDescripcion" placeholder="@Html.DisplayNameFor(model=>model.AdmeDescripcion)"></textarea>

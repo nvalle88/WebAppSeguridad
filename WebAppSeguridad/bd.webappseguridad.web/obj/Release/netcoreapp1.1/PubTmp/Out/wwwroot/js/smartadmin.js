@@ -134,6 +134,7 @@
  * Turns on speech as soon as the page is loaded
  */	
 	voice_command_auto = false,
+
 /*
  * 	Sets the language to the default 'en-US'. (supports over 50 languages 
  * 	by google)

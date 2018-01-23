@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Utils\PoliticaSeguridad.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Negocio\ve-7044.tmp" />
   </ItemGroup>
 

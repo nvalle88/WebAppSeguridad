@@ -36,6 +36,7 @@
                                     }
                                     <div class="row">
                                         <section class="col col-6">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdexBdd)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-database"></i>
                                                 <input maxlength="30"  disabled="disabled" asp-for="AdexBdd" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdexBdd)" />
@@ -43,6 +44,7 @@
                                             </label>
                                         </section>
                                         <section class="col col-6">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdexSistema)</label>
                                             <label class="input">
                                                 <select asp-for="AdexSistema" asp- class="form-control" asp-items="ViewBag.AdexSistema">
                                                     <option value="0" selected="" disabled="">@Html.DisplayNameFor(model => model.AdexSistema)</option>
@@ -53,6 +55,7 @@
                                     </div>
                                     <div class="row">
                                         <section class="col col-6">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdexGrupo)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-users"></i>
                                                 <input maxlength="30" disabled="disabled" asp-for="AdexGrupo" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdexGrupo)" />
@@ -60,6 +63,7 @@
                                             </label>
                                         </section>
                                         <section class="col col-6">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdexAplicacion)</label>
                                             <label class="input">
                                                 <select asp-for="AdexAplicacion" asp- class="form-control" asp-items="ViewBag.AdexAplicacion">
                                                     <option value="Raiz" selected="" disabled="">@Html.DisplayNameFor(model => model.AdexAplicacion)</option>
@@ -70,6 +74,7 @@
                                     </div>
                                     <div class="row">
                                         <section class="col col-3">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdexSql)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-user"></i>
                                                 <input maxlength="30" asp-for="AdexSql" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdexSql)" />
@@ -78,30 +83,34 @@
                                         </section>
                                         <div class="row">
                                             <section class="col col-2">
+                                                <label class="label">&iquest; @Html.DisplayNameFor(model => model.Ins) ?</label>
                                                 <label class="checkbox">
                                                     <input type="checkbox" asp-for="Ins" class="form-control">
-                                                    <i></i> &iquest; Insertar ?
+                                                    <i></i>
                                                     <span asp-validation-for="Ins" class="text-danger"></span>
                                                 </label>
                                             </section>
                                             <section class="col col-2">
+                                                <label class="label">&iquest; @Html.DisplayNameFor(model => model.Upd) ?</label>
                                                 <label class="checkbox">
                                                     <input type="checkbox" asp-for="Upd" class="form-control">
-                                                    <i></i>¿Actualizar?
+                                                    <i></i>
                                                     <span asp-validation-for="Upd" class="text-danger"></span>
                                                 </label>
                                             </section>
                                             <section class="col col-2">
+                                                <label class="label">&iquest; @Html.DisplayNameFor(model => model.Del) ?</label>
                                                 <label class="checkbox">
                                                     <input type="checkbox" asp-for="Del" class="form-control">
-                                                    <i></i>¿Eliminar?
+                                                    <i></i>
                                                     <span asp-validation-for="Del" class="text-danger"></span>
                                                 </label>
                                             </section>
                                             <section class="col col-2">
+                                                <label class="label">&iquest; @Html.DisplayNameFor(model => model.Sel) ?</label>
                                                 <label class="checkbox">
                                                     <input type="checkbox" asp-for="Sel" class="form-control">
-                                                    <i></i>¿Seleccionar?
+                                                    <i></i>
                                                     <span asp-validation-for="Sel" class="text-danger"></span>
                                                 </label>
                                             </section>

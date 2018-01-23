@@ -2,11 +2,14 @@
 using bd.webappseguridad.servicios.Interfaces;
 using bd.webappseguridad.servicios.Servicios;
 using bd.webappseguridad.web.Models;
+using EnviarCorreo;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -48,12 +51,28 @@ namespace bd.webappcompartido.web
             /// para poder utilizar la inyección de dependencia.
             /// </summary>
             services.AddMvc();
-            services.AddSingleton<IAdscSistServicio, AdscSistServicio>();
+            services.AddDataProtection()
+            .UseCryptographicAlgorithms(
+            new AuthenticatedEncryptionSettings()
+             {
+             EncryptionAlgorithm = EncryptionAlgorithm.AES_256_CBC,
+             ValidationAlgorithm = ValidationAlgorithm.HMACSHA256
+            });
+
+            services.AddDataProtection()
+            .SetDefaultKeyLifetime
+            (TimeSpan.FromDays
+             (Convert.ToInt32
+              (Configuration.GetSection("DiasValidosClaveEncriptada").Value)
+             )
+            );
+
+            //services.AddSingleton<IAdscSistServicio, AdscSistServicio>();
             services.AddSingleton<IApiServicio, ApiServicio>();
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IAuthorizationHandler, RolesHandler>();
-            services.AddSingleton<IAdscpasswServicio, AdscpasswServicio>();
+           // services.AddSingleton<IAdscpasswServicio, AdscpasswServicio>();
             services.AddResponseCaching();
 
             /// <summary>
@@ -68,6 +87,16 @@ namespace bd.webappcompartido.web
                                   policy => policy.Requirements.Add(new RolesRequirement()));
             });
 
+
+            ConfiguracionCorreo.servicioSeguridad = Configuration.GetSection("HostServicioSeguridad").Value;
+            ConfiguracionCorreo.NombreEmisor = Configuration.GetSection("NombreEmisor").Value;
+            ConfiguracionCorreo.DeEmail = Configuration.GetSection("DeEmail").Value;
+            ConfiguracionCorreo.NombreReceptor = Configuration.GetSection("NombreReceptor").Value;
+            ConfiguracionCorreo.HostUri = Configuration.GetSection("HostUri").Value;
+            ConfiguracionCorreo.PuertoPrimario = Convert.ToInt32(Configuration.GetSection("PuertoPrimario").Value);
+            ConfiguracionCorreo.NombreUsuario = Configuration.GetSection("NombreUsuario").Value;
+            ConfiguracionCorreo.Contrasenia = Configuration.GetSection("Contrasenia").Value;
+            ConfiguracionCorreo.SecureSocketOptions = Convert.ToInt32(Configuration.GetSection("SecureSocketOptions").Value);
             /// <summary>
             /// Se lee el fichero appsetting.json según las etiquetas expuestas en este.
             /// Ejemplo:HostServicioSeguridad es el host donde se encuentran los servicios de Seguridad.

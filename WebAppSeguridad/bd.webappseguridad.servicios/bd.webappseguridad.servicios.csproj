@@ -6,6 +6,8 @@
 
   <ItemGroup>
     <Compile Remove="Interfaces\ISeguridadServicio.cs" />
+    <Compile Remove="Servicios\AdscpasswServicio.cs" />
+    <Compile Remove="Servicios\AdscSistServicio.cs" />
     <Compile Remove="Servicios\AreaConocimientoServicio.cs" />
     <Compile Remove="Servicios\CiudadServicio.cs" />
     <Compile Remove="Servicios\EstudioServicio.cs" />
