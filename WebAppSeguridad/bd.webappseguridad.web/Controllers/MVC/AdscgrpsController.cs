@@ -260,17 +260,69 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CrearPermisoGrupoPost(Adscexe adscexe)
+        public async Task<IActionResult> CrearPermisoGrupoPost(AdscexeViewModel adscexeViewModel)
         {
             var response = new entidades.Utils.Response();
+            var adscexe = new Adscexe();
             try
             {
                 if (!ModelState.IsValid)
                 {
+                        adscexe = new Adscexe
+                        {
+                            AdexAplicacion = adscexeViewModel.AdexAplicacion,
+                            Adex = adscexeViewModel.Adex,
+                            AdexBdd = adscexeViewModel.AdexBdd,
+                            AdexGrupo = adscexeViewModel.AdexGrupo,
+                            AdexNavigation = adscexeViewModel.AdexNavigation,
+                            AdexSistema = adscexeViewModel.AdexSistema,
+                            AdexSql = adscexeViewModel.AdexSql,
 
+                        };
+            
                     await CargarListaCombox(adscexe);
                     return RedirectToAction("CrearPermisoGrupo", new { adgrBdd = adscexe.AdexBdd, adgrGrupo = adscexe.AdexGrupo });
                 }
+
+                int ins = 0;
+                int del = 0;
+                int upd = 0;
+                int sel = 0;
+
+                if (adscexeViewModel.Del == true)
+                {
+                    del = 1;
+                }
+                if (adscexeViewModel.Ins == true)
+                {
+                    ins = 1;
+                }
+                if (adscexeViewModel.Upd == true)
+                {
+                    upd = 1;
+                }
+                if (adscexeViewModel.Sel == true)
+                {
+                    sel = 1;
+                }
+
+
+                adscexe = new Adscexe
+                {
+                    AdexAplicacion = adscexeViewModel.AdexAplicacion,
+                    Adex = adscexeViewModel.Adex,
+                    AdexBdd = adscexeViewModel.AdexBdd,
+                    AdexGrupo = adscexeViewModel.AdexGrupo,
+                    AdexNavigation = adscexeViewModel.AdexNavigation,
+                    AdexSistema = adscexeViewModel.AdexSistema,
+                    AdexSql = adscexeViewModel.AdexSql,
+                    Del = del,
+                    Sel = sel,
+                    Upd = upd,
+                    Ins = ins,
+                };
+
+
                 response = await apiServicio.InsertarAsync(adscexe,
                                                              new Uri(WebApp.BaseAddress),
                                                              "api/Adscexes/InsertarAdscexe");
@@ -313,7 +365,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         [HttpGet]
         public async Task<IActionResult> CrearPermisoGrupo(string adgrBdd, string adgrGrupo,string mensaje)
         {
-            var miem = new Adscexe
+            var miem = new AdscexeViewModel
             {
                 AdexBdd = adgrBdd,
                 AdexGrupo = adgrGrupo,

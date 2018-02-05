@@ -480,6 +480,8 @@ namespace bd.webappseguridad.servicios.Servicios
 
         public async Task<Response> SalvarLog<T>(HttpContext context, EntradaLog model)
         {
+
+
             var NombreUsuario = "";
             try
             {

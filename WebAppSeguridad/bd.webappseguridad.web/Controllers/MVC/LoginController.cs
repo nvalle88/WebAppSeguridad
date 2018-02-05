@@ -95,7 +95,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 }
                 var adscpasswSend = new Adscpassw
                 {
-                    AdpsLoginAdm = qsList[0],
+                    AdpsLogin = qsList[0],
                     AdpsTokenTemp = qsList[1]
                 };
                 adscpassw = await GetAdscPassws(adscpasswSend);
@@ -155,7 +155,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
                 var adscpasswSend = new Adscpassw
                 {
-                    AdpsLoginAdm = NombreUsuario,
+                    AdpsLogin = NombreUsuario,
                     AdpsToken = token
                 };
 
@@ -165,11 +165,20 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 if (response.IsSuccess)
                 {
                     await HttpContext.Authentication.SignOutAsync("Cookies");
+                    var responseLog = new EntradaLog
+                    {
+                        ExceptionTrace = null,
+                        LogCategoryParametre = Convert.ToString(LogCategoryParameter.Permission),
+                        LogLevelShortName = Convert.ToString(LogLevelParameter.INFO),
+                        ObjectPrevious = null,
+                        ObjectNext = null,
+                    };
+                    await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
                     return RedirectPermanent(WebApp.BaseAddressWebAppLogin);
                 }
                 return RedirectPermanent(WebApp.BaseAddressWebAppLogin);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return RedirectToAction(nameof(LoginController.Index), "Login");
             }
@@ -213,16 +222,6 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
                     if (response.IsSuccess)
                     {
-                        await GuardarLogService.SaveLogEntry(new LogEntryTranfer
-                        {
-                            ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                            EntityID = string.Format("{0} : {1}", "Sistema", adscpassw.AdpsLogin),
-                            LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
-                            LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
-                            Message = "Se ha actualizado un estado civil",
-                            UserName = "Usuario 1"
-                        });
-
                         return response;
                     }
 
@@ -231,15 +230,6 @@ namespace bd.webappseguridad.web.Controllers.MVC
             }
             catch (Exception ex)
             {
-                await GuardarLogService.SaveLogEntry(new LogEntryTranfer
-                {
-                    ApplicationName = Convert.ToString(Aplicacion.WebAppSeguridad),
-                    Message = "Editando un estado civil",
-                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Edit),
-                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
-                    UserName = "Usuario APP webappth"
-                });
-
                 return null;
             }
         }

@@ -130,11 +130,11 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
                 return NotFound();
             }
-            catch (Exception ex )
+            catch (Exception ex)
             {
                 var responseLog = new EntradaLog
                 {
-                    ExceptionTrace = ex.Message,
+                    ExceptionTrace = ex.HResult.ToString() + " - " + ex.Message + " - " + ex.Source,
                     LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
                     LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
                     ObjectPrevious = null,

@@ -11,6 +11,8 @@ using bd.log.guardar.Enumeradores;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using System.Linq;
+using System.Security.Claims;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
@@ -28,7 +30,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
     /// en los métodos [Post] hay una validación de seguridad AntiForgeryToken 
     /// para más información sobre AntiForgery visitar:https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery.
     /// </summary>
-    [Authorize(Policy = PoliticasSeguridad.TienePermiso)]
+   // [Authorize(Policy = PoliticasSeguridad.TienePermiso)]
     public class AdscpasswsController : Controller
     {
 
@@ -53,6 +55,10 @@ namespace bd.webappseguridad.web.Controllers.MVC
             Response response = new Response();
             try
             {
+                var claim = HttpContext.User.Identities.Where(x => x.NameClaimType == ClaimTypes.Name).FirstOrDefault();
+                var NombreUsuario = claim.Claims.Where(c => c.Type == ClaimTypes.Name).FirstOrDefault().Value;
+
+                adscpassw.AdpsLoginAdm = NombreUsuario.ToUpper();
                 response = await apiServicio.InsertarAsync(adscpassw,
                                                              new Uri(WebApp.BaseAddress),
                                                              "/api/Adscpassws/InsertarAdscPassw");
@@ -99,11 +105,11 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 if (!string.IsNullOrEmpty(id))
                 {
                     var respuesta = await apiServicio.SeleccionarAsync<Response>(id, new Uri(WebApp.BaseAddress),
-                                                                  "/api/Adscpassws");
-                    respuesta.Resultado = JsonConvert.DeserializeObject<Adscsist>(respuesta.Resultado.ToString());
+                                                                  "api/Adscpassws");
+                    respuesta.Resultado = JsonConvert.DeserializeObject<Adscpassw>(respuesta.Resultado.ToString());
                     if (respuesta.IsSuccess)
                     {
-                        return View(respuesta);
+                        return View(respuesta.Resultado);
                     }
 
                 }
@@ -135,10 +141,15 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 if (!string.IsNullOrEmpty(id))
                 {
                     var respuestaActualizar = await apiServicio.SeleccionarAsync<Response>(id, new Uri(WebApp.BaseAddress),
-                                                                  "/api/Adscpassws");
+                                                                  "api/Adscpassws");
+
+                    var claim = HttpContext.User.Identities.Where(x => x.NameClaimType == ClaimTypes.Name).FirstOrDefault();
+                    var NombreUsuario = claim.Claims.Where(c => c.Type == ClaimTypes.Name).FirstOrDefault().Value;
+
+                    adscpassw.AdpsLoginAdm = NombreUsuario.ToUpper();
 
                     response = await apiServicio.EditarAsync(id, adscpassw, new Uri(WebApp.BaseAddress),
-                                                                 "/api/Adscpassws");
+                                                                 "api/Adscpassws");
 
                     if (response.IsSuccess)
                     {

@@ -13,6 +13,7 @@ using bd.log.guardar.Enumeradores;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using bd.webappseguridad.entidades.ViewModels;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
@@ -64,17 +65,67 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Adscexe adscexe)
+        public async Task<IActionResult> Create(AdscexeViewModel adscexeViewModel)
         {
             entidades.Utils.Response response = new entidades.Utils.Response();
             try
             {
+                var adscexe = new Adscexe();
                 if (!ModelState.IsValid)
                 {
-
+                    adscexe = new Adscexe
+                    {
+                        AdexAplicacion=adscexeViewModel.AdexAplicacion,
+                        Adex=adscexeViewModel.Adex,
+                        AdexBdd=adscexeViewModel.AdexBdd,
+                        AdexGrupo=adscexeViewModel.AdexGrupo,
+                        AdexNavigation=adscexeViewModel.AdexNavigation,
+                        AdexSistema=adscexeViewModel.AdexSistema,
+                        AdexSql=adscexeViewModel.AdexSql,
+                        
+                    };
                     await CargarListaCombox(adscexe);
                     return View(adscexe);
                 }
+
+
+                int ins = 0;
+                int del = 0;
+                int upd = 0;
+                int sel = 0;
+
+                if (adscexeViewModel.Del==true)
+                {
+                    del = 1;
+                }
+                if (adscexeViewModel.Ins == true)
+                {
+                    ins = 1;
+                }
+                if (adscexeViewModel.Upd == true)
+                {
+                    upd = 1;
+                }
+                if (adscexeViewModel.Sel == true)
+                {
+                    sel = 1;
+                }
+
+                adscexe = new Adscexe
+                {
+                    AdexAplicacion = adscexeViewModel.AdexAplicacion,
+                    Adex = adscexeViewModel.Adex,
+                    AdexBdd = adscexeViewModel.AdexBdd,
+                    AdexGrupo = adscexeViewModel.AdexGrupo,
+                    AdexNavigation = adscexeViewModel.AdexNavigation,
+                    AdexSistema = adscexeViewModel.AdexSistema,
+                    AdexSql = adscexeViewModel.AdexSql,
+                    Del=del,
+                    Sel=sel,
+                    Upd=upd,
+                    Ins=ins,
+                };
+
                 response = await apiServicio.InsertarAsync(adscexe,
                                                              new Uri(WebApp.BaseAddress),
                                                              "api/Adscexes/InsertarAdscexe");
@@ -117,7 +168,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         {
             try
             {
-                var adscexe = new Adscexe
+                var adscexe = new AdscexeViewModel
                 {
                     Del = false,
                     Sel = false,

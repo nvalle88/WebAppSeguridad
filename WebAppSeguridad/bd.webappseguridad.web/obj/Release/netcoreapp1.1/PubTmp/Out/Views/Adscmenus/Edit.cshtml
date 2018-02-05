@@ -43,7 +43,7 @@
                                             <label class="label">@Html.DisplayNameFor(model => model.AdmeSistema)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-building"></i>
-                                                <input maxlength="30" disabled="disabled" asp-for="AdmeSistema" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeSistema)" />
+                                                <input maxlength="8" disabled="disabled" asp-for="AdmeSistema" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeSistema)" />
                                                 <span asp-validation-for="AdmeSistema" class="text-danger"></span>
                                             </label>
                                         </section>
@@ -51,8 +51,9 @@
                                         <section class="col col-3">
                                             <label class="label">@Html.DisplayNameFor(model => model.AdmePadre)</label>
                                             <label class="input">
-                                                <i class="icon-prepend fa fa-rebel"></i>
-                                                <input maxlength="30" disabled="disabled" asp-for="AdmePadre" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmePadre)" />
+                                                <select asp-for="AdmePadre" asp- class="form-control" asp-items="ViewBag.AdmePadre">
+                                                    <option value="Raiz" selected="" disabled="">@Html.DisplayNameFor(model => model.AdmePadre)</option>
+                                                </select>
                                                 <span asp-validation-for="AdmePadre" class="text-danger"></span>
                                             </label>
                                         </section>
@@ -61,7 +62,7 @@
                                             <label class="label">@Html.DisplayNameFor(model => model.AdmeAplicacion)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-thumb-tack"></i>
-                                                <input maxlength="30" asp-for="AdmeAplicacion" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeAplicacion)" />
+                                                <input maxlength="30" asp-for="AdmeAplicacion" disabled="disabled" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeAplicacion)" />
                                                 <span asp-validation-for="AdmeAplicacion" class="text-danger"></span>
                                             </label>
                                         </section>
@@ -69,8 +70,11 @@
                                         <section class="col col-3">
                                             <label class="label">@Html.DisplayNameFor(model => model.AdmeTipo)</label>
                                             <label class="input">
-                                                <i class="icon-prepend fa fa-tags"></i>
-                                                <input maxlength="1" asp-for="AdmeTipo" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeTipo)" />
+                                                <select asp-for="AdmeTipo" asp- class="form-control">
+                                                    <option value="M">Men&uacute;</option>
+                                                    <option value="A">Hoja</option>
+                                                    <option value="B">Acci&oacute;n</option>
+                                                </select>
                                                 <span asp-validation-for="AdmeTipo" class="text-danger"></span>
                                             </label>
                                         </section>
@@ -206,8 +210,16 @@
 </div>
 <!-- END MAIN CONTENT -->
 @section Scripts {
-    <script type="text/javascript">
+
+<script src='~/lib/select2/dist/js/select2.min.js'></script>
+<script src='~/lib/select2/dist/js/i18n/es.js'></script>
+<script src='~/js/site.js'></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        Init_Select2();
+    });
+
+</script>
 
 
-    </script>
 }

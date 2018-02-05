@@ -64,8 +64,11 @@
                                         <section class="col col-3">
                                             <label class="label">@Html.DisplayNameFor(model => model.AdmeTipo)</label>
                                             <label class="input">
-                                                <i class="icon-prepend fa fa-tags"></i>
-                                                <input maxlength="1" asp-for="AdmeTipo" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmeTipo)" />
+                                                <select asp-for="AdmeTipo"  asp- class="form-control">
+                                                    <option value="M">Men&uacute;</option>
+                                                    <option value="A">Hoja</option>
+                                                    <option value="B">Acci&oacute;n</option>
+                                                </select>
                                                 <span asp-validation-for="AdmeTipo" class="text-danger"></span>
                                             </label>
                                         </section>

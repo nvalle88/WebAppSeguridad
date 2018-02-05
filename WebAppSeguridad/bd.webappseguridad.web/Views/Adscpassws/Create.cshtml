@@ -18,7 +18,66 @@
                         <div class="widget-body no-padding">
                             <form  asp-action="Create" id="checkout-form"  class="smart-form" novalidate="novalidate">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                @{await Html.RenderPartialAsync("_AdscpasswsPartialView", Model);}
+                                <fieldset>
+                                    <div class="row">
+
+                                        <section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdpsLogin)</label>
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-user"></i>
+                                                <input maxlength="32" asp-for="AdpsLogin" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdpsLogin)" />
+                                                <span asp-validation-for="AdpsLogin" class="text-danger"></span>
+                                            </label>
+                                        </section>
+
+                                        @*<section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdpsLoginAdm)</label>
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-user-secret"></i>
+                                                <input maxlength="32" asp-for="AdpsLoginAdm" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdpsLoginAdm)" />
+                                                <span asp-validation-for="AdpsLoginAdm" class="text-danger"></span>
+                                            </label>
+                                        </section>*@
+
+                                        <section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdpsTipoUso)</label>
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-tint"></i>
+                                                <input maxlength="100" asp-for="AdpsTipoUso" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdpsTipoUso)" />
+                                                <span asp-validation-for="AdpsTipoUso" class="text-danger"></span>
+                                            </label>
+                                        </section>
+                                    </div>
+
+                                    <div class="row">
+                                        <section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdpsIdContacto)</label>
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-archive"></i>
+                                                <input maxlength="32" asp-for="AdpsIdContacto" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdpsIdContacto)" />
+                                                <span asp-validation-for="AdpsIdContacto" class="text-danger"></span>
+                                            </label>
+                                        </section>
+
+                                        <section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdpsIdEntidad)</label>
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-envelope"></i>
+                                                <input maxlength="32" asp-for="AdpsIdEntidad" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdpsIdEntidad)" />
+                                                <span asp-validation-for="AdpsIdEntidad" class="text-danger"></span>
+                                            </label>
+                                        </section>
+
+                                        <section class="col col-4">
+                                            <label class="label">@Html.DisplayNameFor(model => model.AdpsCodigoEmpleado)</label>
+                                            <label class="input">
+                                                <i class="icon-prepend fa fa-inbox"></i>
+                                                <input maxlength="100" asp-for="AdpsCodigoEmpleado" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdpsCodigoEmpleado)" />
+                                                <span asp-validation-for="AdpsCodigoEmpleado" class="text-danger"></span>
+                                            </label>
+                                        </section>
+                                    </div>
+                                </fieldset>
                                 <footer>
                                     <span class="text-danger">@ViewData["Error"]</span>
                                     <input type="submit" value="Guardar" class="btn btn-primary" />

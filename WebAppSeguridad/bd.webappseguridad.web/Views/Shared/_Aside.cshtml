@@ -1,60 +1,13 @@
 ﻿    <!-- Left panel : Navigation area -->
 <!-- Note: This width of the aside area can be adjusted through LESS variables -->
+@using System.Threading.Tasks
+@using bd.webappseguridad.servicios.Interfaces
+@using bd.webappseguridad.servicios.Servicios
+@inject bd.webappseguridad.servicios.Interfaces.IApiServicio ApiServicio
 <aside id="left-panel">
 
-    <!-- User info -->
     @{ await Html.RenderPartialAsync("_CurrentUser"); }
-    <!-- end user info -->
-    <!-- NAVIGATION : This navigation is also responsive
-
-    To make this navigation dynamic please make sure to link the node
-    (the reference to the nav > ul) after page load. Or the navigation
-    will not initialize.
-    -->
-    <nav>
-        <!-- NOTE: Notice the gaps after each icon usage <i></i>..
-        Please note that these links work a bit different than
-        traditional href="" links. See documentation for details.
-        -->
-        <ul>
-            <li class="@Html.RouteIf("Home", "active")">
-                <a href="@Url.Action("Index", "Home")"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Principal</span></a>
-            </li>
-
-            <li class="@Html.RouteIf("Administrar", "active")">
-                <a href="#"><i class="fa fa-lg fa-cogs"></i> <span class="">Administrar</span></a>
-                <ul>
-
-                    <li class="@Html.RouteIf("BasesDatos", "active")">
-                        <a href="@Url.Action("Index", "BasesDatos")"><span class="fa fa-database ">    Bases de datos</span></a>
-                    </li>
-                    <li class="@Html.RouteIf("AdscSist", "active")">
-                        <a href="@Url.Action("Index", "AdscSist")" ><span class="fa fa-building">   Sistemas</span></a>
-                    </li>
-                    <li class="@Html.RouteIf("Adscgrps", "active")">
-                        <a href="@Url.Action("Index", "Adscgrps")" ><span class="fa fa-users">  Grupos</span></a>
-                    </li>
-                    <li class="@Html.RouteIf("Adscmiems", "active")">
-                        <a href="@Url.Action("Index", "Adscmiems")"><span class="fa fa-user">   Miembros</span></a>
-
-                    <li class="@Html.RouteIf("Adscpassws", "active")">
-                        <a href="@Url.Action("Index", "Adscpassws")"><span class="fa fa-user">   Usuarios</span></a>
-                    </li>
-                    <li class="@Html.RouteIf("Adscmenus", "active")">
-                        <a href="@Url.Action("Index", "Adscmenus")"><span class="fa fa-thumb-tack"> Men&uacute; de aplicaciones</span></a>
-                    </li>
-                    <li class="@Html.RouteIf("Adscexes", "active")">
-                        <a href="@Url.Action("Index", "Adscexes")" ><span class="fa fa-suitcase">   Permisos</span></a>
-                    </li>
-                </ul>
-            </li>
-          
-
-        </ul>
-    </nav>
-    <span class="minifyme" data-action="minifyMenu">
-        <i class="fa fa-arrow-circle-left hit"></i>
-    </span>
-
+    @{ await Html.RenderPartialAsync("_Menu"); }
+    
 </aside>
 <!-- END NAVIGATION -->

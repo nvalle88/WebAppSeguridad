@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <Compile Remove="Utils\PoliticaSeguridad.cs" />
+    <Compile Remove="Utils\Requerimiento.cs" />
   </ItemGroup>
 
   <ItemGroup>

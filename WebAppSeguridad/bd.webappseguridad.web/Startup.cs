@@ -1,15 +1,14 @@
-﻿using bd.webappseguridad.entidades.Utils;
+﻿using bd.log.guardar.Inicializar;
+using bd.webappseguridad.entidades.Utils;
 using bd.webappseguridad.servicios.Interfaces;
 using bd.webappseguridad.servicios.Servicios;
 using bd.webappseguridad.web.Models;
-using EnviarCorreo;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -69,6 +68,7 @@ namespace bd.webappcompartido.web
 
             //services.AddSingleton<IAdscSistServicio, AdscSistServicio>();
             services.AddSingleton<IApiServicio, ApiServicio>();
+            services.AddSingleton<IMenuServicio, MenuServicio>();
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSingleton<IAuthorizationHandler, RolesHandler>();
@@ -88,15 +88,7 @@ namespace bd.webappcompartido.web
             });
 
 
-            ConfiguracionCorreo.servicioSeguridad = Configuration.GetSection("HostServicioSeguridad").Value;
-            ConfiguracionCorreo.NombreEmisor = Configuration.GetSection("NombreEmisor").Value;
-            ConfiguracionCorreo.DeEmail = Configuration.GetSection("DeEmail").Value;
-            ConfiguracionCorreo.NombreReceptor = Configuration.GetSection("NombreReceptor").Value;
-            ConfiguracionCorreo.HostUri = Configuration.GetSection("HostUri").Value;
-            ConfiguracionCorreo.PuertoPrimario = Convert.ToInt32(Configuration.GetSection("PuertoPrimario").Value);
-            ConfiguracionCorreo.NombreUsuario = Configuration.GetSection("NombreUsuario").Value;
-            ConfiguracionCorreo.Contrasenia = Configuration.GetSection("Contrasenia").Value;
-            ConfiguracionCorreo.SecureSocketOptions = Convert.ToInt32(Configuration.GetSection("SecureSocketOptions").Value);
+         
             /// <summary>
             /// Se lee el fichero appsetting.json según las etiquetas expuestas en este.
             /// Ejemplo:HostServicioSeguridad es el host donde se encuentran los servicios de Seguridad.
@@ -113,7 +105,8 @@ namespace bd.webappcompartido.web
             /// Ejemplo:WebApp.BaseAddressSeguridad es el host donde se encuentran los servicios de Seguridad.
             ///  AppGuardarLog.BaseAddress es el host donde se encuentran los servicios de Log.
             /// </summary>
-            await InicializarWebApp.InicializarWeb(HostSeguridad);
+            WebApp.BaseAddress= Configuration.GetSection("HostServicioSeguridad").Value;
+            AppGuardarLog.BaseAddress = Configuration.GetSection("HostServicioLog").Value;
             await InicializarWebApp.InicializarLogEntry(Configuration.GetSection("ServiciosLog").Value, new Uri(HostSeguridad));
 
         }

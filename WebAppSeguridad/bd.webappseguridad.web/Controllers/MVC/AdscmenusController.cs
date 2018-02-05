@@ -397,7 +397,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                                                                  "api/Adscmenus/SeleccionarAdscMenu");
             var padre = JsonConvert.DeserializeObject<Adscmenu>(respuesta.Resultado.ToString());
 
-            if (padre.AdmePadre=="0")
+            if (string.IsNullOrEmpty(padre.AdmePadre))
             {
                 ViewData["AdmePadre"] = new SelectList(listaPadres, "AdmeAplicacion", "AdmeAplicacion","Raíz");
             }
