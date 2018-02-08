@@ -23,96 +23,101 @@
 
         Url.Action("Index", "Login");
     }
-    <nav>
-        <ul>
+    <nav  >
+        <ul   >
             @foreach (var nivel1 in menuItems.Where(p => p.AdmePadre == null || p.AdmePadre == Convert.ToString(0)))
             {
-                <li>
-                    <a href="#"><i class="fa fa-lg fa-caret-square-o-down"></i> <span class="">  @nivel1.AdmeAplicacion</span></a>
+                <li >
+                    <a   href="#" ><i class="fa fa-lg fa-desktop"></i> <span style="font-family:Arial" class="font-sm">  @nivel1.AdmeAplicacion</span></a>
                     <ul>
                         @foreach (var nivel2 in menuItems.Where(p => p.AdmePadre == nivel1.AdmeAplicacion))
                         {
-                            <li>
+                            <li class="@Html.RouteIf(MenuServicio.ObtenerControlador(nivel2.AdmeControlador), "active")">
                                 @if (nivel2.AdmeTipo == "M")
                                 {
 
-                                    <a href="#" style="font-size:12px">
-                                        <span class="fa fa-lg fa-caret-right">  @nivel2.AdmeAplicacion</span>
+                                    <a   href="#" >
+                                       <i class="fa fa-lg fa-folder-o"></i> <span style="font-family:Arial" class="font-sm">  @nivel2.AdmeAplicacion</span>
                                     </a>
 
                                 };
                                 @if (nivel2.AdmeTipo == "A")
                                 {
-                                    <a href="@Url.Action(MenuServicio.ObtenerAccion(nivel2.AdmeControlador), MenuServicio.ObtenerControlador(nivel2.AdmeControlador))" style="font-size:12px"><span class="fa fa-lg fa-user">  @nivel2.AdmeAplicacion</span></a>
+                                    <a href="@Url.Action(MenuServicio.ObtenerAccion(nivel2.AdmeControlador), MenuServicio.ObtenerControlador(nivel2.AdmeControlador))">
+                                        <i class="fa fa-lg fa-gear"></i> <span style="font-family:Arial" class="font-sm">
+                                            @nivel2.AdmeAplicacion
+                                        </span>
+                                    </a>
 
                                 }
                                 else
-                                { <ul>
+                                { <ul  >
                                     @foreach (var nivel3 in menuItems.Where(p => p.AdmePadre == nivel2.AdmeAplicacion))
                                     {
+
                                         <li class="@Html.RouteIf(MenuServicio.ObtenerControlador(nivel3.AdmeControlador), "active")">
                                             @if (nivel3.AdmeTipo == "M")
                                             {
-                                                <a href="#" style="font-size:12px">
-                                                    <span class="fa fa-lg fa-caret-right">  @nivel3.AdmeAplicacion</span>
+                                                <a    href="#" >
+                                                    <i class="fa fa-lg fa-folder-o"></i> <span style="font-family:Arial" class="font-sm">  @nivel3.AdmeAplicacion</span>
                                                 </a>
                                             }
                                             @if (nivel3.AdmeTipo == "A")
                                             {
-                                                <a href="@Url.Action(MenuServicio.ObtenerAccion(nivel3.AdmeControlador), MenuServicio.ObtenerControlador(nivel3.AdmeControlador))" style="font-size:12px"><span class="fa fa-lg fa-user">  @nivel3.AdmeAplicacion</span></a>
+                                                <a   href="@Url.Action(MenuServicio.ObtenerAccion(nivel3.AdmeControlador), MenuServicio.ObtenerControlador(nivel3.AdmeControlador))"><i class="fa fa-lg fa-gear"></i> <span style="font-family:Arial" class="font-sm">  @nivel3.AdmeAplicacion</span></a>
 
                                             }
                                             else
                                             {
-                                                <ul>
+                                                <ul  >
                                                     @foreach (var nivel4 in menuItems.Where(p => p.AdmePadre == nivel3.AdmeAplicacion))
                                                     {
                                                         <li class="@Html.RouteIf(MenuServicio.ObtenerControlador(nivel4.AdmeControlador), "active")">
                                                             @if (nivel4.AdmeTipo == "M")
                                                             {
-                                                                <a href="#" style="font-size:12px">
-                                                                    <span class="fa fa-lg fa-caret-right">  @nivel4.AdmeAplicacion</span>
+                                                                <a   href="#" >
+                                                                    <i class="fa fa-lg fa-folder-o"></i> <span style="font-family:Arial" class="font-sm"> @nivel4.AdmeAplicacion</span>
                                                                 </a>
                                                             }
                                                             @if (nivel4.AdmeTipo == "A")
                                                             {
-                                                                <a href="@Url.Action(MenuServicio.ObtenerAccion(nivel4.AdmeControlador), MenuServicio.ObtenerControlador(nivel4.AdmeControlador))" style="font-size:12px"><span class="fa fa-lg fa-user">  @nivel4.AdmeAplicacion</span></a>
+                                                                <a   href="@Url.Action(MenuServicio.ObtenerAccion(nivel4.AdmeControlador), MenuServicio.ObtenerControlador(nivel4.AdmeControlador))"><i class="fa fa-lg fa-gear"></i> <span style="font-family:Arial" class="font-sm">  @nivel4.AdmeAplicacion</span></a>
 
                                                             }
                                                             else
                                                             {
-                                                                <ul>
+                                                                <ul  >
                                                                     @foreach (var nivel5 in menuItems.Where(p => p.AdmePadre == nivel4.AdmeAplicacion))
                                                                     {
                                                                         <li class="@Html.RouteIf(MenuServicio.ObtenerControlador(nivel5.AdmeControlador), "active")">
                                                                             @if (nivel5.AdmeTipo == "M")
                                                                             {
-                                                                                <a href="#" style="font-size:12px">
-                                                                                    <span class="fa fa-lg fa-caret-right">  @nivel5.AdmeAplicacion</span>
+                                                                                <a   href="#" >
+                                                                                    <i class="fa fa-lg fa-folder-o"></i> <span style="font-family:Arial" class="font-sm"> @nivel5.AdmeAplicacion</span>
                                                                                 </a>
                                                                             }
                                                                             @if (nivel5.AdmeTipo == "A")
                                                                             {
-                                                                                <a href="@Url.Action(MenuServicio.ObtenerAccion(nivel5.AdmeControlador), MenuServicio.ObtenerControlador(nivel5.AdmeControlador))" style="font-size:12px"><span class="fa fa-lg fa-user">  @nivel5.AdmeAplicacion</span></a>
+                                                                                <a   href="@Url.Action(MenuServicio.ObtenerAccion(nivel5.AdmeControlador), MenuServicio.ObtenerControlador(nivel5.AdmeControlador))"><i class="fa fa-lg fa-gear"></i> <span style="font-family:Arial" class="font-sm">  @nivel5.AdmeAplicacion</span></a>
 
                                                                             }
 
 
                                                                             else
                                                                             {
-                                                                                <ul>
+                                                                                <ul >
                                                                                     @foreach (var nivel6 in menuItems.Where(p => p.AdmePadre == nivel5.AdmeAplicacion))
                                                                                     {
-                                                                                        <li class="@Html.RouteIf(MenuServicio.ObtenerControlador(nivel6.AdmeControlador), "active")">
+                                                                                        <li  class="@Html.RouteIf(MenuServicio.ObtenerControlador(nivel6.AdmeControlador), "active")">
                                                                                             @if (nivel6.AdmeTipo == "M")
                                                                                             {
-                                                                                                <a href="#" style="font-size:12px">
-                                                                                                    <span class="fa fa-lg fa-caret-right">  @nivel6.AdmeAplicacion</span>
+                                                                                                <a   href="#" >
+                                                                                                    <i class="fa fa-lg fa-folder-o"></i> <span style="font-family:Arial" class="font-sm">  @nivel6.AdmeAplicacion</span>
                                                                                                 </a>
                                                                                             }
                                                                                             @if (nivel6.AdmeTipo == "A")
                                                                                             {
-                                                                                                <a href="@Url.Action(MenuServicio.ObtenerAccion(nivel6.AdmeControlador), MenuServicio.ObtenerControlador(nivel6.AdmeControlador))" style="font-size:12px"><span class="fa fa-lg fa-user">  @nivel6.AdmeAplicacion</span></a>
+                                                                                                <a href="@Url.Action(MenuServicio.ObtenerAccion(nivel6.AdmeControlador), MenuServicio.ObtenerControlador(nivel6.AdmeControlador))"><i class="fa fa-lg fa-gear"></i> <span style="font-family:Arial" class="font-sm">  @nivel6.AdmeAplicacion</span></a>
 
                                                                                             }
                                                                                         </li>
@@ -138,48 +143,6 @@
                 </li>
             }
         </ul>
-
-
-
-        <!-- NOTE: Notice the gaps after each icon usage <i></i>..
-        Please note that these links work a bit different than
-        traditional href="" links. See documentation for details.
-        -->
-        @*<ul>
-                <li class="@Html.RouteIf("Home", "active")">
-                    <a href="@Url.Action("Index", "Home")"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Principal</span></a>
-                </li>
-
-                <li class="@Html.RouteIf("Administrar", "active")">
-                    <a href="#"><i class="fa fa-lg fa-cogs"></i> <span class="">Administrar</span></a>
-                    <ul>
-
-                        <li class="@Html.RouteIf("BasesDatos", "active")">
-                            <a href="@Url.Action("Index", "BasesDatos")"><span class="fa fa-database ">    Bases de datos</span></a>
-                        </li>
-                        <li class="@Html.RouteIf("AdscSist", "active")">
-                            <a href="@Url.Action("Index", "AdscSist")"><span class="fa fa-building">   Sistemas</span></a>
-                        </li>
-                        <li class="@Html.RouteIf("Adscgrps", "active")">
-                            <a href="@Url.Action("Index", "Adscgrps")"><span class="fa fa-users">  Grupos</span></a>
-                        </li>
-                        <li class="@Html.RouteIf("Adscmiems", "active")">
-                            <a href="@Url.Action("Index", "Adscmiems")"><span class="fa fa-user">   Miembros</span></a>
-
-                        <li class="@Html.RouteIf("Adscpassws", "active")">
-                            <a href="@Url.Action("Index", "Adscpassws")"><span class="fa fa-user">   Usuarios</span></a>
-                        </li>
-                        <li class="@Html.RouteIf("Adscmenus", "active")">
-                            <a href="@Url.Action("Index", "Adscmenus")"><span class="fa fa-thumb-tack"> Men&uacute; de aplicaciones</span></a>
-                        </li>
-                        <li class="@Html.RouteIf("Adscexes", "active")">
-                            <a href="@Url.Action("Index", "Adscexes")"><span class="fa fa-suitcase">   Permisos</span></a>
-                        </li>
-                    </ul>
-                </li>
-
-
-            </ul>*@
     </nav>
     <span class="minifyme" data-action="minifyMenu">
         <i class="fa fa-arrow-circle-left hit"></i>

@@ -75,7 +75,7 @@ namespace bd.webappseguridad.web.Models
                 }
                 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 context.Fail();
                 return Task.CompletedTask;

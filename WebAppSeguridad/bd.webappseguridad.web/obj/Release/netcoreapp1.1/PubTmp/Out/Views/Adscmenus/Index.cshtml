@@ -63,15 +63,6 @@
                                             <th class="hasinput">
                                                 <input type="text" class="form-control" placeholder="Buscar" />
                                             </th>
-                                            <th class="hasinput">
-                                                <input type="text" class="form-control" placeholder="Buscar" />
-                                            </th>
-                                            <th class="hasinput">
-                                                <input type="text" class="form-control" placeholder="Buscar" />
-                                            </th>
-                                            <th class="hasinput">
-                                                <input type="text" class="form-control" placeholder="Buscar" />
-                                            </th>
                                             <th>
                                             </th>
                                         </tr>
@@ -89,24 +80,13 @@
                                                 @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeControlador)
                                             </th>
                                             <th data-hide="phone">
-                                                <i class="fa fa-fw fa-gears text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeAccionControlador)
-                                            </th>
-                                            <th data-hide="phone">
                                                 <i class="fa fa-fw fa-rebel text-muted hidden-md hidden-sm hidden-xs"></i>
                                                 @Html.DisplayNameFor(model => model.FirstOrDefault().AdmePadre)
                                             </th>
-                                            <th data-hide="">
-                                                <i class="fa fa-crosshairs text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeObjetivo)
-                                            </th>
-                                            <th data-hide="phone">
-                                                <i class="fa fa-fw fa-globe text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeUrl)
-                                            </th>
+
                                             <th data-hide="phone">
                                                 <i class="fa fa-fw fa-check-square-o text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeEstado)
+                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeTipo)
                                             </th>
                                             <th>Opciones</th>
                                         </tr>
@@ -125,25 +105,13 @@
                                                     @Html.DisplayFor(modelItem => item.AdmeControlador)
                                                 </td>
                                                 <td>
-                                                    @Html.DisplayFor(modelItem => item.AdmeAccionControlador)
-                                                </td>
-                                                <td>
                                                     @Html.DisplayFor(modelItem => item.AdmePadre)
                                                 </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.AdmeObjetivo)
-                                                </td>
-
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.AdmeUrl)
-                                                </td>
-
                                                 <td>
                                                     @Html.DisplayFor(modelItem => item.AdmeEstado)
                                                 </td>
                                                 <td>
                                                     @Html.ActionLink("Editar", "Edit", new { admeSistema = item.AdmeSistema, admeAplicacion = item.AdmeAplicacion }) |
-
                                                     @Html.ActionLink("Eliminar", "Delete", new { admeSistema = item.AdmeSistema, admeAplicacion = item.AdmeAplicacion }, new { onclick = "return confirm('Desea eliminar el menú... ?');" }) |
                                                     @Html.ActionLink("Detalle", "Details", new { admeSistema = item.AdmeSistema, admeAplicacion = item.AdmeAplicacion })
                                                 </td>

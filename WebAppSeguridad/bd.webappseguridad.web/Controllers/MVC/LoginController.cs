@@ -178,7 +178,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 }
                 return RedirectPermanent(WebApp.BaseAddressWebAppLogin);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return RedirectToAction(nameof(LoginController.Index), "Login");
             }
@@ -204,7 +204,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
                 return null;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return null;
             }
@@ -228,7 +228,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 }
                 return null;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 return null;
             }

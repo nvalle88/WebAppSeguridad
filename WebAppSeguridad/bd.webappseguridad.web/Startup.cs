@@ -42,7 +42,7 @@ namespace bd.webappcompartido.web
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public async void ConfigureServices(IServiceCollection services)
+        public  void ConfigureServices(IServiceCollection services)
         {
 
             /// <summary>
@@ -95,10 +95,8 @@ namespace bd.webappcompartido.web
             ///  ServiciosLog es el nombre con el que se encuentra en la base de datos, en la tabla adscsist
             ///  de aquí se obtiene el valor del Hostdonde se encuentra el servicio de Log .
             /// </summary>
-            var HostSeguridad = Configuration.GetSection("HostServicioSeguridad").Value;
             WebApp.BaseAddressWebAppLogin= Configuration.GetSection("HostLogin").Value;
             WebApp.NombreAplicacion = Configuration.GetSection("NombreAplicacion").Value;
-
             /// <summary>
             /// Se llama a la clase inicializar para darle valor a las variables donde se hospedan los servicios
             /// que utiliza la aplicación
@@ -107,7 +105,6 @@ namespace bd.webappcompartido.web
             /// </summary>
             WebApp.BaseAddress= Configuration.GetSection("HostServicioSeguridad").Value;
             AppGuardarLog.BaseAddress = Configuration.GetSection("HostServicioLog").Value;
-            await InicializarWebApp.InicializarLogEntry(Configuration.GetSection("ServiciosLog").Value, new Uri(HostSeguridad));
 
         }
 

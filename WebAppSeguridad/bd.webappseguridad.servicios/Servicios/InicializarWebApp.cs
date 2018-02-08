@@ -32,7 +32,7 @@ namespace bd.webappseguridad.servicios.Servicios
         /// <returns></returns>
         /// 
 
-        public static async Task InicializarWeb(string baseAddreess)
+        public static void InicializarWeb(string baseAddreess)
         {
             try
             {
@@ -73,9 +73,9 @@ namespace bd.webappseguridad.servicios.Servicios
                     //AppGuardarLog.BaseAddress = "http://localhost:50257";
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-
+                throw;
             }
 
         }

@@ -290,7 +290,7 @@ namespace bd.webappseguridad.servicios.Servicios
                 }
             }
 
-            catch (Exception ex)
+            catch (Exception )
             {
                 return null;
             }
@@ -316,7 +316,7 @@ namespace bd.webappseguridad.servicios.Servicios
                 }
             }
 
-            catch (Exception ex)
+            catch (Exception )
             {
                 return null;
             }
@@ -342,7 +342,7 @@ namespace bd.webappseguridad.servicios.Servicios
                 }
             }
 
-            catch (Exception ex)
+            catch (Exception )
             {
                 return null;
             }
@@ -414,7 +414,7 @@ namespace bd.webappseguridad.servicios.Servicios
                     return respuesta;
                 }
             }
-            catch (Exception ex)
+            catch (Exception )
             {
                 throw;
             }
