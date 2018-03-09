@@ -54,11 +54,10 @@
                                 { <ul  >
                                     @foreach (var nivel3 in menuItems.Where(p => p.AdmePadre == nivel2.AdmeAplicacion))
                                     {
-
                                         <li class="@Html.RouteIf(MenuServicio.ObtenerControlador(nivel3.AdmeControlador), "active")">
                                             @if (nivel3.AdmeTipo == "M")
                                             {
-                                                <a    href="#" >
+                                                <a href="#" >
                                                     <i class="fa fa-lg fa-folder-o"></i> <span style="font-family:Arial" class="font-sm">  @nivel3.AdmeAplicacion</span>
                                                 </a>
                                             }

@@ -37,7 +37,7 @@ namespace bd.webappseguridad.servicios.Servicios
                 return salida;
             }
 
-            return null;
+            return "";
 
         }
 
