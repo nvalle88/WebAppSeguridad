@@ -81,14 +81,19 @@ namespace bd.webappcompartido.web
             /// esta autorización se obtiene desde la base de datos 
             /// Si el grupo del usuario está autorizado a realizar la acción que ha solicitado.
             /// </summary>
-            services.AddAuthorization(options =>
+            //services.AddAuthorization(options =>
+            //{
+            //    options.AddPolicy("EstaAutorizado",
+            //                      policy => policy.Requirements.Add(new RolesRequirement()));
+            //});
+
+            services.AddMvc(options =>
             {
-                options.AddPolicy("EstaAutorizado",
-                                  policy => policy.Requirements.Add(new RolesRequirement()));
+                options.Filters.Add(new Filtro());
             });
 
 
-         
+
             /// <summary>
             /// Se lee el fichero appsetting.json según las etiquetas expuestas en este.
             /// Ejemplo:HostServicioSeguridad es el host donde se encuentran los servicios de Seguridad.
@@ -105,6 +110,8 @@ namespace bd.webappcompartido.web
             /// </summary>
             WebApp.BaseAddress= Configuration.GetSection("HostServicioSeguridad").Value;
             AppGuardarLog.BaseAddress = Configuration.GetSection("HostServicioLog").Value;
+
+            WebApp.NivelesMenu = Convert.ToInt32(Configuration.GetSection("NivelMenu").Value);
 
         }
 

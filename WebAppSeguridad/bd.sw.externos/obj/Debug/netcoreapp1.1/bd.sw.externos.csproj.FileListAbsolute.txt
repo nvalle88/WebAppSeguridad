@@ -30,9 +30,10 @@ C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw.externos\bin\Debug\netcoreapp1.1\bd.sw.externos.pdb
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw.externos\bin\Debug\netcoreapp1.1\bd.webappseguridad.entidades.dll
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw.externos\bin\Debug\netcoreapp1.1\bd.webappseguridad.entidades.pdb
-C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw.externos\obj\Debug\netcoreapp1.1\bd.sw.externos.csprojResolveAssemblyReference.cache
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw.externos\obj\Debug\netcoreapp1.1\bd.sw.externos.csproj.CoreCompileInputs.cache
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw.externos\obj\Debug\netcoreapp1.1\bd.sw.externos.AssemblyInfoInputs.cache
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw.externos\obj\Debug\netcoreapp1.1\bd.sw.externos.AssemblyInfo.cs
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw.externos\obj\Debug\netcoreapp1.1\bd.sw.externos.dll
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw.externos\obj\Debug\netcoreapp1.1\bd.sw.externos.pdb
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw.externos\obj\Debug\netcoreapp1.1\bd.sw.externos.csprojAssemblyReference.cache
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.sw.externos\obj\Debug\netcoreapp1.1\bd.sw.externos.csproj.CopyComplete
