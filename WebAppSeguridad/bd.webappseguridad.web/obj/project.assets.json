@@ -5971,7 +5971,7 @@
       ]
     },
     "Newtonsoft.Json/10.0.3": {
-      "sha512": "wBM7i7i3U2WX0ecor4zdVGvgrwFUjuigBoHKiL+nH39fCOpCPjBY3RDqJM32edvdyTAVdjzlccHsg41+/+zpSA==",
+      "sha512": "hSXaFmh7hNCuEoC4XNY5DrRkLDzYHqPx/Ik23R4J86Z7PE/Y6YidhG602dFVdLBRSdG6xp9NabH3dXpcoxWvww==",
       "type": "package",
       "path": "newtonsoft.json/10.0.3",
       "files": [
@@ -9625,7 +9625,7 @@
       ]
     },
     "System.Runtime.Serialization.Formatters/4.3.0": {
-      "sha512": "KT591AkTNFOTbhZlaeMVvfax3RqhH1EJlcwF50Wm7sfnBLuHiOeZRRKrr1ns3NESkM20KPZ5Ol/ueMq5vg4QoQ==",
+      "sha512": "v1cKNXJew1vz4nRIqjHHp/X4bUUOzTbhq+wSsoEzDju38hckhc56qBDWa2j5uxKyjcy318juVvfgKsfaEC3Xvw==",
       "type": "package",
       "path": "system.runtime.serialization.formatters/4.3.0",
       "files": [
@@ -11004,14 +11004,10 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Nestor Yasmani Valle\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {}
+    "C:\\Users\\Nestor Yasmani Valle\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
       "projectUniqueName": "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.web\\bd.webappseguridad.web.csproj",
       "projectName": "bd.webappseguridad.web",
@@ -11019,13 +11015,9 @@
       "packagesPath": "C:\\Users\\Nestor Yasmani Valle\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.web\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\"
-      ],
       "configFilePaths": [
         "C:\\Users\\Nestor Yasmani Valle\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp1.1"
@@ -11040,14 +11032,14 @@
       "frameworks": {
         "netcoreapp1.1": {
           "projectReferences": {
+            "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.sw.externos\\bd.sw.externos.csproj": {
+              "projectPath": "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.sw.externos\\bd.sw.externos.csproj"
+            },
             "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\bd.webappseguridad.entidades.csproj": {
               "projectPath": "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.entidades\\bd.webappseguridad.entidades.csproj"
             },
             "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.servicios\\bd.webappseguridad.servicios.csproj": {
               "projectPath": "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.webappseguridad.servicios\\bd.webappseguridad.servicios.csproj"
-            },
-            "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.sw.externos\\bd.sw.externos.csproj": {
-              "projectPath": "C:\\Users\\Nestor Yasmani Valle\\source\\repos\\WebAppSeguridad\\WebAppSeguridad\\bd.sw.externos\\bd.sw.externos.csproj"
             }
           }
         }

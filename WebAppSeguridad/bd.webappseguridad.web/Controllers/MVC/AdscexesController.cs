@@ -31,7 +31,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
     /// en los métodos [Post] hay una validación de seguridad AntiForgeryToken 
     /// para más información sobre AntiForgery visitar:https://docs.microsoft.com/en-us/aspnet/core/security/anti-request-forgery.
     /// </summary>
-    [Authorize(Policy = PoliticasSeguridad.TienePermiso)]
+    //[Authorize(Policy = PoliticasSeguridad.TienePermiso)]
     public class AdscexesController : Controller
     {
         private readonly IApiServicio apiServicio;
