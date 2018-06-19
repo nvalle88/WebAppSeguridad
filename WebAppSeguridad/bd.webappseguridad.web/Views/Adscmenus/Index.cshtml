@@ -3,12 +3,13 @@
 @{
     ViewData["Title"] = "Index";
 }
+@using bd.webappseguridad.entidades.Utils
 <div id="content">
 
     <fieldset>
         <div>
-            <a asp-action="Create">
-                <button type="button" class="btn btn-labeled btn-default">
+            <a asp-action="Create" onclick="cargando()">
+                <button onclick="cargando()" type="button" class="btn btn-labeled btn-default">
                     <span class="btn-label">
                         <i class="glyphicon glyphicon-plus"></i>
                     </span>Nuevo men&uacute;
@@ -17,116 +18,100 @@
         </div>
         <p></p>
     </fieldset>
-    <div>
-            @if (@ViewData["Error"].ToString() != "")
-            {
-                <div class="col-lg-9">
-                    <div class="alert alert-block alert-dismissable">
-                        <a class="close" data-dismiss="alert" href="#"><p>X</p></a>
-                        <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Informaci&oacute;n!</h4>
-                        <p>
-                            <span class="text-danger"><strong><bold> @ViewData["Error"]</bold></strong></span>
-                        </p>
-                    </div>
-                </div>
-            }
-        <p></p>
-    </div>
 
-        <section id="widget-grid" class="">
-            <div class="row">
-                <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                    <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
-                        <header>
-                            <span class="widget-icon"> <i class="fa fa-home"></i> </span>
-                            <h2>Men&uacute;</h2>
-                        </header>
-                        <div>
-                            <div class="jarviswidget-editbox">
-                            </div>
-                            <div class="widget-body no-padding">
-                                <table id="datatable_fixed_column" class="table table-striped table-bordered table-responsive" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th class="hasinput">
-                                                <input type="text" class="form-control" placeholder="Buscar" />
-                                            </th>
-                                            <th class="hasinput">
-                                                <input type="text" class="form-control" placeholder="Buscar" />
-                                            </th>
-                                            <th class="hasinput">
-                                                <input type="text" class="form-control" placeholder="Buscar" />
-                                            </th>
-                                            <th class="hasinput">
-                                                <input type="text" class="form-control" placeholder="Buscar" />
-                                            </th>
-                                            <th class="hasinput">
-                                                <input type="text" class="form-control" placeholder="Buscar" />
-                                            </th>
-                                            <th>
-                                            </th>
-                                        </tr>
-                                        <tr>
-                                            <th data-class="expand">
-                                                <i class="fa fa-fw fa-building text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeSistema)
-                                            </th>
-                                            <th data-hide="phone">
-                                                <i class="fa fa-fw fa-thumb-tack text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeAplicacion)
-                                            </th>
-                                            <th data-hide="phone">
-                                                <i class="fa fa-fw fa-gear text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeControlador)
-                                            </th>
-                                            <th data-hide="phone">
-                                                <i class="fa fa-fw fa-rebel text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmePadre)
-                                            </th>
+    <section id="widget-grid" class="">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-home"></i> </span>
+                        <h2>Men&uacute;</h2>
+                    </header>
+                    <div>
+                        <div class="jarviswidget-editbox">
+                        </div>
+                        <div class="widget-body no-padding">
+                            <table id="datatable_fixed_column" data-page-length="@WebApp.TablaCantidadFilas" class="table table-striped table-bordered table-responsive" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th class="hasinput">
+                                            <input type="text" class="form-control" placeholder="Buscar" />
+                                        </th>
+                                        <th class="hasinput">
+                                            <input type="text" class="form-control" placeholder="Buscar" />
+                                        </th>
+                                        <th class="hasinput">
+                                            <input type="text" class="form-control" placeholder="Buscar" />
+                                        </th>
+                                        <th class="hasinput">
+                                            <input type="text" class="form-control" placeholder="Buscar" />
+                                        </th>
+                                        <th class="hasinput">
+                                            <input type="text" class="form-control" placeholder="Buscar" />
+                                        </th>
+                                        <th>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th data-class="expand">
+                                            <i class="fa fa-fw fa-building text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeSistema)
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-thumb-tack text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeAplicacion)
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-gear text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeControlador)
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-rebel text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdmePadre)
+                                        </th>
 
-                                            <th data-hide="phone">
-                                                <i class="fa fa-fw fa-check-square-o text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeTipo)
-                                            </th>
-                                            <th>Opciones</th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-check-square-o text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdmeTipo)
+                                        </th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdmeSistema)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdmeAplicacion)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdmeControlador)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdmePadre)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdmeEstado)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Editar", "Edit", new { admeSistema = item.AdmeSistema, admeAplicacion = item.AdmeAplicacion }, new { onclick = "cargando()" }) |
+                                                @Html.ActionLink("Eliminar", "Delete", new { admeSistema = item.AdmeSistema, admeAplicacion = item.AdmeAplicacion }, new { onclick = "return confirm('Desea eliminar el registro... ?');" }) |
+                                                @Html.ActionLink("Detalle", "Details", new { admeSistema = item.AdmeSistema, admeAplicacion = item.AdmeAplicacion },new {onclick = "cargando()" })
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach (var item in Model)
-                                        {
-                                            <tr>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.AdmeSistema)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.AdmeAplicacion)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.AdmeControlador)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.AdmePadre)
-                                                </td>
-                                                <td>
-                                                    @Html.DisplayFor(modelItem => item.AdmeEstado)
-                                                </td>
-                                                <td>
-                                                    @Html.ActionLink("Editar", "Edit", new { admeSistema = item.AdmeSistema, admeAplicacion = item.AdmeAplicacion }) |
-                                                    @Html.ActionLink("Eliminar", "Delete", new { admeSistema = item.AdmeSistema, admeAplicacion = item.AdmeAplicacion }, new { onclick = "return confirm('Desea eliminar el menú... ?');" }) |
-                                                    @Html.ActionLink("Detalle", "Details", new { admeSistema = item.AdmeSistema, admeAplicacion = item.AdmeAplicacion })
-                                                </td>
-                                            </tr>
-                                        }
-                                    </tbody>
-                                </table>
-                            </div>
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </article>
-            </div>
-        </section>
+                </div>
+            </article>
+        </div>
+    </section>
 </div>
- @section Scripts {
-  <script src='~/js/datatables/init.js'></script>
+@section Scripts {
 }
 

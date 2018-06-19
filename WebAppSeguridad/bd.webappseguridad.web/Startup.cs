@@ -50,6 +50,15 @@ namespace bd.webappcompartido.web
             /// para poder utilizar la inyección de dependencia.
             /// </summary>
             services.AddMvc();
+            services.AddDistributedMemoryCache();
+            Session.TiempoSessionMinutos = Convert.ToInt32(Configuration.GetSection("TiempoSessionMinutos").Value);
+            services.AddSession(options =>
+            {
+                // Set a short timeout for easy testing.
+                options.IdleTimeout = TimeSpan.FromMinutes(Session.TiempoSessionMinutos);
+                //options.Cookie.HttpOnly = true;
+            });
+
             services.AddDataProtection()
             .UseCryptographicAlgorithms(
             new AuthenticatedEncryptionSettings()
@@ -71,9 +80,8 @@ namespace bd.webappcompartido.web
             services.AddSingleton<IMenuServicio, MenuServicio>();
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddSingleton<IAuthorizationHandler, RolesHandler>();
+           // services.AddSingleton<IAuthorizationHandler, RolesHandler>();
            // services.AddSingleton<IAdscpasswServicio, AdscpasswServicio>();
-            services.AddResponseCaching();
 
             /// <summary>
             /// Se añade a las politicas de autorización la autorización personalizada.
@@ -112,6 +120,7 @@ namespace bd.webappcompartido.web
             AppGuardarLog.BaseAddress = Configuration.GetSection("HostServicioLog").Value;
 
             WebApp.NivelesMenu = Convert.ToInt32(Configuration.GetSection("NivelMenu").Value);
+            WebApp.TablaCantidadFilas = Convert.ToInt32(Configuration.GetSection("TablaCantidadFilas").Value);
 
         }
 
@@ -142,12 +151,7 @@ namespace bd.webappcompartido.web
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            /// <summary>
-            /// Es para cargar los ficheros estáticos de la aplicación como Css, imagenes etc...
-            /// Configuración por defecto es en la carpeta wwwroot
-            /// Para más información visitar : https://docs.microsoft.com/en-us/aspnet/core/fundamentals/static-files
-            /// </summary>
-            app.UseStaticFiles();
+
 
             /// <summary>
             /// Se lee el fichero appsetting.json según las etiquetas expuestas en este.
@@ -160,6 +164,12 @@ namespace bd.webappcompartido.web
             var TiempoVidaCookieMinutos = Configuration.GetSection("TiempoVidaCookieMinutos").Value;
             var TiempoVidaCookieSegundos = Configuration.GetSection("TiempoVidaCookieSegundos").Value;
 
+            /// <summary>
+            /// Es para cargar los ficheros estáticos de la aplicación como Css, imagenes etc...
+            /// Configuración por defecto es en la carpeta wwwroot
+            /// Para más información visitar : https://docs.microsoft.com/en-us/aspnet/core/fundamentals/static-files
+            /// </summary>
+            app.UseStaticFiles();
 
             /// <summary>
             /// Configuración de la Cookie de autorización  
@@ -181,6 +191,7 @@ namespace bd.webappcompartido.web
             /// Configuración del MVC, ruta que definimos (Controlador/Acción/Parametros)
             /// Para más información visitar:https://docs.microsoft.com/en-us/aspnet/core/mvc/controllers/routing
             /// </summary>
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
@@ -188,17 +199,6 @@ namespace bd.webappcompartido.web
                     template: "{controller=Login}/{action=Login}/{id?}");
             });
 
-
-            app.UseResponseCaching();
-
-            app.Run(async (context) =>
-            {
-                context.Response.GetTypedHeaders().CacheControl = new CacheControlHeaderValue()
-                {
-                    Public = true,
-                    
-                };
-            });
         }
     }
 }

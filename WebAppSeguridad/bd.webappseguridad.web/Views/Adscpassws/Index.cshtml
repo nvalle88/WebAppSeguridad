@@ -3,11 +3,12 @@
 @{
     ViewData["Title"] = "Index";
 }
+@using bd.webappseguridad.entidades.Utils
 <div id="content">
     <fieldset>
         <div>
-            <a asp-action="Create">
-                <button type="button" class="btn btn-labeled btn-default">
+            <a asp-action="Create" onclick="cargando()">
+                <button type="button" onclick="cargando()" class="btn btn-labeled btn-default">
                     <span class="btn-label">
                         <i class="glyphicon glyphicon-plus"></i>
                     </span>Nuevo usuario
@@ -28,7 +29,7 @@
                         <div class="jarviswidget-editbox">
                         </div>
                         <div class="widget-body no-padding">
-                            <table id="datatable_fixed_column" class="table table-striped table-bordered table-hover" width="100%">
+                            <table id="datatable_fixed_column" data-page-length="@WebApp.TablaCantidadFilas" class="table table-striped table-bordered table-hover" width="100%">
                                 <thead>
                                     <tr>
                                         <th class="hasinput">
@@ -52,31 +53,31 @@
                                         <th>
                                         </th>
                                     </tr>
-                                        <th data-hide="phone">
-                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsLogin)
-                                        </th>
-                                        <th data-hide="phone">
-                                            <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
-                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsCodigoEmpleado)
-                                        </th>
-                                        <th data-class="expand">
-                                            <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i>
-                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsFechaVencimiento)
-                                        </th>
-                                        <th data-hide="phone">
-                                            <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
-                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsIdContacto)
-                                        </th>
-                                        <th data-hide="phone">
-                                            <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
-                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsLoginAdm)
-                                        </th>
-                                        <th data-hide="phone">
-                                            <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
-                                            @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsTipoUso)
-                                        </th>
-                                        <th>Opciones</th>
-                                    </tr>
+                                <th data-hide="phone">
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsLogin)
+                                </th>
+                                <th data-hide="phone">
+                                    <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsCodigoEmpleado)
+                                </th>
+                                <th data-class="expand">
+                                    <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsFechaVencimiento)
+                                </th>
+                                <th data-hide="phone">
+                                    <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsIdContacto)
+                                </th>
+                                <th data-hide="phone">
+                                    <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsLoginAdm)
+                                </th>
+                                <th data-hide="phone">
+                                    <i class="fa fa-fw fa-phone text-muted hidden-md hidden-sm hidden-xs"></i>
+                                    @Html.DisplayNameFor(model => model.FirstOrDefault().AdpsTipoUso)
+                                </th>
+                                <th>Opciones</th>
+                                </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (var item in Model)
@@ -100,9 +101,9 @@
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.AdpsTipoUso)
                                             </td>
-                                           
+
                                             <td>
-                                                @Html.ActionLink("Editar", "Edit", new { id = item.AdpsLogin }) |
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.AdpsLogin },new  { onclick = "cargando()" }) |
                                                 @Html.ActionLink("Eliminar", "Delete", new { id = item.AdpsLogin }, new { onclick = "return confirm('Desea eliminar el Usuario... ?');" })
                                             </td>
                                         </tr>
@@ -116,7 +117,6 @@
         </div>
     </section>
 </div>
- @section Scripts {
-   <script src='~/js/datatables/init.js'></script>
+@section Scripts {
 }
 

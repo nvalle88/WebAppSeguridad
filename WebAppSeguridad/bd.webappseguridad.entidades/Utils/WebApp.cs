@@ -10,5 +10,6 @@ namespace bd.webappseguridad.entidades.Utils
         public static string NombreAplicacion { get; set; }
         public static string BaseAddressWebAppLogin { get; set; }
         public static int NivelesMenu { get; set; }
+        public static int TablaCantidadFilas { get; set; }
     }
 }

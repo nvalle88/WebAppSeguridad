@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using bd.webappseguridad.entidades.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using bd.webappseguridad.servicios.Extensores;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
@@ -46,11 +47,6 @@ namespace bd.webappseguridad.web.Controllers.MVC
             try
             {
                 var ListaAdscgrp = await apiServicio.Listar<Adscmenu>(new Uri(WebApp.BaseAddress), "api/Adscmenus/ListarMenu");
-                if (mensaje == null)
-                {
-                    mensaje = "";
-                }
-                ViewData["Error"] = mensaje;
                 return View(ListaAdscgrp);
             }
             catch (Exception ex)
@@ -64,7 +60,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{ex.Message}");
             }
         }
 
@@ -92,11 +88,11 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                        return RedirectToAction("Index");
-                }
+                        return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
+                    }
                 }
                 await CargarListaCombox();
-                InicializarMensaje(response.Message);
+                
                 return View(adscmenu);
 
             }
@@ -112,23 +108,16 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{ex.Message}");
             }
         }
 
-        private void InicializarMensaje(string mensaje)
-        {
-            if (mensaje == null)
-            {
-                mensaje = "";
-            }
-            ViewData["Error"] = mensaje;
-        }
+        
 
         public async Task<IActionResult> Create(string mensaje)
         {
             await CargarListaCombox();
-            InicializarMensaje(mensaje);
+            
             return View();
         }
 
@@ -156,9 +145,9 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
                 return BadRequest();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{ex.Message}");
             }
         }
 
@@ -197,7 +186,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                 return this.Redireccionar($"{Mensaje.Error}|{ex.Message}");
             }
         }
 
@@ -233,11 +222,11 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                        return RedirectToAction("Index");
+                        return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                     }
 
                 }
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
             catch (Exception ex)
             {
@@ -251,7 +240,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
         }
         public async Task<IActionResult> DeleteHijo(string admeSistemaHijo, string admeAplicacionHijo, string admeAplicacion)
@@ -281,11 +270,11 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                        return RedirectToAction("Details", "Adscmenus", new { admeSistema = admeSistemaHijo, admeAplicacion = admeAplicacion });
+                        return this.Redireccionar("Adscmenus", "Details", new { admeSistema = admeSistemaHijo, admeAplicacion }, $"{Mensaje.Error}|{Mensaje.Excepcion}");
                     }
-                    return BadRequest();
+                    return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
                 }
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
             catch (Exception ex)
             {
@@ -299,7 +288,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
         }
 
@@ -330,11 +319,11 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                        return RedirectToAction("Index");
+                        return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                     }
-                    return RedirectToAction("Index", new { mensaje = response.Message });
+                    return this.Redireccionar($"{Mensaje.Aviso}|{response.Message}");
                 }
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
             catch (Exception ex)
             {
@@ -348,7 +337,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
         }
 

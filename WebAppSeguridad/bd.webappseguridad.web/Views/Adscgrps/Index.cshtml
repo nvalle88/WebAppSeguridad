@@ -1,11 +1,11 @@
 @model List<bd.webappseguridad.entidades.Negocio.Adscgrp>
 
-
+@using bd.webappseguridad.entidades.Utils
 <div id="content">
     <fieldset>
-        <div >
-            <a asp-action="Create">
-                <button type="button" class="btn btn-labeled btn-default">
+        <div>
+            <a asp-action="Create" onclick="cargando()">
+                <button type="button" onclick="cargando()" class="btn btn-labeled btn-default">
                     <span class="btn-label">
                         <i class="glyphicon glyphicon-plus"></i>
                     </span>Nuevo grupo
@@ -14,24 +14,9 @@
         </div>
     </fieldset>
     <div>
-        <div class="row col-lg-10">
-
-            @if (@ViewData["Error"].ToString() != "")
-            {
-                <div class="col-lg-9">
-                    <div class="alert alert-block alert-dismissable">
-                        <a class="close" data-dismiss="alert" href="#"><p>X</p></a>
-                        <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Informaci&oacute;n!</h4>
-                        <p>
-                            <span class="text-danger"><strong><bold> @ViewData["Error"]</bold></strong></span>
-                        </p>
-                    </div>
-                </div>
-            }
-        </div>
         <p></p>
     </div>
-   
+
     <!-- widget grid -->
     <section id="widget-grid" class="">
         <!-- row -->
@@ -40,7 +25,7 @@
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
-             
+
                     <header>
                         <span class="widget-icon"> <i class="fa fa-users"></i> </span>
                         <h2>Grupos</h2>
@@ -54,7 +39,7 @@
                         <!-- end widget edit box -->
                         <!-- widget content -->
                         <div class="widget-body no-padding">
-                            <table id="datatable_fixed_column" class="table table-striped table-bordered table-hover" width="100%">
+                            <table id="datatable_fixed_column" data-page-length="@WebApp.TablaCantidadFilas" class="table table-striped table-bordered table-hover" width="100%">
                                 <thead>
                                     <tr>
                                         <th class="hasinput">
@@ -89,7 +74,7 @@
                                             <i class="fa fa-fw fa fa-comment text-muted hidden-md hidden-sm hidden-xs"></i>
                                             @Html.DisplayNameFor(model => model.FirstOrDefault().AdgrDescripcion)
                                         </th>
-                                      
+
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
@@ -109,11 +94,11 @@
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.AdgrDescripcion)
                                             </td>
-                                           
+
                                             <td>
-                                                @Html.ActionLink("Permisos", "MenusGrupo", new { adgrBdd = item.AdgrBdd, adgrGrupo = item.AdgrGrupo }) |
-                                                @Html.ActionLink("Miembros", "MiembrosGrupo", new { adgrBdd = item.AdgrBdd, adgrGrupo = item.AdgrGrupo }) |
-                                                @Html.ActionLink("Editar", "Edit", new { adgrBdd = item.AdgrBdd, adgrGrupo=item.AdgrGrupo }) |
+                                                @Html.ActionLink("Permisos", "MenusGrupo", new { adgrBdd = item.AdgrBdd, adgrGrupo = item.AdgrGrupo },new  { onclick = "cargando()" }) |
+                                                @Html.ActionLink("Miembros", "MiembrosGrupo", new { adgrBdd = item.AdgrBdd, adgrGrupo = item.AdgrGrupo },new { onclick = "cargando()" }) |
+                                                @Html.ActionLink("Editar", "Edit", new { adgrBdd = item.AdgrBdd, adgrGrupo = item.AdgrGrupo },new { onclick = "cargando()" }) |
                                                 @Html.ActionLink("Eliminar", "Delete", new { adgrBdd = item.AdgrBdd, adgrGrupo = item.AdgrGrupo }, new { onclick = "return confirm('Desea eliminar el grupo... ?');" })
                                             </td>
                                         </tr>
@@ -125,7 +110,7 @@
                     </div>
                     <!-- end widget div -->
                 </div>
-          
+
             </article>
             <!-- WIDGET END -->
         </div>
@@ -136,6 +121,5 @@
 </div>
 <!-- END MAIN CONTENT -->
 
- @section Scripts {
-  <script src='~/js/datatables/init.js'></script>
+@section Scripts {
 }

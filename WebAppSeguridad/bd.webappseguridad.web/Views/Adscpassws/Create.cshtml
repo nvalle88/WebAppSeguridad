@@ -10,13 +10,13 @@
                 <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
                     <header>
                         <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                        <h2>Usuarios</h2>
+                        <h2>Nuevo usuarios</h2>
                     </header>
                     <div>
                         <div class="jarviswidget-editbox">
                         </div>
                         <div class="widget-body no-padding">
-                            <form  asp-action="Create" id="checkout-form"  class="smart-form" novalidate="novalidate">
+                            <form asp-action="Create" id="checkout-form" class="smart-form" novalidate="novalidate">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                 <fieldset>
                                     <div class="row">
@@ -31,13 +31,13 @@
                                         </section>
 
                                         @*<section class="col col-4">
-                                            <label class="label">@Html.DisplayNameFor(model => model.AdpsLoginAdm)</label>
-                                            <label class="input">
-                                                <i class="icon-prepend fa fa-user-secret"></i>
-                                                <input maxlength="32" asp-for="AdpsLoginAdm" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdpsLoginAdm)" />
-                                                <span asp-validation-for="AdpsLoginAdm" class="text-danger"></span>
-                                            </label>
-                                        </section>*@
+                                                <label class="label">@Html.DisplayNameFor(model => model.AdpsLoginAdm)</label>
+                                                <label class="input">
+                                                    <i class="icon-prepend fa fa-user-secret"></i>
+                                                    <input maxlength="32" asp-for="AdpsLoginAdm" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdpsLoginAdm)" />
+                                                    <span asp-validation-for="AdpsLoginAdm" class="text-danger"></span>
+                                                </label>
+                                            </section>*@
 
                                         <section class="col col-4">
                                             <label class="label">@Html.DisplayNameFor(model => model.AdpsTipoUso)</label>
@@ -79,9 +79,8 @@
                                     </div>
                                 </fieldset>
                                 <footer>
-                                    <span class="text-danger">@ViewData["Error"]</span>
-                                    <input type="submit" value="Guardar" class="btn btn-primary" />
-                                    <a asp-action="Index"  class="btn btn-default">Cancelar</a>
+                                    <button type="submit" class="btn btn-primary" id="btn-guardar">Guardar</button>
+                                    <a asp-action="Index"  onclick="cargando()" class="btn btn-default">Cancelar</a>
                                 </footer>
                             </form>
                         </div>
@@ -92,18 +91,15 @@
                 <!-- end widget -->
 
             </article>
-       
+
         </div>
         <!-- END ROW -->
     </section>
     <!-- end widget grid -->
     <!-- Modal -->
-   
+
 </div>
 <!-- END MAIN CONTENT -->
 @section Scripts {
-    <script type="text/javascript">
-
-
-    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

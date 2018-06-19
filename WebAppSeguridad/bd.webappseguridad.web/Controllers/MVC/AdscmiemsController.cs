@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
+using bd.webappseguridad.servicios.Extensores;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
@@ -44,11 +45,6 @@ namespace bd.webappseguridad.web.Controllers.MVC
             try
             {
                 var ListaAdscgrp = await apiServicio.Listar<Adscmiem>(new Uri(WebApp.BaseAddress), "api/Adscmiems/ListarAdscmiem");
-                if (mensaje == null)
-                {
-                    mensaje = "";
-                }
-                ViewData["Error"] = mensaje;
                 return View(ListaAdscgrp);
             }
             catch (Exception ex)
@@ -63,8 +59,8 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                ViewData["Error"] = "Ha ocurrido un error inesperado";
-                return View(new List<Adscmiem>());
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
+               
             }
         }
 
@@ -93,14 +89,14 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                        return RedirectToAction("Index");
+                        return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                     } 
                 }
 
                 await CargarUsuarios();
                 await CargarListaBdd();
                 await CargarListaBddPorGrupo(adscmiem.AdmiGrupo);
-                InicializarMensaje(response.Message);
+               
                 return View(adscmiem);
 
             }
@@ -115,28 +111,18 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                InicializarMensaje("");
+               
                 return View(adscmiem);
             }
         }
-
-
-        private void InicializarMensaje(string mensaje)
-        {
-            if (mensaje == null)
-            {
-                mensaje = "";
-            }
-            ViewData["Error"] = mensaje;
-        }
-
+        
         public async Task<IActionResult> Create(string mensaje)
         {
             try
             {
                 await CargarListaBdd();
                 await CargarUsuarios();
-                InicializarMensaje(mensaje);
+                
                 return View();
             }
             catch (Exception ex)
@@ -183,7 +169,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
                 }
 
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Satisfactorio}");
             }
             catch (Exception ex)
             {
@@ -228,11 +214,11 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                        return RedirectToAction("Index");
+                        return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                     }
 
                 }
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
             catch (Exception ex)
             {
@@ -245,7 +231,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
         }
 
@@ -279,11 +265,11 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                        return RedirectToAction("Index");
+                        return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                     }
-                    return RedirectToAction("Index", new { mensaje = response.Message });
+                    return this.Redireccionar($"{Mensaje.Error}|{response.Message}");
                 }
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
             catch (Exception ex)
             {
@@ -296,7 +282,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
         }
 

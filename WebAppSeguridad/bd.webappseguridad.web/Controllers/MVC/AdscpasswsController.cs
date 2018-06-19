@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using System.Security.Claims;
+using bd.webappseguridad.servicios.Extensores;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
@@ -73,12 +74,10 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         ObjectNext = JsonConvert.SerializeObject(response.Resultado),
                     };
                     await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-
-
-                    return RedirectToAction("Index");
+                    return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                 }
 
-                ViewData["Error"] = response.Message;
+                TempData["Mensaje"] = $"{Mensaje.Aviso}|{response.Message}";
                 return View(adscpassw);
 
             }
@@ -94,7 +93,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{ex.Message}");
             }
         }
 
@@ -127,7 +126,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{ex.Message}");
             }
         }
 
@@ -163,7 +162,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                        return RedirectToAction("Index");
+                        return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                     }
 
                 }
@@ -181,7 +180,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{ex.Message}");
             }
         }
 
@@ -206,7 +205,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{ex.Message}");
             }
         }
 
@@ -229,9 +228,9 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     };
                     await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                    return RedirectToAction("Index");
+                    return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                 }
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{response.Message}");
             }
             catch (Exception ex)
             {
@@ -245,7 +244,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{ex.Message}");
             }
         }
     }

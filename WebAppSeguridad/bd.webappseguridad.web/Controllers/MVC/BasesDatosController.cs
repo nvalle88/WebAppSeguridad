@@ -13,6 +13,7 @@ using bd.webappseguridad.entidades.ModeloTransferencia;
 using System.Linq;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
+using bd.webappseguridad.servicios.Extensores;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
@@ -44,17 +45,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         
         public IActionResult Create(string mensaje)
         {
-            InicializarMensaje(mensaje);
             return View();
-        }
-
-        private void InicializarMensaje(string mensaje)
-        {
-            if (mensaje == null)
-            {
-                mensaje = "";
-            }
-            ViewData["Error"] = mensaje;
         }
 
         [HttpPost]
@@ -85,15 +76,14 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         }
                         catch (Exception)
                         {
-                            return RedirectToAction("Index");
-                            throw;
+                            return this.Redireccionar($"{Mensaje.Informacion}|{response.Message}");
                         }
-                       
-                        return RedirectToAction("Index");
+
+                        return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                     }
 
                 }
-                InicializarMensaje(response.Message);
+                TempData["Mensaje"] = $"{Mensaje.Aviso}|{response.Message}";
                 return View(baseDato);
             }
             catch (Exception ex )
@@ -170,10 +160,10 @@ namespace bd.webappseguridad.web.Controllers.MVC
                             ObjectNext = JsonConvert.SerializeObject(respuesta.Resultado),
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                        return RedirectToAction("Index");
+                        return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                     }
 
-                    ViewData["Error"] = respuesta.Message;
+                    TempData["Mensaje"] = $"{Mensaje.Error}|{respuesta.Message}";
                 }
                 return View(adscbdd);
             }
@@ -188,18 +178,13 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{ex.Message}");
             }
         }
 
         public async Task<IActionResult> Index(string mensaje)
         {
             var Listado = await apiServicio.Listar<Adscbdd>(new Uri(WebApp.BaseAddress), "api/BasesDatos/ListarBasesDatos");
-            if (mensaje == null)
-            {
-                mensaje = "";
-            }
-            ViewData["Error"] = mensaje;
             return View(Listado);
         }
 
@@ -224,12 +209,12 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                        return RedirectToAction("Index");
+                        return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                     }
-                    return RedirectToAction("Index", new { mensaje = response.Message });
+                    return this.Redireccionar($"{Mensaje.Aviso}|{response.Message}");
                 }
 
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Error}");
             }
             catch (Exception ex)
             {
@@ -242,7 +227,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{ex.Message}");
             }
         }
     }

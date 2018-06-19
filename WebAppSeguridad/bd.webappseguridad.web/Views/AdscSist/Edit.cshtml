@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Editar";
 }
+
+<link rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" />
 <div id="content">
     <section id="widget-grid" class="">
         <div class="row">
@@ -10,7 +12,7 @@
                 <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
                     <header>
                         <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                        <h2>Sistemas </h2>
+                        <h2>Editar sistema </h2>
                     </header>
                     <div>
                         <div class="jarviswidget-editbox">
@@ -51,7 +53,7 @@
                                             <label class="label">@Html.DisplayNameFor(model => model.AdstBdd)</label>
                                             <label class="input">
                                                 <select asp-for="AdstBdd" asp- class="form-control" asp-items="ViewBag.AdbdBdd">
-                                                    <option class="fa-database" value="0" selected="" disabled="">@Html.DisplayNameFor(model => model.AdstBdd)</option>
+                                                    <option  value="0" selected="" disabled="">@Html.DisplayNameFor(model => model.AdstBdd)</option>
                                                 </select>
                                                 <span asp-validation-for="AdstBdd" class="text-danger"></span>
                                             </label>
@@ -69,8 +71,8 @@
                                     </section>
                                 </fieldset>
                                 <footer>
-                                    <input type="submit" value="Guardar" class="btn btn-primary" />
-                                    <a asp-action="Index" class="btn btn-default">Cancelar</a>
+                                    <button type="submit" class="btn btn-primary" id="btn-guardar">Guardar</button>
+                                    <a asp-action="Index" onclick="cargando()" class="btn btn-default">Cancelar</a>
 
                                 </footer>
                             </form>
@@ -82,6 +84,12 @@
     </section>
 </div>
 @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src='~/lib/select2/dist/js/select2.min.js'></script>
+    <script src='~/lib/select2/dist/js/i18n/es.js'></script>
     <script type="text/javascript">
+        $(document).ready(function () {
+            Init_Select2();
+        });
     </script>
 }

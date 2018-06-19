@@ -11,6 +11,7 @@ using bd.log.guardar.Enumeradores;
 using bd.webappseguridad.entidades.Utils;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Authorization;
+using bd.webappseguridad.servicios.Extensores;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
@@ -41,17 +42,9 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
         }
 
-        private void InicializarMensaje(string mensaje)
-        {
-            if (mensaje == null)
-            {
-                mensaje = "";
-            }
-            ViewData["Error"] = mensaje;
-        }
         public async Task<IActionResult> Create(string mensaje)
         {
-            InicializarMensaje(mensaje);
+          
             var Listado = await apiServicio.Listar<Adscbdd>(new Uri(WebApp.BaseAddress), "api/BasesDatos/ListarBasesDatos");
             ViewData["AdbdBdd"] = new SelectList(Listado, "AdbdBdd", "AdbdBdd");
             return View();
@@ -81,14 +74,15 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                        return RedirectToAction("Index");
+                        return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                     }
 
                     
                 }
-                InicializarMensaje(response.Message);
+               
                 var Listado = await apiServicio.Listar<Adscbdd>(new Uri(WebApp.BaseAddress), "api/BasesDatos/ListarBasesDatos");
                 ViewData["AdbdBdd"] = new SelectList(Listado, "AdbdBdd", "AdbdBdd");
+                TempData["Mensaje"] = $"{Mensaje.Aviso}|{response.Message}";
                 return View(Adscsist);
             }
             catch (Exception ex)
@@ -102,7 +96,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{ex.Message}");
             }
         }
 
@@ -124,7 +118,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     return View(respuesta.Resultado);
                 }
 
-                return NotFound();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Error}");
             }
             catch (Exception ex)
             {
@@ -137,7 +131,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{ex.Message}");
 
             }
         }
@@ -168,10 +162,10 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                        return RedirectToAction("Index");
+                        return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                     }
 
-                    ViewData["Error"] = respuesta.Message;
+                    TempData["Mensaje"] = $"{Mensaje.Error}|{respuesta.Message}";
                 }
                 var Listado = await apiServicio.Listar<Adscbdd>(new Uri(WebApp.BaseAddress), "api/BasesDatos/ListarBasesDatos");
                 ViewData["AdbdBdd"] = new SelectList(Listado, "AdbdBdd", "AdbdBdd");
@@ -188,7 +182,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{ex.Message}");
             }
         }
 
@@ -196,11 +190,6 @@ namespace bd.webappseguridad.web.Controllers.MVC
         {
            var listado = await apiServicio.Listar<Adscsist>(new Uri(WebApp.BaseAddress)
                                                                     , "api/Adscsists/ListarAdscSistema");
-            if (mensaje == null)
-            {
-                mensaje = "";
-            }
-            ViewData["Error"] = mensaje;
             return View(listado);
         }
 
@@ -226,12 +215,12 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                        return RedirectToAction("Index");
+                       return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                     }
-                    return RedirectToAction("Index", new { mensaje = response.Message });
+                    return this.Redireccionar($"{Mensaje.Aviso}|{response.Message}");
                 }
 
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Error}");
             }
             catch (Exception ex)
             {
@@ -244,7 +233,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{ex.Message}");
             }
         }
     }

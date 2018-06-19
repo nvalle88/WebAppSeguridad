@@ -16,6 +16,7 @@ using bd.log.guardar.Enumeradores;
 using Newtonsoft.Json;
 using bd.webappseguridad.entidades.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using bd.webappseguridad.servicios.Extensores;
 
 namespace bd.webappseguridad.web.Controllers.MVC
 {
@@ -49,11 +50,6 @@ namespace bd.webappseguridad.web.Controllers.MVC
             try
             {
                 var ListaAdscgrp = await apiServicio.Listar<Adscgrp>(new Uri(WebApp.BaseAddress), "api/Adscgrps/ListarAdscgrp");
-                if (mensaje==null)
-                {
-                    mensaje = "";
-                }
-                ViewData["Error"] = mensaje;
                 return View(ListaAdscgrp);
             }
             catch (Exception ex)
@@ -67,18 +63,8 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
-        }
-
-
-        private void InicializarMensaje(string mensaje)
-        {
-            if (mensaje == null)
-            {
-                mensaje = "";
-            }
-            ViewData["Error"] = mensaje;
         }
 
         [HttpPost]
@@ -106,11 +92,10 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                        return RedirectToAction("Index");
+                        return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                     }
                 }
                 await CargarListaBdd();
-                InicializarMensaje(response.Message);
                 return View(adscgrp);
 
             }
@@ -125,7 +110,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
         }
 
@@ -134,7 +119,6 @@ namespace bd.webappseguridad.web.Controllers.MVC
             try
             {
                 await CargarListaBdd();
-                InicializarMensaje(mensaje);
                 return View();
             }
             catch (Exception ex)
@@ -148,10 +132,111 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return View();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
         }
 
+        public async Task<IActionResult> EliminarMiembro(string adgrBdd, string adgrGrupo, string empleado)
+        {
+            try
+            {
+                if (adgrBdd != null || adgrGrupo != null || empleado != null )
+                {
+                    var miembroGrupo = new Adscmiem
+                    {
+                        AdmiBdd = adgrBdd,
+                        AdmiGrupo = adgrGrupo,
+                        AdmiEmpleado=empleado
+                        
+                    };
+                    var respuesta = await apiServicio.EliminarAsync(miembroGrupo, new Uri(WebApp.BaseAddress),
+                                                                  "api/Adscmiems/EliminarAdscmiem");
+
+                    respuesta.Resultado = JsonConvert.DeserializeObject<Adscmiem>(respuesta.Resultado.ToString());
+
+                    if (respuesta.IsSuccess)
+                    {
+                        var responseLog = new EntradaLog
+                        {
+                            ExceptionTrace = null,
+                            LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
+                            LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
+                            ObjectPrevious = JsonConvert.SerializeObject(respuesta.Resultado),
+                            ObjectNext = null,
+                        };
+                        return this.Redireccionar("Adscgrps", "MiembrosGrupo", new { adgrBdd = miembroGrupo.AdmiBdd, adgrGrupo = miembroGrupo.AdmiGrupo }, $"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
+                    }
+                    return this.Redireccionar("Adscgrps", "MiembrosGrupo", new { adgrBdd = miembroGrupo.AdmiBdd, adgrGrupo = miembroGrupo.AdmiGrupo }, $"{Mensaje.Aviso}|{respuesta.Message}");
+
+                }
+
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
+            }
+            catch (Exception ex)
+            {
+                var responseLog = new EntradaLog
+                {
+                    ExceptionTrace = ex.Message,
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
+                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
+            }
+        }
+
+        public async Task<IActionResult> EliminarPermiso(string adgrBdd, string adgrGrupo, string sistema,string aplicacion)
+        {
+            try
+            {
+                if (adgrBdd != null || adgrGrupo != null || sistema!=null || aplicacion!=null)
+                {
+                    var permisoGrupo = new Adscexe
+                    {
+                        AdexBdd = adgrBdd,
+                        AdexGrupo = adgrGrupo,
+                        AdexSistema=sistema,
+                        AdexAplicacion=aplicacion
+                    };
+                    var respuesta = await apiServicio.EliminarAsync(permisoGrupo, new Uri(WebApp.BaseAddress),
+                                                                  "api/Adscexes/EliminarAdscexe");
+                   
+                    respuesta.Resultado = JsonConvert.DeserializeObject<Adscexe>(respuesta.Resultado.ToString());
+
+                    if (respuesta.IsSuccess)
+                    {
+                        var responseLog = new EntradaLog
+                        {
+                            ExceptionTrace = null,
+                            LogCategoryParametre = Convert.ToString(LogCategoryParameter.Delete),
+                            LogLevelShortName = Convert.ToString(LogLevelParameter.ADV),
+                            ObjectPrevious = JsonConvert.SerializeObject(respuesta.Resultado),
+                            ObjectNext = null,
+                        };
+                        return this.Redireccionar("Adscgrps", "MenusGrupo", new { adgrBdd = permisoGrupo.AdexBdd, adgrGrupo = permisoGrupo.AdexGrupo }, $"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
+                    }
+                    return this.Redireccionar("Adscgrps", "MenusGrupo", new { adgrBdd = permisoGrupo.AdexBdd, adgrGrupo = permisoGrupo.AdexGrupo }, $"{Mensaje.Aviso}|{respuesta.Message}");
+
+                }
+
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
+            }
+            catch (Exception ex)
+            {
+                var responseLog = new EntradaLog
+                {
+                    ExceptionTrace = ex.Message,
+                    LogCategoryParametre = Convert.ToString(LogCategoryParameter.Critical),
+                    LogLevelShortName = Convert.ToString(LogLevelParameter.ERR),
+                    ObjectPrevious = null,
+                    ObjectNext = null,
+                };
+                await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
+            }
+        }
 
         public async Task<IActionResult> Edit(string adgrBdd, string adgrGrupo)
         {
@@ -174,7 +259,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
 
                 }
 
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
             catch (Exception ex)
             {
@@ -187,7 +272,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
         }
 
@@ -231,7 +316,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                     ObjectNext = null,
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
         }
 
@@ -281,7 +366,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
             
                     await CargarListaCombox(adscexe);
-                    return RedirectToAction("CrearPermisoGrupo", new { adgrBdd = adscexe.AdexBdd, adgrGrupo = adscexe.AdexGrupo });
+                    return this.Redireccionar("Adscgrps", "CrearPermisoGrupo", new { adgrBdd = adscexe.AdexBdd, adgrGrupo = adscexe.AdexGrupo }, $"{Mensaje.Error}|{Mensaje.ModeloInvalido}");
                 }
 
                 int ins = 0;
@@ -337,12 +422,11 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         ObjectNext = JsonConvert.SerializeObject(response.Resultado),
                     };
                     await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-
-                    return RedirectToAction("MenusGrupo", new { adgrBdd = adscexe.AdexBdd, adgrGrupo = adscexe.AdexGrupo});
+                    return this.Redireccionar("Adscgrps", "MenusGrupo", new { adgrBdd = adscexe.AdexBdd, adgrGrupo = adscexe.AdexGrupo }, $"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                 }
                 await CargarListaCombox();
-               
-                return RedirectToAction("CrearPermisoGrupo", new { adgrBdd = adscexe.AdexBdd, adgrGrupo = adscexe.AdexGrupo,mensaje=response.Message });
+                return this.Redireccionar("Adscgrps", "CrearPermisoGrupo", new { adgrBdd = adscexe.AdexBdd, adgrGrupo = adscexe.AdexGrupo }, $"{Mensaje.Error}|{response.Message}");
+                
 
             }
             catch (Exception ex)
@@ -357,7 +441,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                return BadRequest();
+                return this.Redireccionar("Adscgrps", "CrearPermisoGrupo", new { adgrBdd = adscexe.AdexBdd, adgrGrupo = adscexe.AdexGrupo }, $"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
         }
 
@@ -372,7 +456,6 @@ namespace bd.webappseguridad.web.Controllers.MVC
             };
 
             await CargarListaCombox();
-            InicializarMensaje(mensaje);
             return View(miem);
         }
 
@@ -386,7 +469,6 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 AdmiBdd=adgrBdd,
                 AdmiGrupo=adgrGrupo,
             };
-            InicializarMensaje(mensaje);
             await CargarUsuarios();
             return   View(miem);
         }
@@ -421,13 +503,12 @@ namespace bd.webappseguridad.web.Controllers.MVC
                             ObjectNext = JsonConvert.SerializeObject(response.Resultado),
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
-
-                        return RedirectToAction("MiembrosGrupo", new { adgrBdd = adscmiem.AdmiBdd, adgrGrupo = adscmiem.AdmiGrupo });
-                    } 
+                        return this.Redireccionar("Adscgrps", "MiembrosGrupo", new { adgrBdd = adscmiem.AdmiBdd, adgrGrupo = adscmiem.AdmiGrupo }, $"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
+                    }
                 }
                 await CargarUsuarios();
                 await CargarListaBdd();
-                return RedirectToAction("CrearMiembroGrupo", new { adgrBdd = adscmiem.AdmiBdd, adgrGrupo = adscmiem.AdmiGrupo,mensaje=response.Message});
+                return this.Redireccionar("Adscgrps", "CrearMiembroGrupo", new { adgrBdd = adscmiem.AdmiBdd, adgrGrupo = adscmiem.AdmiGrupo }, $"{Mensaje.Error}|{response.Message}");
 
             }
             catch (Exception ex)
@@ -442,8 +523,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 };
 
                 await apiServicio.SalvarLog<log.guardar.Utiles.Response>(HttpContext, responseLog);
-
-                return BadRequest();
+                return this.Redireccionar("Adscgrps", "CrearMiembroGrupo", new { adgrBdd = adscmiem.AdmiBdd, adgrGrupo = adscmiem.AdmiGrupo }, $"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
         }
 
@@ -504,11 +584,11 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                        return RedirectToAction("Index");
+                        return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                     }
 
                 }
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
             catch (Exception ex)
             {
@@ -522,7 +602,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
         }
 
@@ -554,12 +634,12 @@ namespace bd.webappseguridad.web.Controllers.MVC
                         };
                         await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                        return RedirectToAction("Index");
+                        return this.Redireccionar($"{Mensaje.Informacion}|{Mensaje.Satisfactorio}");
                     }
-                    return RedirectToAction("Index", new { mensaje = response.Message });
+                    return this.Redireccionar($"{Mensaje.Error}|{response.Message}");
                 }
 
-                return BadRequest();
+                return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
             catch (Exception ex)
             {
@@ -573,7 +653,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
                 };
                 await apiServicio.SalvarLog<entidades.Utils.Response>(HttpContext, responseLog);
 
-                return BadRequest();
+               return this.Redireccionar($"{Mensaje.Error}|{Mensaje.Excepcion}");
             }
         }
 

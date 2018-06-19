@@ -19,7 +19,6 @@ namespace bd.webappseguridad.web
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
                 .Build();
-
             host.Run();
         }
     }
