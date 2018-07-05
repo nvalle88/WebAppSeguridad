@@ -18,7 +18,7 @@
                         <div class="widget-body no-padding">
                             <form asp-action="Edit" id="checkout-form" class="smart-form" novalidate="novalidate">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <input type="hidden" asp-for="AdgrBdd"/>
+                                <input type="hidden" asp-for="AdgrBdd" />
                                 <input type="hidden" asp-for="AdgrGrupo" />
                                 <fieldset>
                                     <div class="row">
@@ -34,7 +34,7 @@
                                         <section class="col col-4">
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-users"></i>
-                                                <input maxlength="32"  disabled="disabled" asp-for="AdgrGrupo" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdgrGrupo)" />
+                                                <input maxlength="32" disabled="disabled" asp-for="AdgrGrupo" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdgrGrupo)" />
                                                 <span asp-validation-for="AdgrGrupo" class="text-danger"></span>
                                             </label>
                                         </section>
@@ -59,9 +59,8 @@
                                     </section>
                                 </fieldset>
                                 <footer>
-                                    <span class="text-danger">@ViewData["Error"]</span>
-                                    <input type="submit" value="Guardar" class="btn btn-primary" />
-                                    <a asp-action="Index" class="btn btn-default">Cancelar</a>
+                                    <button type="submit" class="btn btn-primary" id="btn-guardar">Guardar</button>
+                                    <a asp-action="Index" onclick="cargando()" class="btn btn-default">Cancelar</a>
                                 </footer>
                             </form>
                         </div>
@@ -72,8 +71,5 @@
     </section>
 </div>
 @section Scripts {
-    <script type="text/javascript">
-
-
-    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

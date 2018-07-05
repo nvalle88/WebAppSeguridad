@@ -5,7 +5,6 @@ C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.we
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.servicios\bin\Release\netcoreapp1.1\bd.webappseguridad.entidades.dll
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.servicios\bin\Release\netcoreapp1.1\bd.sw.externos.pdb
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.servicios\bin\Release\netcoreapp1.1\bd.webappseguridad.entidades.pdb
-C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.servicios\obj\Release\netcoreapp1.1\bd.webappseguridad.servicios.csprojResolveAssemblyReference.cache
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.servicios\obj\Release\netcoreapp1.1\bd.webappseguridad.servicios.csproj.CoreCompileInputs.cache
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.servicios\obj\Release\netcoreapp1.1\bd.webappseguridad.servicios.AssemblyInfo.cs
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.servicios\obj\Release\netcoreapp1.1\bd.webappseguridad.servicios.dll
@@ -24,3 +23,5 @@ C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridadSalva\WebAppSeguridad\
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridadSalva\WebAppSeguridad\bd.webappseguridad.servicios\obj\Release\netcoreapp1.1\bd.webappseguridad.servicios.AssemblyInfo.cs
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridadSalva\WebAppSeguridad\bd.webappseguridad.servicios\obj\Release\netcoreapp1.1\bd.webappseguridad.servicios.dll
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridadSalva\WebAppSeguridad\bd.webappseguridad.servicios\obj\Release\netcoreapp1.1\bd.webappseguridad.servicios.pdb
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.servicios\obj\Release\netcoreapp1.1\bd.webappseguridad.servicios.csprojAssemblyReference.cache
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.servicios\obj\Release\netcoreapp1.1\bd.webappseguridad.servicios.csproj.CopyComplete

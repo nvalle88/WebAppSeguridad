@@ -1,7 +1,6 @@
 @model bd.webappseguridad.entidades.ViewModels.AdscexeViewModel
 
 <link rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" />
-<link rel="stylesheet" href="~/lib/select2/dist/css/select2.min.css" />
 <link rel="stylesheet" href="~/lib/waitMe/waitMe.min.css" />
 
 <div id="content">
@@ -22,24 +21,12 @@
                                 <input type="hidden" asp-for="AdexBdd" />
                                 <input type="hidden" asp-for="AdexGrupo" />
                                 <fieldset>
-                                    @if (@ViewData["Error"].ToString() != "")
-                                    {
-                                        <div class="col-lg-12">
-                                            <div class="alert alert-block  bordered">
-                                                <a class="close" data-dismiss="alert" href="#"><p><strong> <bold>X</bold></strong></p></a>
-                                                <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Informaci&oacute;n!</h4>
-                                                <p>
-                                                    <span class="text-info"><strong> <bold> @ViewData["Error"]</bold></strong></span>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    }
                                     <div class="row">
                                         <section class="col col-6">
                                             <label class="label">@Html.DisplayNameFor(model => model.AdexBdd)</label>
                                             <label class="input">
                                                 <i class="icon-prepend fa fa-database"></i>
-                                                <input maxlength="30"  disabled="disabled" asp-for="AdexBdd" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdexBdd)" />
+                                                <input maxlength="30" disabled="disabled" asp-for="AdexBdd" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdexBdd)" />
                                                 <span asp-validation-for="AdexBdd" class="text-danger"></span>
                                             </label>
                                         </section>
@@ -118,8 +105,8 @@
                                     </div>
                                 </fieldset>
                                 <footer>
-                                    <input type="submit" value="Guardar" class="btn btn-primary" />
-                                    <a asp-action="MenusGrupo" asp-route-adgrBdd="@Model.AdexBdd" asp-route-adgrGrupo="@Model.AdexGrupo" asp as class="btn btn-default">Cancelar</a>
+                                    <button type="submit" class="btn btn-primary" id="btn-guardar">Guardar</button>
+                                    <a asp-action="MenusGrupo" onclick="cargando()" asp-route-adgrBdd="@Model.AdexBdd" asp-route-adgrGrupo="@Model.AdexGrupo" asp as class="btn btn-default">Cancelar</a>
                                 </footer>
                             </form>
                         </div>
@@ -130,18 +117,17 @@
     </section>
 </div>
 @section Scripts {
+    <script src='~/lib/select2/dist/js/select2.min.js'></script>
+    <script src='~/lib/select2/dist/js/i18n/es.js'></script>
+    <script src='~/lib/waitMe/waitMe.min.js'></script>
+    <script src='~/js/site.js'></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Init_Select2();
+        });
+    </script>
 
-<script src='~/lib/select2/dist/js/select2.min.js'></script>
-<script src='~/lib/select2/dist/js/i18n/es.js'></script>
-<script src='~/lib/waitMe/waitMe.min.js'></script>
-<script src='~/js/site.js'></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        Init_Select2();
-    });
-</script>
 
-    
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -170,6 +156,6 @@
                 return false;
             })
         });
-</script>
+    </script>
 
 }

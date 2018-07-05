@@ -3,13 +3,13 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+@using bd.webappseguridad.entidades.Utils
 <!-- MAIN CONTENT -->
 <div id="content">
     <fieldset>
         <div>
-            <a asp-action="Create">
-                <button type="button" class="btn btn-labeled btn-default">
+            <a asp-action="Create" onclick="cargando()">
+                <button type="button"  onclick="cargando()" class="btn btn-labeled btn-default">
                     <span class="btn-label">
                         <i class="glyphicon glyphicon-plus"></i>
                     </span>Nueva base de datos
@@ -18,21 +18,6 @@
         </div>
         <p></p>
     </fieldset>
-    <div>
-            @if (@ViewData["Error"].ToString() != "")
-            {
-                <div class="col-lg-9">
-                    <div class="alert alert-block alert-dismissable">
-                        <a class="close" data-dismiss="alert" href="#"><p>X</p></a>
-                        <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Informaci&oacute;n!</h4>
-                        <p>
-                            <span class="text-danger"><strong><bold> @ViewData["Error"]</bold></strong></span>
-                        </p>
-                    </div>
-                </div>
-            }
-        <p></p>
-    </div>
 
     <section id="widget-grid" class="">
         <div class="row">
@@ -46,7 +31,7 @@
                         <div class="jarviswidget-editbox">
                         </div>
                         <div class="widget-body no-padding">
-                            <table id="datatable_fixed_column" class="table table-striped table-bordered table-hover" width="100%">
+                            <table id="datatable_fixed_column" data-page-length="@WebApp.TablaCantidadFilas" class="table table-striped table-bordered table-hover" width="100%">
                                 <thead>
                                     <tr>
                                         <th class="hasinput" >
@@ -88,13 +73,13 @@
                                                 @Html.DisplayFor(modelItem => item.AdbdServidor)
                                             </td>
                                             <td>
-                                                <p class="lead">
+                                                <p>
                                                     @Html.DisplayFor(modelItem => item.AdbdDescripcion)
                                                 </p>
                                             </td>
 
                                             <td>
-                                                @Html.ActionLink("Editar", "Edit", new { id = item.AdbdBdd }) |
+                                                @Html.ActionLink("Editar", "Edit", new { id = item.AdbdBdd  },new { onclick = "cargando()" }) |
                                                 @Html.ActionLink("Eliminar", "Delete", new { id = item.AdbdBdd }, new { onclick = "return confirm('Desea eliminar el la base de datos... ?');" })
                                             </td>
                                         </tr>
@@ -117,5 +102,5 @@
 <!-- END MAIN CONTENT -->
 
 @section Scripts {
-    <script src='~/js/datatables/init.js'></script>
+    
 }

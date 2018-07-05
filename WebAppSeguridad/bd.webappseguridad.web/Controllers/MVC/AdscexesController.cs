@@ -194,7 +194,7 @@ namespace bd.webappseguridad.web.Controllers.MVC
         }
 
 
-        public async Task<IActionResult> Details(string admeSistema, string admeAplicacion)
+        public  IActionResult Details(string admeSistema, string admeAplicacion)
         {
             try
             {

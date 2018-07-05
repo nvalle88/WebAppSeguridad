@@ -97,7 +97,7 @@ namespace bd.webappcompartido.web
 
             services.AddMvc(options =>
             {
-                options.Filters.Add(new Filtro());
+                options.Filters.Add(typeof(Filtro));
             });
 
 

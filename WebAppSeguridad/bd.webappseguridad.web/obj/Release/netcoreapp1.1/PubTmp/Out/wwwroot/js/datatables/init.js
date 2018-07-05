@@ -56,7 +56,7 @@
         //"bAutoWidth": false,
         //"bPaginate": false,
         //"bStateSave": true // saves sort state using localStorage
-        "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-4 hidden-xs'f><'col-xs-12 col-sm-2 hidden-xs'T><'col-sm-6 col-xs-12 hidden-xs'lC>r>" +
+        "sDom": "<'dt-toolbar'<'col-xs-12 col-sm-4 hidden-xs'f><'col-sm-8 col-xs-12 hidden-xs'l>>" +
         "t" +
         "<'dt-toolbar-footer'<'col-sm-6 col-xs-12 hidden-xs'i><'col-xs-12 col-sm-6'p>>",
         "autoWidth": true,

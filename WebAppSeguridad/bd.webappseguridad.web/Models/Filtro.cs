@@ -1,4 +1,5 @@
 ﻿using bd.webappseguridad.entidades.Utils;
+using bd.webappseguridad.servicios.Interfaces;
 using bd.webappseguridad.servicios.Servicios;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -11,8 +12,13 @@ namespace bd.webappseguridad.web.Models
 
     public class Filtro : IActionFilter
     {
+        private readonly IApiServicio apiServicio;
 
-      
+        public Filtro(IApiServicio apiServicio)
+        {
+            this.apiServicio = apiServicio;
+        }
+
 
         public void OnActionExecuted(ActionExecutedContext context)
         {
@@ -57,8 +63,8 @@ namespace bd.webappseguridad.web.Models
                 /// Se valida que la información del usuario actual tenga permiso para acceder al path solicitado... 
                 /// </summary>
                 /// <returns></returns>
-                ApiServicio a = new ApiServicio();
-                var respuestaToken = a.ObtenerElementoAsync1<Response>(permiso, new Uri(WebApp.BaseAddress), "api/Adscpassws/ExisteToken");
+                
+                var respuestaToken = apiServicio.ObtenerElementoAsync1<Response>(permiso, new Uri(WebApp.BaseAddress), "api/Adscpassws/ExisteToken");
 
                 if (!respuestaToken.Result.IsSuccess)
                 {
@@ -72,7 +78,7 @@ namespace bd.webappseguridad.web.Models
                 }
                 else
                 {
-                    var respuesta = a.ObtenerElementoAsync1<Response>(permiso, new Uri(WebApp.BaseAddress), "api/Adscpassws/TienePermiso");
+                    var respuesta = apiServicio.ObtenerElementoAsync1<Response>(permiso, new Uri(WebApp.BaseAddress), "api/Adscpassws/TienePermiso");
 
                     //respuesta.Result.IsSuccess = true;
                     if (!respuesta.Result.IsSuccess)
@@ -85,7 +91,7 @@ namespace bd.webappseguridad.web.Models
                
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 var result = new RedirectResult(WebApp.BaseAddressWebAppLogin);
                 foreach (var cookie in context.HttpContext.Request.Cookies.Keys)

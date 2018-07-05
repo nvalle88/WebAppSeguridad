@@ -1,7 +1,6 @@
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\bin\Release\netcoreapp1.1\bd.webappseguridad.entidades.deps.json
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\bin\Release\netcoreapp1.1\bd.webappseguridad.entidades.dll
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\bin\Release\netcoreapp1.1\bd.webappseguridad.entidades.pdb
-C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\obj\Release\netcoreapp1.1\bd.webappseguridad.entidades.csprojResolveAssemblyReference.cache
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\obj\Release\netcoreapp1.1\bd.webappseguridad.entidades.csproj.CoreCompileInputs.cache
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\obj\Release\netcoreapp1.1\bd.webappseguridad.entidades.AssemblyInfo.cs
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\obj\Release\netcoreapp1.1\bd.webappseguridad.entidades.dll
@@ -16,3 +15,4 @@ C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridadSalva\WebAppSeguridad\
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridadSalva\WebAppSeguridad\bd.webappseguridad.entidades\obj\Release\netcoreapp1.1\bd.webappseguridad.entidades.AssemblyInfo.cs
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridadSalva\WebAppSeguridad\bd.webappseguridad.entidades\obj\Release\netcoreapp1.1\bd.webappseguridad.entidades.dll
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridadSalva\WebAppSeguridad\bd.webappseguridad.entidades\obj\Release\netcoreapp1.1\bd.webappseguridad.entidades.pdb
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.entidades\obj\Release\netcoreapp1.1\bd.webappseguridad.entidades.csprojAssemblyReference.cache

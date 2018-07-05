@@ -3,11 +3,12 @@
 @{
     ViewData["Title"] = "Index";
 }
+@using bd.webappseguridad.entidades.Utils
 <div id="content">
     <fieldset>
         <div>
-            <a asp-action="Create">
-                <button type="button" class="btn btn-labeled btn-default">
+            <a asp-action="Create" onclick="cargando()">
+                <button type="button" onclick="cargando()" class="btn btn-labeled btn-default">
                     <span class="btn-label">
                         <i class="glyphicon glyphicon-plus"></i>
                     </span>Nuevo miembro
@@ -17,18 +18,7 @@
         <p></p>
     </fieldset>
     <div>
-           @if (@ViewData["Error"].ToString() != "")
-           {
-            <div class="col-lg-9">
-                <div class="alert alert-block alert-info">
-                    <a class="close" data-dismiss="alert" href="#"><p>X</p></a>
-                    <h4 class="alert-heading"><i class="fa fa-check-square-o"></i>Informaci&oacute;n!</h4>
-                    <p>
-                        <span class="text-danger">@ViewData["Error"]</span>
-                    </p>
-                </div>
-            </div>
-           }
+
         <p></p>
     </div>
     <section id="widget-grid" class="">
@@ -36,14 +26,14 @@
             <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
                     <header>
-                        <span class="widget-icon"> <i class="fa fa-users fa-users" ></i> </span>
+                        <span class="widget-icon"> <i class="fa fa-users fa-users"></i> </span>
                         <h2>Miembros</h2>
                     </header>
                     <div>
                         <div class="jarviswidget-editbox">
                         </div>
                         <div class="widget-body no-padding">
-                            <table id="datatable_fixed_column" class="table table-striped table-bordered table-hover" width="100%">
+                            <table id="datatable_fixed_column" data-page-length="@WebApp.TablaCantidadFilas" class="table table-striped table-bordered table-hover" width="100%">
                                 <thead>
                                     <tr>
                                         <th class="hasinput">
@@ -107,9 +97,9 @@
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.AdmiCodigoEmpleado)
                                             </td>
-                                         
+
                                             <td>
-                                                @Html.ActionLink("Editar", "Edit", new { admiGrupo = item.AdmiGrupo, admiBdd=item.AdmiBdd, admiEmpleado=item.AdmiEmpleado }) |
+                                                @Html.ActionLink("Editar", "Edit", new { admiGrupo = item.AdmiGrupo, admiBdd = item.AdmiBdd, admiEmpleado = item.AdmiEmpleado }, new  { onclick = "cargando()" }) |
                                                 @Html.ActionLink("Eliminar", "Delete", new { admiGrupo = item.AdmiGrupo, admiBdd = item.AdmiBdd, admiEmpleado = item.AdmiEmpleado }, new { onclick = "return confirm('Desea eliminar el Miembro... ?');" })
                                             </td>
                                         </tr>
@@ -123,7 +113,7 @@
         </div>
     </section>
 </div>
- @section Scripts {
-  <script src='~/js/datatables/init.js'></script>
+@section Scripts {
+
 }
 

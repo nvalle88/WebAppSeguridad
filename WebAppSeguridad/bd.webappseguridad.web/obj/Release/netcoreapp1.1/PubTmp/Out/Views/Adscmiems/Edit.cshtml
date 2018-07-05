@@ -10,7 +10,7 @@
                 <div class="jarviswidget" id="wid-id-1" data-widget-editbutton="false" data-widget-custombutton="false">
                     <header>
                         <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                        <h2>Miembro</h2>
+                        <h2>Editar miembro</h2>
                     </header>
                     <div>
                         <div class="jarviswidget-editbox">
@@ -18,7 +18,7 @@
                         <div class="widget-body no-padding">
                             <form asp-action="Edit" id="checkout-form" class="smart-form" novalidate="novalidate">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <input type="hidden" asp-for="AdmiGrupo"/>
+                                <input type="hidden" asp-for="AdmiGrupo" />
                                 <input type="hidden" asp-for="AdmiBdd" />
                                 <input type="hidden" asp-for="AdmiEmpleado" />
                                 <fieldset>
@@ -40,7 +40,7 @@
                                                 <i class="icon-prepend fa fa-database"></i>
                                                 <input maxlength="100" disabled="disabled" asp-for="AdmiBdd" class="form-control" placeholder="@Html.DisplayNameFor(model=>model.AdmiBdd)" />
                                                 <span asp-validation-for="AdmiBdd" class="text-danger"></span>
-                                                
+
                                             </label>
                                         </section>
 
@@ -77,9 +77,8 @@
 
                                 </fieldset>
                                 <footer>
-                                    <span class="text-danger">@ViewData["Error"]</span>
-                                    <input type="submit" value="Guardar" class="btn btn-primary" />
-                                    <a asp-action="Index" class="btn btn-default">Cancelar</a>
+                                    <button type="submit" class="btn btn-primary" id="btn-guardar">Guardar</button>
+                                    <a asp-action="Index" onclick="cargando()" class="btn btn-default">Cancelar</a>
                                 </footer>
                             </form>
                         </div>
@@ -90,8 +89,5 @@
     </section>
 </div>
 @section Scripts {
-    <script type="text/javascript">
-
-
-    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

@@ -20,7 +20,7 @@
 
                     <header>
                         <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
-                        <h2>Men&uacute;</h2>
+                        <h2>Editar men&uacute;</h2>
                     </header>
                     <!-- widget div-->
                     <div>
@@ -35,7 +35,7 @@
 
                             <form asp-action="Edit" id="checkout-form" class="smart-form" novalidate="novalidate">
                                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                <input type="hidden" asp-for="AdmeSistema"/>
+                                <input type="hidden" asp-for="AdmeSistema" />
                                 <input type="hidden" asp-for="AdmeAplicacion" />
                                 <fieldset>
                                     <div class="row">
@@ -74,6 +74,7 @@
                                                     <option value="M">Men&uacute;</option>
                                                     <option value="A">Hoja</option>
                                                     <option value="B">Acci&oacute;n</option>
+                                                    <option value="Z">Cat&aacute;logo</option>
                                                 </select>
                                                 <span asp-validation-for="AdmeTipo" class="text-danger"></span>
                                             </label>
@@ -177,9 +178,8 @@
                                     </section>
                                 </fieldset>
                                 <footer>
-                                    <span class="text-danger">@ViewData["Error"]</span>
-                                    <input type="submit" value="Guardar" class="btn btn-primary" />
-                                    <a asp-action="Index" class="btn btn-default">Cancelar</a>
+                                    <button type="submit" class="btn btn-primary" id="btn-guardar">Guardar</button>
+                                    <a asp-action="Index" onclick="cargando()" class="btn btn-default">Cancelar</a>
                                 </footer>
                             </form>
                         </div>
@@ -200,16 +200,17 @@
 </div>
 <!-- END MAIN CONTENT -->
 @section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-<script src='~/lib/select2/dist/js/select2.min.js'></script>
-<script src='~/lib/select2/dist/js/i18n/es.js'></script>
-<script src='~/js/site.js'></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        Init_Select2();
-    });
+    <script src='~/lib/select2/dist/js/select2.min.js'></script>
+    <script src='~/lib/select2/dist/js/i18n/es.js'></script>
+    <script src='~/js/site.js'></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Init_Select2();
+        });
 
-</script>
+    </script>
 
 
 }

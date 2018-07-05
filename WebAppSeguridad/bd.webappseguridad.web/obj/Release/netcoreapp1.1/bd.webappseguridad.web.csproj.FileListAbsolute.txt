@@ -9,7 +9,6 @@ C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.we
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\bin\Release\netcoreapp1.1\bd.sw.externos.pdb
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\bin\Release\netcoreapp1.1\bd.webappseguridad.entidades.pdb
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\bin\Release\netcoreapp1.1\bd.webappseguridad.servicios.pdb
-C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Release\netcoreapp1.1\bd.webappseguridad.web.csprojResolveAssemblyReference.cache
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Release\netcoreapp1.1\bd.webappseguridad.web.csproj.CoreCompileInputs.cache
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Release\netcoreapp1.1\bd.webappseguridad.web.AssemblyInfo.cs
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Release\netcoreapp1.1\bd.webappseguridad.web.dll
@@ -32,3 +31,5 @@ C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridadSalva\WebAppSeguridad\
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridadSalva\WebAppSeguridad\bd.webappseguridad.web\obj\Release\netcoreapp1.1\bd.webappseguridad.web.AssemblyInfo.cs
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridadSalva\WebAppSeguridad\bd.webappseguridad.web\obj\Release\netcoreapp1.1\bd.webappseguridad.web.dll
 C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridadSalva\WebAppSeguridad\bd.webappseguridad.web\obj\Release\netcoreapp1.1\bd.webappseguridad.web.pdb
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Release\netcoreapp1.1\bd.webappseguridad.web.csprojAssemblyReference.cache
+C:\Users\Nestor Yasmani Valle\source\repos\WebAppSeguridad\WebAppSeguridad\bd.webappseguridad.web\obj\Release\netcoreapp1.1\bd.webappseguridad.web.csproj.CopyComplete

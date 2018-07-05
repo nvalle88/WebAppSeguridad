@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-
+@using bd.webappseguridad.entidades.Utils
 
 <div id="content">
 
@@ -18,102 +18,109 @@
             </button>
             <ul class="dropdown-menu">
                 <li>
-                    <a asp-action="CrearMiembroGrupo" asp-controller="Adscgrps" asp-route-adgrBdd="@Model.Adgrbdd" asp-route-adgrGrupo="@Model.Adgrgrupo"><i class="fa fa-plus"></i>  Crear miembro</a>
+                    <a asp-action="CrearMiembroGrupo" onclick="cargando()" asp-controller="Adscgrps" asp-route-adgrBdd="@Model.Adgrbdd" asp-route-adgrGrupo="@Model.Adgrgrupo"><i class="fa fa-plus"></i>  Crear miembro</a>
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a asp-action="Index" asp-controller="Adscgrps"><i class="fa fa-arrow-left"></i> Regresar</a>
+                    <a asp-action="Index" onclick="cargando()" asp-controller="Adscgrps"><i class="fa fa-arrow-left"></i> Regresar</a>
                 </li>
             </ul>
         </div>
         <p></p>
         <!-- end col -->
     </div>
-                    <section id="widget-grid" class="table-striped">
-                        <div class="row">
-                            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
-                                    <header>
-                                        <span class="widget-icon"> <i class="fa fa-users fa-users"></i> </span>
-                                        <h2>Miembro para el <strong><<<  grupo >>></strong> con base de datos:<strong>@Model.Adgrbdd</strong> y grupo <strong>@Model.Adgrgrupo</strong>  </h2>
-                                    </header>
-                                    <div>
-                                        <div class="jarviswidget-editbox">
-                                        </div>
-                                        <div class="widget-body no-padding">
-                                            <table id="datatable_fixed_column" class="table table-striped table-bordered table-hover" width="100%">
-                                                <thead>
-                                                    <tr>
-                                                        <th class="hasinput">
-                                                            <input type="text" class="form-control" placeholder="Buscar" />
-                                                        </th>
-                                                        <th class="hasinput">
-                                                            <input type="text" class="form-control" placeholder="Buscar" />
-                                                        </th>
-                                                        <th class="hasinput">
-                                                            <input type="text" class="form-control" placeholder="Buscar" />
-                                                        </th>
-                                                        <th class="hasinput">
-                                                            <input type="text" class="form-control" placeholder="Buscar" />
-                                                        </th>
-                                                        <th class="hasinput">
-                                                            <input type="text" class="form-control" placeholder="Buscar" />
-                                                        </th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th data-class="expand">
-                                                            <i class="fa fa-fw fa-users text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                            @Html.DisplayNameFor(model => model.Adgrgrupo)
-                                                        </th>
-                                                        <th data-hide="phone">
-                                                            <i class="fa fa-fw fa-database text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                            @Html.DisplayNameFor(model => model.Adgrbdd)
-                                                        </th>
-                                                        <th data-hide="phone">
-                                                            <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                            @Html.DisplayNameFor(model => model.ListaMiembros.FirstOrDefault().AdmiEmpleado)
-                                                        </th>
-                                                        <th data-hide="phone">
-                                                            <i class="fa fa-fw fa-user-md text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                            @Html.DisplayNameFor(model => model.ListaMiembros.FirstOrDefault().AdmiTotal)
-                                                        </th>
-                                                        <th data-hide="phone">
-                                                            <i class="fa fa-fw fa-qrcode text-muted hidden-md hidden-sm hidden-xs"></i>
-                                                            @Html.DisplayNameFor(model => model.ListaMiembros.FirstOrDefault().AdmiCodigoEmpleado)
-                                                        </th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach (var item in Model.ListaMiembros)
-                                                    {
-                                                        <tr>
-                                                            <td>
-                                                                @Html.DisplayFor(modelItem => item.AdmiGrupo)
-                                                            </td>
-                                                            <td>
-                                                                @Html.DisplayFor(modelItem => item.AdmiBdd)
-                                                            </td>
-                                                            <td>
-                                                                @Html.DisplayFor(modelItem => item.AdmiEmpleado)
-                                                            </td>
-                                                            <td>
-                                                                @Html.DisplayFor(modelItem => item.AdmiTotal)
-                                                            </td>
-                                                            <td>
-                                                                @Html.DisplayFor(modelItem => item.AdmiCodigoEmpleado)
-                                                            </td>
-
-                                                        </tr>
-                                                    }
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
+    <section id="widget-grid" class="table-striped">
+        <div class="row">
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-users fa-users"></i> </span>
+                        <h2>Miembro para el <strong><<<  grupo >>></strong> con base de datos:<strong>@Model.Adgrbdd</strong> y grupo <strong>@Model.Adgrgrupo</strong>  </h2>
+                    </header>
+                    <div>
+                        <div class="jarviswidget-editbox">
                         </div>
-                    </section>
+                        <div class="widget-body no-padding">
+                            <table id="datatable_fixed_column" data-page-length="@WebApp.TablaCantidadFilas" class="table table-striped table-bordered table-hover" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th class="hasinput">
+                                            <input type="text" class="form-control" placeholder="Buscar" />
+                                        </th>
+                                        <th class="hasinput">
+                                            <input type="text" class="form-control" placeholder="Buscar" />
+                                        </th>
+                                        <th class="hasinput">
+                                            <input type="text" class="form-control" placeholder="Buscar" />
+                                        </th>
+                                        <th class="hasinput">
+                                            <input type="text" class="form-control" placeholder="Buscar" />
+                                        </th>
+                                        <th class="hasinput">
+                                            <input type="text" class="form-control" placeholder="Buscar" />
+                                        </th>
+                                        <th class="hasinput">
+                                           
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th data-class="expand">
+                                            <i class="fa fa-fw fa-users text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.Adgrgrupo)
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-database text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.Adgrbdd)
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-user text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.ListaMiembros.FirstOrDefault().AdmiEmpleado)
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-user-md text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.ListaMiembros.FirstOrDefault().AdmiTotal)
+                                        </th>
+                                        <th data-hide="phone">
+                                            <i class="fa fa-fw fa-qrcode text-muted hidden-md hidden-sm hidden-xs"></i>
+                                            @Html.DisplayNameFor(model => model.ListaMiembros.FirstOrDefault().AdmiCodigoEmpleado)
+                                        </th>
+                                        <th data-hide="phone">
+                                            Opciones
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.ListaMiembros)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdmiGrupo)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdmiBdd)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdmiEmpleado)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdmiTotal)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.AdmiCodigoEmpleado)
+                                            </td>
+                                            <td>
+                                                <a asp-action="EliminarMiembro" onclick="return confirm('Desea eliminar el registro... ?');" asp-route-adgrBdd="@Model.Adgrbdd" asp-route-adgrGrupo="@Model.Adgrgrupo" asp-route-empleado="@item.AdmiEmpleado">Eliminar</a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                @section Scripts {
-                    <script src='~/js/datatables/init.js'></script>
-                }
+            </article>
+        </div>
+    </section>
+</div>
+@section Scripts {
+}
